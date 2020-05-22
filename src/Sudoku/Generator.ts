@@ -27,6 +27,7 @@ export default class Generator {
         square.subGrid = Utility.getSubGrid(index + 1);
         square.value = value;
         square.index = index;
+        square.picture = `${value}.png`;
         return square;
     }
 
@@ -49,23 +50,16 @@ export default class Generator {
             if (this.available[this.count].length !== 0) { //if there are possible values left for the current square
                 let nextIndex = Utility.getRandomNumber(this.available[this.count].length) //get random number/index of between 0 and last index of array
                 let value = this.available[this.count][nextIndex];
-
                 if (Generator.hasConflict(this.squares, Generator.createSquare(this.count, value)) === false) { //if the randomly chosen value provides no conflict
-
                     this.squares[this.count] = Generator.createSquare(this.count, value); //generate a square and add to squares at current count/index
-
                     this.available[this.count].splice(nextIndex, 1); //remove the value for this square
-
                     this.count += 1;
-
                 } else {
                     this.available[this.count].splice(nextIndex, 1);
                 }
             } else { //if no possible values for the current square are left
                 this.available[this.count] = [1, 2, 3, 4, 5, 6, 7, 8, 9];  //make all possible values in range 1-9 available for this square
-
                 this.squares[this.count - 1] = new Square(); // backtrack to square before the current one
-
                 this.count -= 1;
             }
         }

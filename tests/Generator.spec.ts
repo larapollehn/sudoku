@@ -4,7 +4,6 @@ test('generating a sudoku works', () => {
     let freeSquares = 20;
     let sudokuGenerator = new Generator(freeSquares);
     let sudoku = sudokuGenerator.generateSudoku();
-    let range = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     expect(sudoku.length).toBe(81);
 
