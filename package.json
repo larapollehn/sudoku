@@ -4,7 +4,7 @@
   "description": "generate and solve sudoku puzzles",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run": "parcel ./public/index.html"
   },
   "author": "Lara Pollehn",
   "license": "ISC",
