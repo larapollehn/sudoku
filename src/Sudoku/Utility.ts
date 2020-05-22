@@ -2,10 +2,17 @@ export default class Utility {
     constructor() {
     }
 
+    /**
+     * returns a random number [0, max)
+     * @param max
+     */
     static getRandomNumber(max: number): number{
         return Math.floor(Math.random() * Math.floor(max));
     }
 
+    /**
+     * @param index is number [1, 81]
+     */
     static getRow(index: number): number {
         let row;
         if (index % 9 === 0) { //original: getColumn(n)
@@ -16,11 +23,17 @@ export default class Utility {
         return row;
     }
 
+    /**
+     * @param index is number [1, 81]
+     */
     static getColumn(index: number): number{
         let column = index % 9;
         return (column === 0) ? 9 : column;
     }
 
+    /**
+     * @param index is number between 1 and 81
+     */
     static getSubGrid(index: number): number{
         let row = this.getRow(index);
         let column = this.getColumn(index);

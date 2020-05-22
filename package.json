@@ -4,7 +4,8 @@
   "description": "generate and solve sudoku puzzles",
   "main": "index.js",
   "scripts": {
-    "run": "parcel ./public/index.html"
+    "run": "parcel ./public/index.html",
+    "test": "jest --collectCoverage tests/*.spec.ts"
   },
   "author": "Lara Pollehn",
   "license": "ISC",
