@@ -4,15 +4,16 @@ import Utility from "./Utility";
 export default class Solver {
     private emptySquares: Array<number>;
     private cellCount: number;
-    private available: Array<Array<number>> = new Array<Array<number>>();
-    private count: number = 0;
+    private available: Array<Array<number>>;
+    private count: number;
     public sudoku: Array<Square>;
 
-    constructor(sudoku: Array<Square>) {
-        this.sudoku = sudoku;
+    constructor() {
     }
 
     private setUp() {
+        this.available = new Array<Array<number>>();
+        this.count = 0;
         this.findEmptySquares();
         for (let i = 0; i < this.cellCount; i++) {
             this.available.push([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -114,7 +115,8 @@ export default class Solver {
         return true;
     }
 
-    solveSudoku() {
+    solveSudoku(sudoku: Array<Square>) {
+        this.sudoku = sudoku;
         this.setUp();
         while (this.count < this.cellCount) {
             if (this.available[this.count].length !== 0) {
@@ -135,5 +137,4 @@ export default class Solver {
             }
         }
     }
-
 }
