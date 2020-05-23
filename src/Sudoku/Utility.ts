@@ -48,6 +48,7 @@ export default class Utility {
         }
     }
 
+    //delete after testing and confirming everything !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     static printGrid(grid: Array<Square>){
         let row = [];
         for (let i = 0; i < grid.length; i++) {

@@ -1,11 +1,12 @@
 import Solver from "../src/Sudoku/Solver";
 import Generator from "../src/Sudoku/Generator";
 import Utility from "../src/Sudoku/Utility";
+import exp = require("constants");
 
 test('solver works as expected', () => {
     let generator = new Generator();
     let solver = new Solver();
-    let sudoku = generator.generateSudoku(20);
+    let sudoku = generator.generateSudoku(65);
     solver.solveSudoku(sudoku);
 
     let values = new Map();
@@ -21,6 +22,7 @@ test('solver works as expected', () => {
             values.set(value, count);
         }
     }
+    expect(values.size).toEqual(9);
     values.forEach((value) => {
         expect(value).toEqual(9)
     })

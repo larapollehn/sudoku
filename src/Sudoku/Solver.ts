@@ -93,6 +93,7 @@ export default class Solver {
                 start = 60;
                 end = 81;
                 break;
+
         }
         for (let i = start; i < end; i += 9) {
             for (let j = 0; j < 3; j++) {
