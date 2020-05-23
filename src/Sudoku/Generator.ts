@@ -50,6 +50,7 @@ export default class Generator {
             if (this.available[this.count].length !== 0) { //if there are possible values left for the current square
                 let nextIndex = Utility.getRandomNumber(this.available[this.count].length) //get random number/index of between 0 and last index of array
                 let value = this.available[this.count][nextIndex];
+
                 if (Generator.hasConflict(this.squares, Generator.createSquare(this.count, value)) === false) { //if the randomly chosen value provides no conflict
                     this.squares[this.count] = Generator.createSquare(this.count, value); //generate a square and add to squares at current count/index
                     this.available[this.count].splice(nextIndex, 1); //remove the value for this square

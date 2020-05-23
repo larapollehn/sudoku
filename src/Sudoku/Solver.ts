@@ -4,22 +4,22 @@ import Utility from "./Utility";
 export default class Solver {
     private emptySquares: Array<number>;
     private cellCount: number;
-    private available: Array<Array<number>>;
-    private count: number;
-    private sudoku: Array<Square>;
+    private available: Array<Array<number>> = new Array<Array<number>>();
+    private count: number = 0;
+    public sudoku: Array<Square>;
 
     constructor(sudoku: Array<Square>) {
         this.sudoku = sudoku;
     }
 
-    setUp() {
+    private setUp() {
         this.findEmptySquares();
         for (let i = 0; i < this.cellCount; i++) {
             this.available.push([1, 2, 3, 4, 5, 6, 7, 8, 9]);
         }
     }
 
-    findEmptySquares() {
+    private findEmptySquares() {
         let indices = [];
         for (let i = 0; i < 81; i++) {
             if (this.sudoku[i].value === 0) {
@@ -30,7 +30,7 @@ export default class Solver {
         this.cellCount = indices.length;
     }
 
-    checkRow(index: number, value: number): boolean {
+    private checkRow(index: number, value: number): boolean {
         let row = Utility.getRow(index + 1) - 1;
         let begin = (row * 9);
         for (let i = begin; i < begin + 9; i++) {
@@ -41,7 +41,7 @@ export default class Solver {
         return false;
     }
 
-    checkColumn(index: number, value: number): boolean {
+    private checkColumn(index: number, value: number): boolean {
         let column = Utility.getColumn(index + 1);
         for (let i = column - 1; i < 81; i += 9) {
             if (this.sudoku[i].value === value) {
@@ -51,7 +51,7 @@ export default class Solver {
         return false;
     }
 
-    checkSubGrid(index: number, value: number): boolean {
+    private checkSubGrid(index: number, value: number): boolean {
         let region = Utility.getSubGrid(index + 1);
         let start;
         let end;
@@ -103,7 +103,7 @@ export default class Solver {
         return false;
     }
 
-    conflictForOption(index: number, value: number) {
+    private conflictForOption(index: number, value: number) {
         let conflict = this.checkRow(index, value);
         if (!conflict) {
             conflict = this.checkColumn(index, value);
@@ -134,7 +134,6 @@ export default class Solver {
                 this.count -= 1;
             }
         }
-        return this.sudoku;
     }
 
 }

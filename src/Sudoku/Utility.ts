@@ -1,3 +1,5 @@
+import Square from "./Square";
+
 export default class Utility {
     constructor() {
     }
@@ -43,6 +45,19 @@ export default class Utility {
             return 4 + (Math.ceil(column / 3)) - 1;
         } else if (row < 10) {
             return 7 + (Math.ceil(column / 3)) - 1;
+        }
+    }
+
+    static printGrid(grid: Array<Square>){
+        let row = [];
+        for (let i = 0; i < grid.length; i++) {
+            row.push(grid[i].value);
+            if (i === 8 || i === 17 || i === 26 ||
+                i === 35 || i === 44 || i === 53 ||
+                i === 62 || i === 71 || i === 80) {
+                console.log(row.join(''));
+                row = [];
+            }
         }
     }
 }
