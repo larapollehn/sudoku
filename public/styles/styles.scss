@@ -1,0 +1,9 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+// Abstracts - variables - grids
+@import "scss/base/colors";
+@import "scss/base/globalGrid";

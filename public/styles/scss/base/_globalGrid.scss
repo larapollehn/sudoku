@@ -1,0 +1,19 @@
+#app{
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 600px auto;
+  grid-template-rows: 50% 50%;
+}
+
+#menuSection{
+  grid-column: 1/2;
+  grid-row: 1/3;
+  background-color: thistle;
+}
+
+#puzzleSection{
+  grid-column: 2/3;
+  grid-row: 1/3;
+  background-color: darkseagreen;
+}
