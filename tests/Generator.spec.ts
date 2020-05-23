@@ -2,8 +2,8 @@ import Generator from "../src/Sudoku/Generator";
 
 test('generating a sudoku works', () => {
     let freeSquares = 20;
-    let sudokuGenerator = new Generator(freeSquares);
-    let sudoku = sudokuGenerator.generateSudoku();
+    let sudokuGenerator = new Generator();
+    let sudoku = sudokuGenerator.generateSudoku(freeSquares);
 
     expect(sudoku.length).toBe(81);
 
