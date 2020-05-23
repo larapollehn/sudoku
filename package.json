@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "run": "parcel ./public/index.html",
-    "test": "jest --collectCoverage tests/*.spec.ts"
+    "test": "jest --collectCoverage tests/*.spec.ts",
+    "debug": "ts-node tests/Solver.spec.ts"
   },
   "author": "Lara Pollehn",
   "license": "ISC",

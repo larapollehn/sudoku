@@ -2,16 +2,19 @@ import Square from "./Square";
 import Utility from "./Utility";
 
 export default class Generator {
-    private squares: Array<Square> = new Array<Square>(81);
-    private available: Array<Array<number>> = new Array<Array<number>>(81);
-    private count: number = 0;
+    private squares: Array<Square>;
+    private available: Array<Array<number>>;
+    private count: number;
     private freeSquares: number;
 
-    constructor(freeSquares: number) {
-        this.freeSquares = freeSquares;
+    constructor() {
     }
 
     private setUp(): void {
+        this.squares = new Array<Square>(81);
+        this.available = new Array<Array<number>>(81);
+        this.count = 0;
+
         for (let i = 0; i < this.squares.length; i++) {
             this.squares[i] = new Square();
         }
@@ -66,15 +69,15 @@ export default class Generator {
         }
     }
 
-    generateSudoku(){
+    generateSudoku(freeSquares: number){
         this.generateGrid();
         let erased = new Set<number>();
-        while (this.freeSquares > 0){
+        while (freeSquares > 0){
             let index = Utility.getRandomNumber(81);
             if (!erased.has(index)) {
                 erased.add(index);
                 this.squares[index].value = 0;
-                this.freeSquares--;
+                freeSquares--;
             }
         }
         return this.squares;
