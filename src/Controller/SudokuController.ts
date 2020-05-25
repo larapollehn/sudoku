@@ -3,12 +3,15 @@ import SudokuViewMenu from "../View/SudokuViewMenu";
 import Generator from "../Sudoku/Generator";
 import Square from "../Sudoku/Square";
 import Validator from "../Sudoku/Validator";
+import Solver from "../Sudoku/Solver";
 
 export default class SudokuController {
     private puzzleView: SudokuViewPuzzle;
     private Generator: Generator = new Generator();
     private Validator: Validator = new Validator();
+    private Solver: Solver = new Solver();
     private currentSudoku: Array<Square>;
+    private currentSudokuGrid: Array<Square> = new Array<Square>();
     private sudokuSquares: Map<number, Square>;
     private currentOption: number;
     private filledSquares: Array<number> = new Array<number>();
@@ -25,6 +28,7 @@ export default class SudokuController {
         this.setCurrentOption = this.setCurrentOption.bind(this);
         this.setCurrentOptionWithKeyboard = this.setCurrentOptionWithKeyboard.bind(this);
         this.validateSudoku = this.validateSudoku.bind(this);
+        this.solveSudoku = this.solveSudoku.bind(this);
     }
 
     setup() {
@@ -34,11 +38,14 @@ export default class SudokuController {
     addBtnEventListener() {
         this.puzzleView.generateBtn.addEventListener('click', this.setupNewSudoku);
         this.puzzleView.validateBtn.addEventListener('click', this.validateSudoku);
+        this.puzzleView.solveBtn.addEventListener('click', this.solveSudoku);
     }
 
     setupNewSudoku() {
         this.currentSudoku = this.Generator.generateSudoku(this.defaultDifficulty);
         this.puzzleView.displaySudoku(this.currentSudoku);
+
+        this.currentSudokuGrid = JSON.parse(JSON.stringify(this.currentSudoku));
 
         this.sudokuSquares = new Map();
         this.currentSudoku.forEach(square => {
@@ -88,6 +95,11 @@ export default class SudokuController {
         } else {
             this.puzzleView.showValidatorMessage('Leider Falsch. Versuche es doch nochmal.');
         }
+    }
+
+    solveSudoku(){
+        this.Solver.solveSudoku(this.currentSudokuGrid);
+        this.puzzleView.displaySudoku(this.currentSudokuGrid);
     }
 
 }
