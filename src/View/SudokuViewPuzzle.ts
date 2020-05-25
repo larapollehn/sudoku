@@ -6,6 +6,10 @@ export default class SudokuViewPuzzle {
     public generateBtn: HTMLElement = document.getElementById('generateBtn');
     public validateBtn: HTMLElement = document.getElementById('validateBtn');
     public solveBtn: HTMLElement = document.getElementById('solveBtn');
+    public easyBtn: HTMLElement = document.getElementById('easyBtn');
+    public advancedBtn: HTMLElement = document.getElementById('advancedBtn');
+    public hardBtn: HTMLElement = document.getElementById('hardBtn');
+    public extremeBtn: HTMLElement = document.getElementById('extremeBtn');
 
     constructor() {
         this.displaySudoku = this.displaySudoku.bind(this);

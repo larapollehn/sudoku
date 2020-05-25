@@ -16,6 +16,7 @@ export default class SudokuController {
     private currentOption: number;
     private filledSquares: Array<number> = new Array<number>();
     private defaultDifficulty: number = 10;
+    private currentMode: string;
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
@@ -29,6 +30,8 @@ export default class SudokuController {
         this.setCurrentOptionWithKeyboard = this.setCurrentOptionWithKeyboard.bind(this);
         this.validateSudoku = this.validateSudoku.bind(this);
         this.solveSudoku = this.solveSudoku.bind(this);
+        this.setDifficulty = this.setDifficulty.bind(this);
+        this.timer = this.timer.bind(this);
     }
 
     setup() {
@@ -39,6 +42,10 @@ export default class SudokuController {
         this.puzzleView.generateBtn.addEventListener('click', this.setupNewSudoku);
         this.puzzleView.validateBtn.addEventListener('click', this.validateSudoku);
         this.puzzleView.solveBtn.addEventListener('click', this.solveSudoku);
+        this.puzzleView.easyBtn.addEventListener('click', this.setDifficulty);
+        this.puzzleView.advancedBtn.addEventListener('click', this.setDifficulty);
+        this.puzzleView.hardBtn.addEventListener('click', this.setDifficulty);
+        this.puzzleView.extremeBtn.addEventListener('click', this.setDifficulty);
     }
 
     setupNewSudoku() {
@@ -80,26 +87,57 @@ export default class SudokuController {
     }
 
     setCurrentOption(event: any) {
-            this.currentOption = event.target.innerText;
-            this.puzzleView.highlightCurrentOption(event.target.id);
+        this.currentOption = event.target.innerText;
+        this.puzzleView.highlightCurrentOption(event.target.id);
     }
 
-    setCurrentOptionWithKeyboard(event: any){
+    setCurrentOptionWithKeyboard(event: any) {
         this.currentOption = Number(event.key);
         this.puzzleView.highlightCurrentOption(`li${event.key}`);
     }
 
-    validateSudoku(){
-        if(this.Validator.validate(this.currentSudoku)){
+    validateSudoku() {
+        if (this.Validator.validate(this.currentSudoku)) {
             this.puzzleView.showValidatorMessage('Super! Deine Lösung ist Richtig :D');
         } else {
             this.puzzleView.showValidatorMessage('Leider Falsch. Versuche es doch nochmal.');
         }
     }
 
-    solveSudoku(){
+    solveSudoku() {
         this.Solver.solveSudoku(this.currentSudokuGrid);
         this.puzzleView.displaySudoku(this.currentSudokuGrid);
+    }
+
+    setDifficulty(event: any) {
+        if (event.target.id === 'easyBtn') {
+            this.currentMode = 'easy';
+            this.defaultDifficulty = 20;
+            this.setupNewSudoku();
+        } else if (event.target.id === 'advancedBtn') {
+            this.currentMode = 'advanced';
+            this.defaultDifficulty = 30;
+            this.setupNewSudoku();
+        } else if (event.target.id === 'hardBtn') {
+            this.currentMode = 'hard';
+            this.defaultDifficulty = 35;
+            this.setupNewSudoku();
+        } else if (event.target.id === 'extremeBtn') {
+            this.currentMode = 'extreme';
+            this.defaultDifficulty = 45;
+            this.setupNewSudoku();
+            this.extremeMode();
+        }
+    }
+
+    extremeMode(){
+        setTimeout(() =>{
+            this.puzzleView.displaySudoku(this.currentSudoku.reverse());
+        }, 5000);
+    }
+
+    timer(){
+
     }
 
 }

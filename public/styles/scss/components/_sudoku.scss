@@ -1,7 +1,7 @@
 #puzzleSection{
   text-align: center;
   display: grid;
-  grid-template-rows: 5% 60% 5% 5% 5% 20%;
+  grid-template-rows: 5% 5% 60% 5% 5% 5% 15%;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
@@ -10,24 +10,29 @@
   grid-column: 1/4;
 }
 
-#sudokuList{
+#timer{
   grid-row: 2/3;
+  grid-column: 2/3;
+}
+
+#sudokuList{
+  grid-row: 3/4;
   grid-column: 1/4;
 }
 
 #optionsList{
-  grid-row: 3/4;
+  grid-row: 4/5;
   grid-column: 1/4;
   margin: 0 auto;
 }
 
 #buttonMenu{
-  grid-row: 4/5;
+  grid-row: 5/6;
   grid-column: 1/4;
 }
 
 #validationMsg{
-  grid-row: 5/6;
+  grid-row: 6/7;
   grid-column: 2/3;
   font-size: 30px;
 }

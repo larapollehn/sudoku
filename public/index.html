@@ -7,13 +7,19 @@
 </head>
 <body>
 <div id="app">
-    <div id="menuSection"></div>
+    <div id="menuSection">
+        <button id="easyBtn">EASY</button>
+        <button id="advancedBtn">ADVANCED</button>
+        <button id="hardBtn">HARD</button>
+        <button id="extremeBtn">EXTREME</button>
+    </div>
     <div id="puzzleSection">
         <h1 id="title">SuDoKu</h1>
+        <h3 id="timer"></h3>
         <ul id="sudokuList" class="sudokuList"></ul>
         <ul id="optionsList"></ul>
         <div id="buttonMenu">
-            <button id="generateBtn">Generate Sudoku</button>
+            <button id="generateBtn">New Sudoku</button>
             <button id="validateBtn">Validate Sudoku</button>
             <button id="solveBtn">Show Solution</button>
         </div>
