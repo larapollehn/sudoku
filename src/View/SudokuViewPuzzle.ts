@@ -80,4 +80,17 @@ export default class SudokuViewPuzzle {
         this.timer.innerText = time;
     }
 
+    displayStrobo(state: string){
+        let listElements = document.getElementsByClassName('sudokuLiElement');
+        if (state === 'on'){
+            for (let listElement of listElements) {
+                listElement.style.backgroundColor = '#000';
+            }
+        } else {
+            for (let listElement of listElements) {
+                listElement.style.backgroundColor = '#fff';
+            }
+        }
+    }
+
 }

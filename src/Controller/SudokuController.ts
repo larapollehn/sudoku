@@ -130,6 +130,7 @@ export default class SudokuController {
             this.defaultDifficulty = 45;
             this.setupNewSudoku();
             this.extremeMode();
+            this.strobo();
         }
     }
 
@@ -156,6 +157,12 @@ export default class SudokuController {
         this.addSudokuListeners();
     }
 
+    strobo(){
+        this.puzzleView.displayStrobo('on');
+        setTimeout(() => {
+            this.puzzleView.displayStrobo('off');
+        }, 500);
+    }
 
     humanReadable(seconds: number) {
         let time_left = seconds;
@@ -175,6 +182,9 @@ export default class SudokuController {
             this.puzzleView.displayClock(time);
             if (this.currentMode === 'extreme' && this.seconds % 5 === 0) {
                 this.extremeMode();
+            }
+            if(this.currentMode === 'extreme'){
+                this.strobo();
             }
         }, 1000);
     }
