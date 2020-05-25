@@ -1,7 +1,7 @@
 #puzzleSection{
   text-align: center;
   display: grid;
-  grid-template-rows: 5% 60% 5% 20%;
+  grid-template-rows: 5% 60% 5% 5% 5% 20%;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
@@ -26,6 +26,12 @@
   grid-column: 1/4;
 }
 
+#validationMsg{
+  grid-row: 5/6;
+  grid-column: 2/3;
+  font-size: 30px;
+}
+
 .sudokuList {
   display: grid;
   grid-template-columns: repeat(9, 3vw);
@@ -47,6 +53,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: lightgrey;
 }
 
 li:nth-child(n):nth-child(-n+9) {
@@ -94,5 +101,5 @@ li:nth-child(n+46):nth-child(-n+54) {
 }
 
 .emptySquare{
-  background-color: lightgray;
+  background-color: white;
 }

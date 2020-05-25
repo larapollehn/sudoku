@@ -2,14 +2,17 @@ import SudokuViewPuzzle from "../View/SudokuViewPuzzle";
 import SudokuViewMenu from "../View/SudokuViewMenu";
 import Generator from "../Sudoku/Generator";
 import Square from "../Sudoku/Square";
+import Validator from "../Sudoku/Validator";
 
 export default class SudokuController {
     private puzzleView: SudokuViewPuzzle;
     private Generator: Generator = new Generator();
+    private Validator: Validator = new Validator();
     private currentSudoku: Array<Square>;
     private sudokuSquares: Map<number, Square>;
     private currentOption: number;
     private filledSquares: Array<number> = new Array<number>();
+    private defaultDifficulty: number = 10;
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
@@ -21,6 +24,7 @@ export default class SudokuController {
         this.fillEmptySquare = this.fillEmptySquare.bind(this);
         this.setCurrentOption = this.setCurrentOption.bind(this);
         this.setCurrentOptionWithKeyboard = this.setCurrentOptionWithKeyboard.bind(this);
+        this.validateSudoku = this.validateSudoku.bind(this);
     }
 
     setup() {
@@ -29,10 +33,11 @@ export default class SudokuController {
 
     addBtnEventListener() {
         this.puzzleView.generateBtn.addEventListener('click', this.setupNewSudoku);
+        this.puzzleView.validateBtn.addEventListener('click', this.validateSudoku);
     }
 
     setupNewSudoku() {
-        this.currentSudoku = this.Generator.generateSudoku(30);
+        this.currentSudoku = this.Generator.generateSudoku(this.defaultDifficulty);
         this.puzzleView.displaySudoku(this.currentSudoku);
 
         this.sudokuSquares = new Map();
@@ -75,6 +80,14 @@ export default class SudokuController {
     setCurrentOptionWithKeyboard(event: any){
         this.currentOption = Number(event.key);
         this.puzzleView.highlightCurrentOption(`li${event.key}`);
+    }
+
+    validateSudoku(){
+        if(this.Validator.validate(this.currentSudoku)){
+            this.puzzleView.showValidatorMessage('Super! Deine Lösung ist Richtig :D');
+        } else {
+            this.puzzleView.showValidatorMessage('Leider Falsch. Versuche es doch nochmal.');
+        }
     }
 
 }

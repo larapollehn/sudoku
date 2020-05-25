@@ -4,11 +4,13 @@ export default class SudokuViewPuzzle {
     public sudokuList: HTMLElement = document.getElementById('sudokuList');
     public optionsList: HTMLElement = document.getElementById('optionsList');
     public generateBtn: HTMLElement = document.getElementById('generateBtn');
+    public validateBtn: HTMLElement = document.getElementById('validateBtn');
 
     constructor() {
         this.displaySudoku = this.displaySudoku.bind(this);
         this.displayOptions = this.displayOptions.bind(this);
         this.highlightCurrentOption = this.highlightCurrentOption.bind(this);
+        this.showValidatorMessage = this.showValidatorMessage.bind(this);
     }
 
     displaySudoku(sudoku: Array<Square>) {
@@ -57,6 +59,14 @@ export default class SudokuViewPuzzle {
         squares.forEach(square => {
             li[square].classList.add('emptySquare');
         })
+    }
+
+    showValidatorMessage(msg: string){
+        let msgContainer = document.getElementById('validationMsg');
+        msgContainer.innerText = msg;
+        setTimeout(function () {
+            msgContainer.innerText = '';
+        }, 5000);
     }
 
 }
