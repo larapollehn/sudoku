@@ -13,10 +13,11 @@ export default class SudokuController {
     private currentSudoku: Array<Square>;
     private currentSudokuGrid: Array<Square> = new Array<Square>();
     private sudokuSquares: Map<number, Square>;
-    private currentOption: number;
+    private currentOption: number = 1;
     private filledSquares: Array<number> = new Array<number>();
     private defaultDifficulty: number = 10;
     private currentMode: string;
+    private seconds: number;
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
@@ -36,6 +37,7 @@ export default class SudokuController {
 
     setup() {
         this.addBtnEventListener();
+        this.timer();
     }
 
     addBtnEventListener() {
@@ -49,6 +51,7 @@ export default class SudokuController {
     }
 
     setupNewSudoku() {
+        this.seconds = 0;
         this.currentSudoku = this.Generator.generateSudoku(this.defaultDifficulty);
         this.puzzleView.displaySudoku(this.currentSudoku);
 
@@ -130,14 +133,50 @@ export default class SudokuController {
         }
     }
 
-    extremeMode(){
-        setTimeout(() =>{
-            this.puzzleView.displaySudoku(this.currentSudoku.reverse());
-        }, 5000);
+    extremeMode() {
+        this.filledSquares = this.filledSquares.map(num => {
+            return 80 - num;
+        });
+        this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
+
+        this.currentSudoku = this.currentSudoku.reverse().map(square =>{
+            let newSquare = square;
+            newSquare.index = 80 - square.index;
+            return newSquare;
+        })
+        this.puzzleView.displaySudoku(this.currentSudoku);
+
+        this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
+
+        this.sudokuSquares = new Map();
+        this.currentSudoku.forEach(square => {
+            this.sudokuSquares.set(square.index, square);
+        });
+
+        this.addSudokuListeners();
     }
 
-    timer(){
 
+    humanReadable(seconds: number) {
+        let time_left = seconds;
+        let human_readable: Array<string> = [];
+        [3600, 60, 1].forEach((unit) => {
+            let time = Math.floor(time_left / unit);
+            human_readable.push(time_left / unit < 1 ? '00' : String(time).padStart(2, '0'));
+            time_left = time_left - (time * unit);
+        });
+        return human_readable.join(":");
+    }
+
+    timer() {
+        setInterval(() => {
+            this.seconds++
+            let time = this.humanReadable(this.seconds);
+            this.puzzleView.displayClock(time);
+            if (this.currentMode === 'extreme' && this.seconds % 5 === 0) {
+                this.extremeMode();
+            }
+        }, 1000);
     }
 
 }

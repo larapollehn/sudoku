@@ -10,12 +10,14 @@ export default class SudokuViewPuzzle {
     public advancedBtn: HTMLElement = document.getElementById('advancedBtn');
     public hardBtn: HTMLElement = document.getElementById('hardBtn');
     public extremeBtn: HTMLElement = document.getElementById('extremeBtn');
+    public timer: HTMLElement = document.getElementById('timer');
 
     constructor() {
         this.displaySudoku = this.displaySudoku.bind(this);
         this.displayOptions = this.displayOptions.bind(this);
         this.highlightCurrentOption = this.highlightCurrentOption.bind(this);
         this.showValidatorMessage = this.showValidatorMessage.bind(this);
+        this.displayClock = this.displayClock.bind(this);
     }
 
     displaySudoku(sudoku: Array<Square>) {
@@ -72,6 +74,10 @@ export default class SudokuViewPuzzle {
         setTimeout(function () {
             msgContainer.innerText = '';
         }, 5000);
+    }
+
+    displayClock(time: string){
+        this.timer.innerText = time;
     }
 
 }
