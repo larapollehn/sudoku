@@ -17,7 +17,7 @@ export default class SudokuController {
         this.addBtnEventListener = this.addBtnEventListener.bind(this);
         this.setupNewSudoku = this.setupNewSudoku.bind(this);
         this.addSudokuListeners = this.addSudokuListeners.bind(this);
-        this.getEmptySquare = this.getEmptySquare.bind(this);
+        this.fillEmptySquare = this.fillEmptySquare.bind(this);
         this.setCurrentOption = this.setCurrentOption.bind(this);
     }
 
@@ -45,7 +45,7 @@ export default class SudokuController {
     addSudokuListeners() {
         let emptySquares = document.getElementsByClassName('emptySquare');
         for (let emptySquare of emptySquares) {
-            emptySquare.addEventListener('click', this.getEmptySquare);
+            emptySquare.addEventListener('click', this.fillEmptySquare);
         }
 
         let options = document.getElementsByClassName('optionsList');
@@ -54,16 +54,17 @@ export default class SudokuController {
         }
     }
 
-    getEmptySquare(event: any) {
-        /**
-         let squareIndex = event.target.id;
-         this.currentEmptySquare = this.sudokuSquares.get(squareIndex);
-         **/
+    fillEmptySquare(event: any) {
+        let squareIndex = event.target.id;
+        this.currentSudoku[squareIndex].value = this.currentOption;
+        this.puzzleView.displaySudoku(this.currentSudoku);
+        this.addSudokuListeners();
+
     }
 
     setCurrentOption(event: any) {
         let option = event.target.id;
-        console.log(option);
+        this.currentOption = event.target.innerText;
         this.puzzleView.highlightCurrentOption(option);
     }
 }
