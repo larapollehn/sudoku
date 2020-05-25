@@ -8,6 +8,7 @@ export default class SudokuViewPuzzle {
     constructor() {
         this.displaySudoku = this.displaySudoku.bind(this);
         this.displayOptions = this.displayOptions.bind(this);
+        this.highlightCurrentOption = this.highlightCurrentOption.bind(this);
     }
 
     displaySudoku(sudoku: Array<Square>) {
@@ -37,10 +38,20 @@ export default class SudokuViewPuzzle {
         for (let i = 1; i < 10; i++){
             let li = document.createElement('li');
             li.innerText = String(i);
-            li.id = String(i);
+            li.id = `li${i}`;
             li.classList.add('optionsList')
             this.optionsList.appendChild(li);
         }
+    }
+
+    highlightCurrentOption(id: string){
+        let oldOption = document.getElementsByClassName('highlightCurrentOption');
+        if (oldOption[0]){
+            oldOption[0].classList.remove('highlightCurrentOption');
+        }
+
+        let currentOption = document.getElementById(id);
+        currentOption.classList.add('highlightCurrentOption');
     }
 
 }

@@ -56,4 +56,10 @@ li:nth-child(n+46):nth-child(-n+54) {
 .optionsList {
   float: left;
   margin: 10px;
+  cursor: pointer;
+}
+
+.highlightCurrentOption{
+  background-color: cornflowerblue;
+  font-weight: bolder;
 }

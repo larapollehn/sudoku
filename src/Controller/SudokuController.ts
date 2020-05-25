@@ -3,41 +3,67 @@ import SudokuViewMenu from "../View/SudokuViewMenu";
 import Generator from "../Sudoku/Generator";
 import Square from "../Sudoku/Square";
 
-export default class SudokuController{
+export default class SudokuController {
     private puzzleView: SudokuViewPuzzle;
     private Generator: Generator = new Generator();
     private currentSudoku: Array<Square>;
+    private sudokuSquares: Map<number, Square>;
+    private currentOption: number;
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
 
-        this.addEventListener = this.addEventListener.bind(this);
-        this.generateSudoku = this.generateSudoku.bind(this);
+        this.setup = this.setup.bind(this);
+        this.addBtnEventListener = this.addBtnEventListener.bind(this);
+        this.setupNewSudoku = this.setupNewSudoku.bind(this);
+        this.addSudokuListeners = this.addSudokuListeners.bind(this);
+        this.getEmptySquare = this.getEmptySquare.bind(this);
+        this.setCurrentOption = this.setCurrentOption.bind(this);
     }
 
-    setup(){
-        this.addEventListener();
+    setup() {
+        this.addBtnEventListener();
     }
 
-    addEventListener(){
-        this.puzzleView.generateBtn.addEventListener('click', this.generateSudoku);
+    addBtnEventListener() {
+        this.puzzleView.generateBtn.addEventListener('click', this.setupNewSudoku);
     }
 
-    generateSudoku(){
+    setupNewSudoku() {
         this.currentSudoku = this.Generator.generateSudoku(30);
         this.puzzleView.displaySudoku(this.currentSudoku);
-        this.addEmptySquareListeners();
+
+        this.sudokuSquares = new Map();
+        this.currentSudoku.forEach(square => {
+            this.sudokuSquares.set(square.index, square);
+        });
+
         this.puzzleView.displayOptions();
+        this.addSudokuListeners();
     }
 
-    addEmptySquareListeners(){
+    addSudokuListeners() {
         let emptySquares = document.getElementsByClassName('emptySquare');
         for (let emptySquare of emptySquares) {
             emptySquare.addEventListener('click', this.getEmptySquare);
         }
+
+        let options = document.getElementsByClassName('optionsList');
+        for (let option of options) {
+            option.addEventListener('click', this.setCurrentOption);
+        }
     }
 
-    getEmptySquare(event: any){
-        console.log('clicked', event.target.id);
+    getEmptySquare(event: any) {
+        /**
+         let squareIndex = event.target.id;
+         this.currentEmptySquare = this.sudokuSquares.get(squareIndex);
+         **/
+    }
+
+    setCurrentOption(event: any) {
+        let option = event.target.id;
+        console.log(option);
+        this.puzzleView.highlightCurrentOption(option);
     }
 }
