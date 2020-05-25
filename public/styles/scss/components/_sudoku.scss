@@ -1,3 +1,31 @@
+#puzzleSection{
+  text-align: center;
+  display: grid;
+  grid-template-rows: 5% 60% 5% 20%;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#title{
+  grid-row: 1/2;
+  grid-column: 1/4;
+}
+
+#sudokuList{
+  grid-row: 2/3;
+  grid-column: 1/4;
+}
+
+#optionsList{
+  grid-row: 3/4;
+  grid-column: 1/4;
+  margin: 0 auto;
+}
+
+#buttonMenu{
+  grid-row: 4/5;
+  grid-column: 1/4;
+}
+
 .sudokuList {
   display: grid;
   grid-template-columns: repeat(9, 3vw);
@@ -6,7 +34,6 @@
   align-content: center;
   grid-gap: 0rem;
   list-style: none;
-  margin: 0 0 2vw;
   padding: 0;
   font-size: calc(2vw + 10px);
 }
@@ -19,10 +46,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  span {
-    margin-top: 0.4rem;
-  }
 }
 
 li:nth-child(n):nth-child(-n+9) {
@@ -55,8 +78,10 @@ li:nth-child(n+46):nth-child(-n+54) {
 
 .optionsList {
   float: left;
-  margin: 10px;
   cursor: pointer;
+  margin: 0 20px 0 20px;
+  font-size: 27px;
+  font-weight: bold;
 }
 
 .highlightCurrentOption{
