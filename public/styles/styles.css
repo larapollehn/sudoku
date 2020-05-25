@@ -51,7 +51,8 @@
   grid-gap: 0rem;
   list-style: none;
   padding: 0;
-  font-size: calc(2vw + 10px); }
+  font-size: calc(2vw + 10px);
+  cursor: pointer; }
 
 .sudokuLiElement {
   margin: 0;
@@ -86,15 +87,18 @@ li:nth-child(n+46):nth-child(-n+54) {
 .optionsList {
   float: left;
   cursor: pointer;
-  margin: 0 20px 0 20px;
+  margin: 0 15px 0 15px;
   font-size: 27px;
-  font-weight: bold; }
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  border-radius: 25px; }
 
 .highlightCurrentOption {
-  background-color: cornflowerblue;
+  background-color: darkseagreen;
   font-weight: bolder; }
 
 .emptySquare {
-  background-color: mediumorchid; }
+  background-color: lightgray; }
 
 /*# sourceMappingURL=styles.css.map */
