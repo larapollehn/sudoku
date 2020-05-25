@@ -19,6 +19,7 @@ export default class SudokuController {
         this.addSudokuListeners = this.addSudokuListeners.bind(this);
         this.fillEmptySquare = this.fillEmptySquare.bind(this);
         this.setCurrentOption = this.setCurrentOption.bind(this);
+        this.setCurrentOptionWithKeyboard = this.setCurrentOptionWithKeyboard.bind(this);
     }
 
     setup() {
@@ -52,6 +53,8 @@ export default class SudokuController {
         for (let option of options) {
             option.addEventListener('click', this.setCurrentOption);
         }
+
+        window.addEventListener('keypress', this.setCurrentOptionWithKeyboard);
     }
 
     fillEmptySquare(event: any) {
@@ -63,8 +66,13 @@ export default class SudokuController {
     }
 
     setCurrentOption(event: any) {
-        let option = event.target.id;
-        this.currentOption = event.target.innerText;
-        this.puzzleView.highlightCurrentOption(option);
+            this.currentOption = event.target.innerText;
+            this.puzzleView.highlightCurrentOption(event.target.id);
     }
+
+    setCurrentOptionWithKeyboard(event: any){
+        this.currentOption = Number(event.key);
+        this.puzzleView.highlightCurrentOption(`li${event.key}`);
+    }
+
 }
