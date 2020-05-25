@@ -20,13 +20,11 @@ export default class SudokuViewPuzzle {
             let li = document.createElement('li');
             li.classList.add('sudokuLiElement');
             li.id = String(square.index);
-            let span = document.createElement('span');
             if (square.value !== 0) {
-                span.innerText = String(square.value);
+                li.innerText = String(square.value);
             } else {
                 li.classList.add('emptySquare');
             }
-            li.appendChild(span);
             this.sudokuList.appendChild(li);
         })
     }
@@ -52,6 +50,13 @@ export default class SudokuViewPuzzle {
 
         let currentOption = document.getElementById(id);
         currentOption.classList.add('highlightCurrentOption');
+    }
+
+    setClassofFormerEmptySquares(squares: Array<number>){
+        let li = document.getElementsByClassName('sudokuLiElement');
+        squares.forEach(square => {
+            li[square].classList.add('emptySquare');
+        })
     }
 
 }

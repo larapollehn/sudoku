@@ -9,6 +9,7 @@ export default class SudokuController {
     private currentSudoku: Array<Square>;
     private sudokuSquares: Map<number, Square>;
     private currentOption: number;
+    private filledSquares: Array<number> = new Array<number>();
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
@@ -59,10 +60,11 @@ export default class SudokuController {
 
     fillEmptySquare(event: any) {
         let squareIndex = event.target.id;
+        this.filledSquares.push(squareIndex);
         this.currentSudoku[squareIndex].value = this.currentOption;
         this.puzzleView.displaySudoku(this.currentSudoku);
+        this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
         this.addSudokuListeners();
-
     }
 
     setCurrentOption(event: any) {
