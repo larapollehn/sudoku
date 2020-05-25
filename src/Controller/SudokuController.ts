@@ -1,10 +1,12 @@
 import SudokuViewPuzzle from "../View/SudokuViewPuzzle";
 import SudokuViewMenu from "../View/SudokuViewMenu";
 import Generator from "../Sudoku/Generator";
+import Square from "../Sudoku/Square";
 
 export default class SudokuController{
     private puzzleView: SudokuViewPuzzle;
     private Generator: Generator = new Generator();
+    private currentSudoku: Array<Square>;
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
@@ -22,8 +24,20 @@ export default class SudokuController{
     }
 
     generateSudoku(){
-        console.log('BITCH SOMEONE TICKLED MY ASS');
-        let sudoku = this.Generator.generateSudoku(30);
-        this.puzzleView.displaySudoku(sudoku);
+        this.currentSudoku = this.Generator.generateSudoku(30);
+        this.puzzleView.displaySudoku(this.currentSudoku);
+        this.addEmptySquareListeners();
+        this.puzzleView.displayOptions();
+    }
+
+    addEmptySquareListeners(){
+        let emptySquares = document.getElementsByClassName('emptySquare');
+        for (let emptySquare of emptySquares) {
+            emptySquare.addEventListener('click', this.getEmptySquare);
+        }
+    }
+
+    getEmptySquare(event: any){
+        console.log('clicked', event.target.id);
     }
 }

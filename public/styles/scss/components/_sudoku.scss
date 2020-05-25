@@ -1,4 +1,4 @@
-.sudokuList{
+.sudokuList {
   display: grid;
   grid-template-columns: repeat(9, 3vw);
   grid-template-rows: repeat(9, 3vw);
@@ -11,7 +11,7 @@
   font-size: calc(2vw + 10px);
 }
 
-.sudokuLiElement{
+.sudokuLiElement {
   margin: 0;
   padding: 0;
   text-align: center;
@@ -19,6 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   span {
     margin-top: 0.4rem;
   }
@@ -27,18 +28,32 @@
 li:nth-child(n):nth-child(-n+9) {
   border-top-width: 4px;
 }
+
 li:nth-child(n+73):nth-child(-n+81) {
   border-bottom-width: 4px;
 }
+
 li:nth-child(3n) {
   border-right-width: 4px;
 }
+
 li:nth-child(9n+1) {
   border-left-width: 4px;
 }
+
 li:nth-child(n+19):nth-child(-n+27) {
   border-bottom-width: 4px;
 }
+
 li:nth-child(n+46):nth-child(-n+54) {
   border-bottom-width: 4px;
+}
+
+#optionsList {
+  list-style-type: none;
+}
+
+.optionsList {
+  float: left;
+  margin: 10px;
 }

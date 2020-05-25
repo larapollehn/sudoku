@@ -7,7 +7,7 @@
   height: 100vh;
   width: 100%;
   display: grid;
-  grid-template-columns: 600px auto;
+  grid-template-columns: 20% auto;
   grid-template-rows: 50% 50%; }
 
 #menuSection {
@@ -60,5 +60,12 @@ li:nth-child(n+19):nth-child(-n+27) {
 
 li:nth-child(n+46):nth-child(-n+54) {
   border-bottom-width: 4px; }
+
+#optionsList {
+  list-style-type: none; }
+
+.optionsList {
+  float: left;
+  margin: 10px; }
 
 /*# sourceMappingURL=styles.css.map */
