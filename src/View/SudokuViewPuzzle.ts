@@ -1,6 +1,7 @@
 import Square from "../Sudoku/Square";
 
 export default class SudokuViewPuzzle {
+    public sudokuSection: HTMLElement = document.getElementById('puzzleSection');
     public sudokuList: HTMLElement = document.getElementById('sudokuList');
     public optionsList: HTMLElement = document.getElementById('optionsList');
     public generateBtn: HTMLElement = document.getElementById('generateBtn');
@@ -38,11 +39,11 @@ export default class SudokuViewPuzzle {
         })
     }
 
-    displayOptions(){
-        while(this.optionsList.hasChildNodes()){
+    displayOptions() {
+        while (this.optionsList.hasChildNodes()) {
             this.optionsList.removeChild(this.optionsList.firstChild);
         }
-        for (let i = 1; i < 10; i++){
+        for (let i = 1; i < 10; i++) {
             let li = document.createElement('li');
             li.innerText = String(i);
             li.id = `li${i}`;
@@ -51,9 +52,9 @@ export default class SudokuViewPuzzle {
         }
     }
 
-    highlightCurrentOption(id: string){
+    highlightCurrentOption(id: string) {
         let oldOption = document.getElementsByClassName('highlightCurrentOption');
-        if (oldOption[0]){
+        if (oldOption[0]) {
             oldOption[0].classList.remove('highlightCurrentOption');
         }
 
@@ -61,14 +62,14 @@ export default class SudokuViewPuzzle {
         currentOption.classList.add('highlightCurrentOption');
     }
 
-    setClassofFormerEmptySquares(squares: Array<number>){
+    setClassofFormerEmptySquares(squares: Array<number>) {
         let li = document.getElementsByClassName('sudokuLiElement');
         squares.forEach(square => {
             li[square].classList.add('emptySquare');
         })
     }
 
-    showValidatorMessage(msg: string){
+    showValidatorMessage(msg: string) {
         let msgContainer = document.getElementById('validationMsg');
         msgContainer.innerText = msg;
         setTimeout(function () {
@@ -76,20 +77,67 @@ export default class SudokuViewPuzzle {
         }, 5000);
     }
 
-    displayClock(time: string){
+    displayClock(time: string) {
         this.timer.innerText = time;
     }
 
-    displayStrobo(state: string){
+    displayStrobo(state: string) {
         let listElements = document.getElementsByClassName('sudokuLiElement');
-        if (state === 'on'){
+        if (state === 'on') {
             for (let listElement of listElements) {
-                listElement.style.backgroundColor = '#000';
+                listElement.classList.add('strobo');
             }
         } else {
             for (let listElement of listElements) {
-                listElement.style.backgroundColor = '#fff';
+                listElement.classList.remove('strobo');
             }
+        }
+    }
+
+    confetti() {
+        let self = this;
+        for (let i = 0; i < 250; i++) {
+            create(i);
+        }
+
+        function create(i: number) {
+            let width = Math.random() * 8;
+            let height = width * 0.4;
+            let colourIdx = Math.ceil(Math.random() * 3);
+            let colour = "red";
+            switch (colourIdx) {
+                case 1:
+                    colour = "yellow";
+                    break;
+                case 2:
+                    colour = "blue";
+                    break;
+                default:
+                    colour = "red";
+            }
+            let confetti = document.createElement('div');
+            confetti.classList.add(`confetti-${i}`);
+            confetti.classList.add(`${colour}`);
+            confetti.style.width = width + 'px';
+            confetti.style.height = height + 'px';
+            confetti.style.top = -Math.random() * 20 + "%";
+            confetti.style.left = Math.random() * 100 + "%";
+            confetti.style.opacity = String(Math.random() + 0.5);
+            confetti.style.transform = "rotate(" + Math.random() * 360 + "deg)";
+            self.sudokuSection.appendChild(confetti);
+            drop(i);
+        }
+
+        function drop(x: number) {
+            let confetto = document.getElementsByClassName(`confetti-${x}`);
+            confetto[0].animate({top: "100%", left: "+=" + Math.random() * 15 + "%"}, Math.random() * 3000 + 3000);
+            reset(x);
+        }
+
+        function reset(x: number) {
+            let confetto = document.getElementsByClassName(`confetti-${x}`);
+            confetto[0].animate({"top": -Math.random() * 20 + "%", "left": "-=" + Math.random() * 15 + "%"}, 0);
+            drop(x);
         }
     }
 

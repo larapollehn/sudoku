@@ -15,7 +15,7 @@ export default class SudokuController {
     private sudokuSquares: Map<number, Square>;
     private currentOption: number = 1;
     private filledSquares: Array<number> = new Array<number>();
-    private defaultDifficulty: number = 10;
+    private defaultDifficulty: number = 1;
     private currentMode: string;
     private seconds: number;
 
@@ -101,6 +101,7 @@ export default class SudokuController {
 
     validateSudoku() {
         if (this.Validator.validate(this.currentSudoku)) {
+            this.puzzleView.confetti();
             this.puzzleView.showValidatorMessage('Super! Deine Lösung ist Richtig :D');
         } else {
             this.puzzleView.showValidatorMessage('Leider Falsch. Versuche es doch nochmal.');
