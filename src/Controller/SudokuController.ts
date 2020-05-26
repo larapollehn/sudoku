@@ -18,6 +18,7 @@ export default class SudokuController {
     private defaultDifficulty: number = 1;
     private currentMode: string;
     private seconds: number;
+    private timeScores: Array<Array<string | number>> = new Array<Array<string | number>>();
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
@@ -62,6 +63,8 @@ export default class SudokuController {
             this.sudokuSquares.set(square.index, square);
         });
 
+        this.filledSquares = new Array<number>();
+
         this.puzzleView.displayOptions();
         this.addSudokuListeners();
     }
@@ -102,6 +105,7 @@ export default class SudokuController {
     validateSudoku() {
         if (this.Validator.validate(this.currentSudoku)) {
             this.puzzleView.showValidatorMessage('Super! Deine Lösung ist Richtig :D');
+            this.markHighscore(new Date().toLocaleTimeString(), this.seconds);
         } else {
             this.puzzleView.showValidatorMessage('Leider Falsch. Versuche es doch nochmal.');
         }
@@ -140,7 +144,7 @@ export default class SudokuController {
         });
         this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
 
-        this.currentSudoku = this.currentSudoku.reverse().map(square =>{
+        this.currentSudoku = this.currentSudoku.reverse().map(square => {
             let newSquare = square;
             newSquare.index = 80 - square.index;
             return newSquare;
@@ -157,11 +161,11 @@ export default class SudokuController {
         this.addSudokuListeners();
     }
 
-    strobo(){
+    strobo() {
         this.puzzleView.displayStrobo('on');
         setTimeout(() => {
             this.puzzleView.displayStrobo('off');
-        }, 500);
+        }, 700);
     }
 
     humanReadable(seconds: number) {
@@ -183,10 +187,32 @@ export default class SudokuController {
             if (this.currentMode === 'extreme' && this.seconds % 5 === 0) {
                 this.extremeMode();
             }
-            if(this.currentMode === 'extreme'){
+            if (this.currentMode === 'extreme') {
                 this.strobo();
             }
         }, 1000);
+    }
+
+    markHighscore(time: string, seconds: number) {
+        if (this.timeScores.length === 0) {
+            this.timeScores.push([time, seconds]);
+            let score = JSON.stringify(this.timeScores);
+            localStorage.setItem('HighScore', score);
+            this.puzzleView.displayHighScores([[time, seconds]]);
+        } else {
+            let former = JSON.parse(localStorage.getItem('HighScore'));
+            former.push([time, seconds]);
+            this.timeScores = former;
+            former.sort((a: Array<number>, b: Array<number>) => {
+                return a[1] - b[1];
+            });
+            if (former.length > 3) {
+               former = former.slice(0, 3);
+            }
+            let score = JSON.stringify(former);
+            localStorage.setItem('HighScore', score);
+            this.puzzleView.displayHighScores(former);
+        }
     }
 
 }

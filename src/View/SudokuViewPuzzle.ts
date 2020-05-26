@@ -13,6 +13,7 @@ export default class SudokuViewPuzzle {
     public hardBtn: HTMLElement = document.getElementById('hardBtn');
     public extremeBtn: HTMLElement = document.getElementById('extremeBtn');
     public timer: HTMLElement = document.getElementById('timer');
+    public scoreList: HTMLElement = document.getElementById('highScores');
 
     constructor() {
         this.displaySudoku = this.displaySudoku.bind(this);
@@ -20,6 +21,7 @@ export default class SudokuViewPuzzle {
         this.highlightCurrentOption = this.highlightCurrentOption.bind(this);
         this.showValidatorMessage = this.showValidatorMessage.bind(this);
         this.displayClock = this.displayClock.bind(this);
+        this.displayHighScores = this.displayHighScores.bind(this);
     }
 
     displaySudoku(sudoku: Array<Square>) {
@@ -93,6 +95,19 @@ export default class SudokuViewPuzzle {
                 listElement.classList.remove('strobo');
             }
         }
+    }
+
+    displayHighScores(scores: Array<Array<string | number>>){
+        while (this.scoreList.hasChildNodes()) {
+            this.scoreList.removeChild(this.scoreList.firstChild);
+        }
+
+        scores.forEach(score => {
+            let li = document.createElement('li');
+            li.innerText = `${score[0]} - ${score[1]}`;
+            li.classList.add('scoreListEntry');
+            this.scoreList.appendChild(li);
+        })
     }
 
 }
