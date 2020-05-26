@@ -22,6 +22,7 @@ export default class SudokuViewPuzzle {
         this.showValidatorMessage = this.showValidatorMessage.bind(this);
         this.displayClock = this.displayClock.bind(this);
         this.displayHighScores = this.displayHighScores.bind(this);
+        this.showTimer = this.showTimer.bind(this);
     }
 
     displaySudoku(sudoku: Array<Square>) {
@@ -108,6 +109,10 @@ export default class SudokuViewPuzzle {
             li.classList.add('scoreListEntry');
             this.scoreList.appendChild(li);
         })
+    }
+
+    showTimer(){
+        this.timer.style.color = 'black';
     }
 
 }

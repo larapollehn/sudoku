@@ -53,6 +53,7 @@ export default class SudokuController {
 
     setupNewSudoku() {
         this.seconds = 0;
+
         this.currentSudoku = this.Generator.generateSudoku(this.defaultDifficulty);
         this.puzzleView.displaySudoku(this.currentSudoku);
 
@@ -184,6 +185,9 @@ export default class SudokuController {
             this.seconds++
             let time = this.humanReadable(this.seconds);
             this.puzzleView.displayClock(time);
+            if(this.seconds === 1){
+                this.puzzleView.showTimer();
+            }
             if (this.currentMode === 'extreme' && this.seconds % 5 === 0) {
                 this.extremeMode();
             }
@@ -207,7 +211,7 @@ export default class SudokuController {
                 return a[1] - b[1];
             });
             if (former.length > 3) {
-               former = former.slice(0, 3);
+                former = former.slice(0, 3);
             }
             let score = JSON.stringify(former);
             localStorage.setItem('HighScore', score);
