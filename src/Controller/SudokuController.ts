@@ -16,7 +16,7 @@ export default class SudokuController {
     private currentOption: number = 1;
     private filledSquares: Array<number> = new Array<number>();
     private defaultDifficulty: number = 1;
-    private currentMode: string;
+    private currentMode: string = 'easy';
     private seconds: number;
     private timeScores: Array<Array<string | number>> = new Array<Array<string | number>>();
 
@@ -118,17 +118,18 @@ export default class SudokuController {
     }
 
     setDifficulty(event: any) {
+        this.timeScores = new Array<Array<string|number>>();
         if (event.target.id === 'easyBtn') {
             this.currentMode = 'easy';
-            this.defaultDifficulty = 20;
+            this.defaultDifficulty = 1; //20
             this.setupNewSudoku();
         } else if (event.target.id === 'advancedBtn') {
             this.currentMode = 'advanced';
-            this.defaultDifficulty = 30;
+            this.defaultDifficulty = 1; //30
             this.setupNewSudoku();
         } else if (event.target.id === 'hardBtn') {
             this.currentMode = 'hard';
-            this.defaultDifficulty = 35;
+            this.defaultDifficulty = 1 //35;
             this.setupNewSudoku();
         } else if (event.target.id === 'extremeBtn') {
             this.currentMode = 'extreme';
@@ -137,6 +138,8 @@ export default class SudokuController {
             this.extremeMode();
             this.strobo();
         }
+        let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${this.currentMode}`));
+        this.puzzleView.displayHighScores(scoreBoard);
     }
 
     extremeMode() {
@@ -198,13 +201,13 @@ export default class SudokuController {
     }
 
     markHighscore(time: string, seconds: number) {
-        if (this.timeScores.length === 0) {
+        if (localStorage.getItem(`HighScore${this.currentMode}`) === null) {
             this.timeScores.push([time, seconds]);
             let score = JSON.stringify(this.timeScores);
-            localStorage.setItem('HighScore', score);
+            localStorage.setItem(`HighScore${this.currentMode}`, score);
             this.puzzleView.displayHighScores([[time, seconds]]);
         } else {
-            let former = JSON.parse(localStorage.getItem('HighScore'));
+            let former = JSON.parse(localStorage.getItem(`HighScore${this.currentMode}`));
             former.push([time, seconds]);
             this.timeScores = former;
             former.sort((a: Array<number>, b: Array<number>) => {
@@ -214,7 +217,7 @@ export default class SudokuController {
                 former = former.slice(0, 3);
             }
             let score = JSON.stringify(former);
-            localStorage.setItem('HighScore', score);
+            localStorage.setItem(`HighScore${this.currentMode}`, score);
             this.puzzleView.displayHighScores(former);
         }
     }
