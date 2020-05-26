@@ -115,7 +115,7 @@ export default class SudokuViewPuzzle {
     }
 
     showTimer() {
-        this.timer.style.color = 'black';
+        this.timer.style.color = 'white';
     }
 
 

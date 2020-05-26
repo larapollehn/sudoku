@@ -1,7 +1,7 @@
 #puzzleSection{
   text-align: center;
   display: grid;
-  grid-template-rows: 5% 5% 60% 5% 5% 5% 15%;
+  grid-template-rows: 5% 3% 60% 5% 5% 5% 15%;
   grid-template-columns: 1fr 1fr 1fr;
   background-color: #FCA0C5;
 }
@@ -14,7 +14,8 @@
 #timer{
   grid-row: 2/3;
   grid-column: 2/3;
-  color: white;
+  color: #FCA0C5;
+  font-size: 30px;
 }
 
 #sudokuList{
@@ -26,6 +27,7 @@
   grid-row: 4/5;
   grid-column: 1/4;
   margin: 0 auto;
+  color: white;
 }
 
 #buttonMenu{
@@ -40,6 +42,7 @@
 }
 
 .sudokuList {
+  font-family: 'Forum', cursive;
   display: grid;
   grid-template-columns: repeat(9, 3vw);
   grid-template-rows: repeat(9, 3vw);
@@ -48,7 +51,7 @@
   grid-gap: 0rem;
   list-style: none;
   padding: 0;
-  font-size: calc(2vw + 10px);
+  font-size: calc(2vw + 7px);
   cursor: pointer;
 }
 

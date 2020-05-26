@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/styles.scss">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Forum&display=swap" rel="stylesheet">
     <title>Sudoku</title>
 </head>
 <body>
@@ -15,14 +16,14 @@
         <ol id="highScores"></ol>
     </div>
     <div id="puzzleSection">
-        <h1 id="title">SuDoKu</h1>
+        <h1 id="title"></h1>
         <h3 id="timer"></h3>
         <ul id="sudokuList" class="sudokuList"></ul>
         <ul id="optionsList"></ul>
         <div id="buttonMenu">
-            <button id="generateBtn">New Sudoku</button>
-            <button id="validateBtn">Validate Sudoku</button>
-            <button id="solveBtn">Show Solution</button>
+            <button id="generateBtn" class="puzzleBtn">New Sudoku</button>
+            <button id="validateBtn" class="puzzleBtn middleBtn">Validate Sudoku</button>
+            <button id="solveBtn" class="puzzleBtn">Show Solution</button>
         </div>
         <p id="validationMsg"></p>
 
