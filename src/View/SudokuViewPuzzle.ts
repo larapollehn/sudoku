@@ -1,4 +1,5 @@
 import Square from "../Sudoku/Square";
+import $ = require("jquery");
 
 export default class SudokuViewPuzzle {
     public sudokuSection: HTMLElement = document.getElementById('puzzleSection');
@@ -91,53 +92,6 @@ export default class SudokuViewPuzzle {
             for (let listElement of listElements) {
                 listElement.classList.remove('strobo');
             }
-        }
-    }
-
-    confetti() {
-        let self = this;
-        for (let i = 0; i < 250; i++) {
-            create(i);
-        }
-
-        function create(i: number) {
-            let width = Math.random() * 8;
-            let height = width * 0.4;
-            let colourIdx = Math.ceil(Math.random() * 3);
-            let colour = "red";
-            switch (colourIdx) {
-                case 1:
-                    colour = "yellow";
-                    break;
-                case 2:
-                    colour = "blue";
-                    break;
-                default:
-                    colour = "red";
-            }
-            let confetti = document.createElement('div');
-            confetti.classList.add(`confetti-${i}`);
-            confetti.classList.add(`${colour}`);
-            confetti.style.width = width + 'px';
-            confetti.style.height = height + 'px';
-            confetti.style.top = -Math.random() * 20 + "%";
-            confetti.style.left = Math.random() * 100 + "%";
-            confetti.style.opacity = String(Math.random() + 0.5);
-            confetti.style.transform = "rotate(" + Math.random() * 360 + "deg)";
-            self.sudokuSection.appendChild(confetti);
-            drop(i);
-        }
-
-        function drop(x: number) {
-            let confetto = document.getElementsByClassName(`confetti-${x}`);
-            confetto[0].animate({top: "100%", left: "+=" + Math.random() * 15 + "%"}, Math.random() * 3000 + 3000);
-            reset(x);
-        }
-
-        function reset(x: number) {
-            let confetto = document.getElementsByClassName(`confetti-${x}`);
-            confetto[0].animate({"top": -Math.random() * 20 + "%", "left": "-=" + Math.random() * 15 + "%"}, 0);
-            drop(x);
         }
     }
 

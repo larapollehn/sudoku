@@ -101,7 +101,6 @@ export default class SudokuController {
 
     validateSudoku() {
         if (this.Validator.validate(this.currentSudoku)) {
-            this.puzzleView.confetti();
             this.puzzleView.showValidatorMessage('Super! Deine Lösung ist Richtig :D');
         } else {
             this.puzzleView.showValidatorMessage('Leider Falsch. Versuche es doch nochmal.');
