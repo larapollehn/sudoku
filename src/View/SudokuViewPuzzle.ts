@@ -1,4 +1,5 @@
 import Square from "../Sudoku/Square";
+import Utility from "../Sudoku/Utility";
 
 export default class SudokuViewPuzzle {
     public sudokuSection: HTMLElement = document.getElementById('puzzleSection');
@@ -105,13 +106,31 @@ export default class SudokuViewPuzzle {
         while (this.scoreList.hasChildNodes()) {
             this.scoreList.removeChild(this.scoreList.firstChild);
         }
+        let tr = document.createElement('tr');
+        let titles = ['Place', 'Date', 'Time'];
+        for (let i = 0; i < 3; i++){
+            let th = document.createElement('th');
+            th.innerText = titles[i];
+            tr.appendChild(th);
+        }
+        this.scoreList.appendChild(tr);
 
-        scores.forEach(score => {
-            let li = document.createElement('li');
-            li.innerText = `${score[0]} - ${score[1]}`;
-            li.classList.add('scoreListEntry');
-            this.scoreList.appendChild(li);
-        })
+        for (let i = 1; i < 4; i++){
+            let tr = document.createElement('tr');
+            let place = document.createElement('td');
+            place.innerText = `${i}`;
+            let date = document.createElement('td');
+            date.innerText = String(scores[i][0]);
+            let time = document.createElement('td');
+            time.innerText = Utility.humanReadable(Number(scores[i][1]));
+
+            tr.appendChild(place);
+            tr.appendChild(date);
+            tr.appendChild(time);
+
+            this.scoreList.appendChild(tr);
+        }
+
     }
 
     showTimer() {

@@ -4,6 +4,7 @@ import Generator from "../Sudoku/Generator";
 import Square from "../Sudoku/Square";
 import Validator from "../Sudoku/Validator";
 import Solver from "../Sudoku/Solver";
+import Utility from "../Sudoku/Utility";
 
 export default class SudokuController {
     private puzzleView: SudokuViewPuzzle;
@@ -174,21 +175,10 @@ export default class SudokuController {
         }, 200);
     }
 
-    humanReadable(seconds: number) {
-        let time_left = seconds;
-        let human_readable: Array<string> = [];
-        [3600, 60, 1].forEach((unit) => {
-            let time = Math.floor(time_left / unit);
-            human_readable.push(time_left / unit < 1 ? '00' : String(time).padStart(2, '0'));
-            time_left = time_left - (time * unit);
-        });
-        return human_readable.join(":");
-    }
-
     timer() {
         setInterval(() => {
             this.seconds++
-            let time = this.humanReadable(this.seconds);
+            let time = Utility.humanReadable(this.seconds);
             this.puzzleView.displayClock(time);
             if(this.seconds === 1){
                 this.puzzleView.showTimer();

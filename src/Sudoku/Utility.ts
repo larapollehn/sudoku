@@ -48,6 +48,17 @@ export default class Utility {
         }
     }
 
+    static humanReadable(seconds: number) {
+        let time_left = seconds;
+        let human_readable: Array<string> = [];
+        [3600, 60, 1].forEach((unit) => {
+            let time = Math.floor(time_left / unit);
+            human_readable.push(time_left / unit < 1 ? '00' : String(time).padStart(2, '0'));
+            time_left = time_left - (time * unit);
+        });
+        return human_readable.join(":");
+    }
+
     //delete after testing and confirming everything !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     static printGrid(grid: Array<Square>){
         let row = [];
