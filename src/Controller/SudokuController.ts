@@ -15,7 +15,7 @@ export default class SudokuController {
     private sudokuSquares: Map<number, Square>;
     private currentOption: number = 1;
     private filledSquares: Array<number> = new Array<number>();
-    private defaultDifficulty: number = 1;
+    private defaultDifficulty: number = 20;
     private currentMode: string = 'easy';
     private seconds: number;
     private timeScores: Array<Array<string | number>> = new Array<Array<string | number>>();
@@ -37,8 +37,10 @@ export default class SudokuController {
     }
 
     setup() {
+        this.puzzleView.setBackgroundImages();
         this.addBtnEventListener();
         this.timer();
+        this.setupNewSudoku();
     }
 
     addBtnEventListener() {
@@ -121,15 +123,15 @@ export default class SudokuController {
         this.timeScores = new Array<Array<string|number>>();
         if (event.target.id === 'easyBtn') {
             this.currentMode = 'easy';
-            this.defaultDifficulty = 1; //20
+            this.defaultDifficulty = 20;
             this.setupNewSudoku();
         } else if (event.target.id === 'advancedBtn') {
             this.currentMode = 'advanced';
-            this.defaultDifficulty = 1; //30
+            this.defaultDifficulty = 30;
             this.setupNewSudoku();
         } else if (event.target.id === 'hardBtn') {
             this.currentMode = 'hard';
-            this.defaultDifficulty = 1 //35;
+            this.defaultDifficulty = 35;
             this.setupNewSudoku();
         } else if (event.target.id === 'extremeBtn') {
             this.currentMode = 'extreme';
@@ -169,7 +171,7 @@ export default class SudokuController {
         this.puzzleView.displayStrobo('on');
         setTimeout(() => {
             this.puzzleView.displayStrobo('off');
-        }, 700);
+        }, 200);
     }
 
     humanReadable(seconds: number) {

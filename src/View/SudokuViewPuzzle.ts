@@ -1,5 +1,4 @@
 import Square from "../Sudoku/Square";
-import $ = require("jquery");
 
 export default class SudokuViewPuzzle {
     public sudokuSection: HTMLElement = document.getElementById('puzzleSection');
@@ -16,6 +15,7 @@ export default class SudokuViewPuzzle {
     public scoreList: HTMLElement = document.getElementById('highScores');
 
     constructor() {
+        this.setBackgroundImages = this.setBackgroundImages.bind(this);
         this.displaySudoku = this.displaySudoku.bind(this);
         this.displayOptions = this.displayOptions.bind(this);
         this.highlightCurrentOption = this.highlightCurrentOption.bind(this);
@@ -23,6 +23,9 @@ export default class SudokuViewPuzzle {
         this.displayClock = this.displayClock.bind(this);
         this.displayHighScores = this.displayHighScores.bind(this);
         this.showTimer = this.showTimer.bind(this);
+    }
+
+    setBackgroundImages() {
     }
 
     displaySudoku(sudoku: Array<Square>) {
@@ -98,7 +101,7 @@ export default class SudokuViewPuzzle {
         }
     }
 
-    displayHighScores(scores: Array<Array<string | number>>){
+    displayHighScores(scores: Array<Array<string | number>>) {
         while (this.scoreList.hasChildNodes()) {
             this.scoreList.removeChild(this.scoreList.firstChild);
         }
@@ -111,8 +114,9 @@ export default class SudokuViewPuzzle {
         })
     }
 
-    showTimer(){
+    showTimer() {
         this.timer.style.color = 'black';
     }
+
 
 }

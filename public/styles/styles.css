@@ -1,114 +1,68 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box; }
+/*
+Error: wrong number of arguments (4 for 3) for `rgb'
+        on line 63 of scss/components/_sudoku.scss
+        from line 13 of styles.scss
 
-#app {
-  height: 100vh;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 20% auto;
-  grid-template-rows: 50% 50%; }
-
-#menuSection {
-  grid-column: 1/2;
-  grid-row: 1/3;
-  background-color: thistle; }
-
-#puzzleSection {
-  grid-column: 2/3;
-  grid-row: 1/3; }
-
-#puzzleSection {
-  text-align: center;
-  display: grid;
-  grid-template-rows: 5% 5% 60% 5% 5% 5% 15%;
-  grid-template-columns: 1fr 1fr 1fr; }
-
-#title {
-  grid-row: 1/2;
-  grid-column: 1/4; }
-
-#timer {
-  grid-row: 2/3;
-  grid-column: 2/3; }
-
-#sudokuList {
-  grid-row: 3/4;
-  grid-column: 1/4; }
-
-#optionsList {
-  grid-row: 4/5;
-  grid-column: 1/4;
-  margin: 0 auto; }
-
-#buttonMenu {
-  grid-row: 5/6;
-  grid-column: 1/4; }
-
-#validationMsg {
-  grid-row: 6/7;
-  grid-column: 2/3;
-  font-size: 30px; }
-
-.sudokuList {
-  display: grid;
-  grid-template-columns: repeat(9, 3vw);
-  grid-template-rows: repeat(9, 3vw);
-  justify-content: center;
-  align-content: center;
-  grid-gap: 0rem;
-  list-style: none;
-  padding: 0;
-  font-size: calc(2vw + 10px);
-  cursor: pointer; }
-
-.sudokuLiElement {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: lightgrey; }
-
-li:nth-child(n):nth-child(-n+9) {
-  border-top-width: 4px; }
-
-li:nth-child(n+73):nth-child(-n+81) {
-  border-bottom-width: 4px; }
-
-li:nth-child(3n) {
-  border-right-width: 4px; }
-
-li:nth-child(9n+1) {
-  border-left-width: 4px; }
-
-li:nth-child(n+19):nth-child(-n+27) {
-  border-bottom-width: 4px; }
-
-li:nth-child(n+46):nth-child(-n+54) {
-  border-bottom-width: 4px; }
-
-#optionsList {
-  list-style-type: none; }
-
-.optionsList {
-  float: left;
-  cursor: pointer;
-  margin: 0 15px 0 15px;
-  font-size: 27px;
-  font-weight: bold;
-  width: 30px;
-  height: 30px;
-  border-radius: 25px; }
-
-.highlightCurrentOption {
-  background-color: darkseagreen;
-  font-weight: bolder; }
-
-.emptySquare {
-  background-color: white; }
-
-/*# sourceMappingURL=styles.css.map */
+Backtrace:
+scss/components/_sudoku.scss:63
+styles.scss:13
+/usr/lib/ruby/vendor_ruby/sass/script/tree/funcall.rb:310:in `reformat_argument_error'
+/usr/lib/ruby/vendor_ruby/sass/script/tree/funcall.rb:149:in `rescue in _perform'
+/usr/lib/ruby/vendor_ruby/sass/script/tree/funcall.rb:122:in `_perform'
+/usr/lib/ruby/vendor_ruby/sass/script/tree/node.rb:58:in `perform'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:397:in `visit_prop'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `visit'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:160:in `block in visit'
+/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `block in with_base'
+/usr/lib/ruby/vendor_ruby/sass/stack.rb:115:in `with_frame'
+/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `with_base'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:160:in `visit'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:433:in `block (2 levels) in visit_rule'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:433:in `map'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:433:in `block in visit_rule'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:181:in `with_environment'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `visit_rule'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `visit'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:160:in `block in visit'
+/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `block in with_base'
+/usr/lib/ruby/vendor_ruby/sass/stack.rb:115:in `with_frame'
+/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `with_base'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:160:in `visit'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:328:in `block (2 levels) in visit_import'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:328:in `map'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:328:in `block in visit_import'
+/usr/lib/ruby/vendor_ruby/sass/stack.rb:88:in `block in with_import'
+/usr/lib/ruby/vendor_ruby/sass/stack.rb:115:in `with_frame'
+/usr/lib/ruby/vendor_ruby/sass/stack.rb:88:in `with_import'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:325:in `visit_import'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `visit'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:160:in `block in visit'
+/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `block in with_base'
+/usr/lib/ruby/vendor_ruby/sass/stack.rb:115:in `with_frame'
+/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `with_base'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:160:in `visit'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:52:in `map'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:52:in `visit_children'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:169:in `block in visit_children'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:181:in `with_environment'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:168:in `visit_children'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `block in visit'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:188:in `visit_root'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `visit'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:159:in `visit'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:8:in `visit'
+/usr/lib/ruby/vendor_ruby/sass/tree/root_node.rb:36:in `css_tree'
+/usr/lib/ruby/vendor_ruby/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+/usr/lib/ruby/vendor_ruby/sass/engine.rb:381:in `_render_with_sourcemap'
+/usr/lib/ruby/vendor_ruby/sass/engine.rb:298:in `render_with_sourcemap'
+/usr/lib/ruby/vendor_ruby/sass/exec/sass_scss.rb:387:in `run'
+/usr/lib/ruby/vendor_ruby/sass/exec/sass_scss.rb:63:in `process_result'
+/usr/lib/ruby/vendor_ruby/sass/exec/base.rb:52:in `parse'
+/usr/lib/ruby/vendor_ruby/sass/exec/base.rb:19:in `parse!'
+/usr/bin/sass:8:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: wrong number of arguments (4 for 3) for `rgb'\A         on line 63 of scss/components/_sudoku.scss\A         from line 13 of styles.scss"; }

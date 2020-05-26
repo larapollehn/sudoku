@@ -3,6 +3,7 @@
   display: grid;
   grid-template-rows: 5% 5% 60% 5% 5% 5% 15%;
   grid-template-columns: 1fr 1fr 1fr;
+  background-color: #FCA0C5;
 }
 
 #title{
@@ -55,35 +56,42 @@
   margin: 0;
   padding: 0;
   text-align: center;
-  border: 1px solid black;
+  border: 1px solid #FCA0C5;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: lightgrey;
+  background-color: rgb(223,225,228,0.8);
+  color: rgba(0, 0, 0, 0.7);
 }
 
 li:nth-child(n):nth-child(-n+9) {
-  border-top-width: 4px;
+  border-top-width: 3px;
+  border-top-color: #9f0050;
 }
 
 li:nth-child(n+73):nth-child(-n+81) {
-  border-bottom-width: 4px;
+  border-bottom-width: 3px;
+  border-bottom-color: #9f0050;
 }
 
 li:nth-child(3n) {
-  border-right-width: 4px;
+  border-right-width: 3px;
+  border-right-color: #9f0050;
 }
 
 li:nth-child(9n+1) {
-  border-left-width: 4px;
+  border-left-width: 3px;
+  border-left-color: #9f0050;
 }
 
 li:nth-child(n+19):nth-child(-n+27) {
-  border-bottom-width: 4px;
+  border-bottom-width: 3px;
+  border-bottom-color: #9f0050;
 }
 
 li:nth-child(n+46):nth-child(-n+54) {
-  border-bottom-width: 4px;
+  border-bottom-width: 3px;
+  border-bottom-color: #9f0050;
 }
 
 #optionsList {
@@ -102,12 +110,14 @@ li:nth-child(n+46):nth-child(-n+54) {
 }
 
 .highlightCurrentOption{
-  background-color: darkseagreen;
+  background-color: #9f0050;
+  color: white;
   font-weight: bolder;
 }
 
 .emptySquare{
   background-color: white;
+  color: rgba(0, 0, 0, 1);
 }
 
 .strobo{
