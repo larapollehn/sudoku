@@ -14,6 +14,7 @@ export default class SudokuViewPuzzle {
     public extremeBtn: HTMLElement = document.getElementById('extremeBtn');
     public timer: HTMLElement = document.getElementById('timer');
     public scoreList: HTMLElement = document.getElementById('highScores');
+    public eraseBtn: HTMLElement = document.getElementById('eraseBtn');
 
     constructor() {
         this.setBackgroundImages = this.setBackgroundImages.bind(this);

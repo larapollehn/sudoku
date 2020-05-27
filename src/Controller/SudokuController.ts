@@ -20,6 +20,7 @@ export default class SudokuController {
     private currentMode: string = 'easy';
     private seconds: number;
     private timeScores: Array<Array<string | number>> = new Array<Array<string | number>>();
+    private eraseMode: boolean = false;
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
@@ -35,6 +36,7 @@ export default class SudokuController {
         this.solveSudoku = this.solveSudoku.bind(this);
         this.setDifficulty = this.setDifficulty.bind(this);
         this.timer = this.timer.bind(this);
+        this.activateEraseMode = this.activateEraseMode.bind(this);
     }
 
     setup() {
@@ -52,6 +54,7 @@ export default class SudokuController {
         this.puzzleView.advancedBtn.addEventListener('click', this.setDifficulty);
         this.puzzleView.hardBtn.addEventListener('click', this.setDifficulty);
         this.puzzleView.extremeBtn.addEventListener('click', this.setDifficulty);
+        this.puzzleView.eraseBtn.addEventListener('click', this.activateEraseMode);
     }
 
     setupNewSudoku() {
@@ -89,11 +92,21 @@ export default class SudokuController {
 
     fillEmptySquare(event: any) {
         let squareIndex = event.target.id;
-        this.filledSquares.push(squareIndex);
-        this.currentSudoku[squareIndex].value = this.currentOption;
-        this.puzzleView.displaySudoku(this.currentSudoku);
-        this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
-        this.addSudokuListeners();
+        if (this.eraseMode){
+            let index = this.filledSquares.indexOf(squareIndex);
+            this.filledSquares.splice(index, 1);
+            this.currentSudoku[squareIndex].value = 0;
+            this.puzzleView.displaySudoku(this.currentSudoku);
+            this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
+            this.addSudokuListeners();
+        } else {
+            this.filledSquares.push(squareIndex);
+            this.currentSudoku[squareIndex].value = this.currentOption;
+            this.puzzleView.displaySudoku(this.currentSudoku);
+            this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
+            this.addSudokuListeners();
+        }
+
     }
 
     setCurrentOption(event: any) {
@@ -211,6 +224,14 @@ export default class SudokuController {
             let score = JSON.stringify(former);
             localStorage.setItem(`HighScore${this.currentMode}`, score);
             this.puzzleView.displayHighScores(former);
+        }
+    }
+
+    activateEraseMode(){
+        if (this.eraseMode){
+            this.eraseMode = false;
+        } else {
+            this.eraseMode = true;
         }
     }
 
