@@ -5,6 +5,7 @@ import Square from "../Sudoku/Square";
 import Validator from "../Sudoku/Validator";
 import Solver from "../Sudoku/Solver";
 import Utility from "../Sudoku/Utility";
+import {numberAnimalsMapping} from "../Globals";
 
 export default class SudokuController {
     private puzzleView: SudokuViewPuzzle;
@@ -123,11 +124,7 @@ export default class SudokuController {
         } else if (this.helperMode) {
             this.filledSquares.push(squareIndex);
             this.currentSudoku[squareIndex].value = Number(this.currentOption);
-            if (this.currentMode === 'kids') {
-                this.puzzleView.displayKidsSudoku(this.currentSudoku);
-            } else {
-                this.puzzleView.displaySudoku(this.currentSudoku);
-            }
+            this.puzzleView.displaySudoku(this.currentSudoku);
             this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
 
             let validPick = this.Validator.validateSetNumber(this.currentSudoku, squareIndex, this.currentOption);
@@ -144,10 +141,13 @@ export default class SudokuController {
             this.addSudokuListeners();
         } else {
             this.filledSquares.push(squareIndex);
-            this.currentSudoku[squareIndex].value = Number(this.currentOption);
             if (this.currentMode === 'kids') {
+                this.currentSudoku[squareIndex].value = Number(this.currentOption);
+                this.currentSudoku[squareIndex].picture = numberAnimalsMapping.get(Number(this.currentOption));
+                console.log(this.currentMode, this.currentOption, squareIndex, this.currentSudoku);
                 this.puzzleView.displayKidsSudoku(this.currentSudoku);
             } else {
+                this.currentSudoku[squareIndex].value = Number(this.currentOption);
                 this.puzzleView.displaySudoku(this.currentSudoku);
             }
             this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
@@ -155,15 +155,15 @@ export default class SudokuController {
         }
 
 
-        if (this.finished()){
+        if (this.finished()) {
             this.validateSudoku();
         }
 
     }
 
-    finished(){
-        for (let i = 0; i < this.currentSudoku.length; i++){
-            if(this.currentSudoku[i].value === 0){
+    finished() {
+        for (let i = 0; i < this.currentSudoku.length; i++) {
+            if (this.currentSudoku[i].value === 0) {
                 return false;
             }
         }
@@ -171,7 +171,7 @@ export default class SudokuController {
     }
 
     setCurrentOption(event: any) {
-        this.currentOption = event.target.innerText;
+        this.currentOption = event.target.id.slice(2,3);
         this.puzzleView.highlightCurrentOption(event.target.id);
     }
 

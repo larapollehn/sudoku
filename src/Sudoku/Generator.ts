@@ -1,31 +1,12 @@
 import Square from "./Square";
 import Utility from "./Utility";
-
-// @ts-ignore
-import cat from "./../../public/assets/png/1.png";
-// @ts-ignore
-import bee from "./../../public/assets/png/2.png";
-// @ts-ignore
-import elephant from "./../../public/assets/png/3.png";
-// @ts-ignore
-import frog from "./../../public/assets/png/4.png";
-// @ts-ignore
-import ladybug from "./../../public/assets/png/5.png";
-// @ts-ignore
-import monkey from "./../../public/assets/png/6.png";
-// @ts-ignore
-import pig from "./../../public/assets/png/7.png";
-// @ts-ignore
-import bunny from "./../../public/assets/png/8.png";
-// @ts-ignore
-import whale from "./../../public/assets/png/9.png";
+import {numberAnimalsMapping} from "../Globals";
 
 export default class Generator {
     private squares: Array<Square>;
     private available: Array<Array<number>>;
     private count: number;
     private freeSquares: number;
-    private numberAnimalsMapping: Map<number, string> = new Map<number, string>();
 
     constructor() {
     }
@@ -41,17 +22,6 @@ export default class Generator {
         for (let i = 0; i < this.squares.length; i++) {
             this.available[i] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         }
-        this.numberAnimalsMapping = new Map<number, string>([
-            [1, cat],
-            [2, bee],
-            [3, elephant],
-            [4, frog],
-            [5, ladybug],
-            [6, monkey],
-            [7, pig],
-            [8, bunny],
-            [9, whale]
-        ])
     }
 
     private createSquare(index: number, value: number): Square {
@@ -61,7 +31,7 @@ export default class Generator {
         square.subGrid = Utility.getSubGrid(index + 1);
         square.value = value;
         square.index = index;
-        square.picture = this.numberAnimalsMapping.get(value);
+        square.picture = numberAnimalsMapping.get(value);
         return square;
     }
 

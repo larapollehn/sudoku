@@ -19,6 +19,7 @@ import pig from "./../../public/assets/png/7.png";
 import bunny from "./../../public/assets/png/8.png";
 // @ts-ignore
 import whale from "./../../public/assets/png/9.png";
+// @ts-ignore
 import bg from "./../../public/assets/png/tree2.png";
 
 export default class SudokuViewPuzzle {
@@ -115,7 +116,7 @@ export default class SudokuViewPuzzle {
             let li = document.createElement('li');
             li.style.backgroundImage = 'url("' + options[i] + '")';
             li.style.backgroundSize = 'cover';
-            li.id = `li${i}`;
+            li.id = `li${i+1}`;
             li.classList.add('optionsList')
             this.optionsList.appendChild(li);
         }
