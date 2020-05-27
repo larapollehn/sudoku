@@ -67,9 +67,9 @@ export default class SudokuController {
 
         this.currentSudoku = this.Generator.generateSudoku(this.defaultDifficulty);
 
-        if(this.currentMode === 'kids'){
+        if (this.currentMode === 'kids') {
             this.puzzleView.displayKidsSudoku(this.currentSudoku);
-        }else {
+        } else {
             this.puzzleView.displaySudoku(this.currentSudoku);
         }
 
@@ -83,7 +83,12 @@ export default class SudokuController {
         this.filledSquares = new Array<number>();
         this.wrongSquares = new Array<number>();
 
-        this.puzzleView.displayOptions();
+        if (this.currentMode === 'kids') {
+            this.puzzleView.displayKidsOptions();
+        } else {
+            this.puzzleView.displayOptions();
+        }
+
         this.addSudokuListeners();
     }
 
@@ -107,29 +112,29 @@ export default class SudokuController {
             let index = this.filledSquares.indexOf(squareIndex);
             this.filledSquares.splice(index, 1);
             this.currentSudoku[squareIndex].value = 0;
-            if(this.currentMode === 'kids'){
+            if (this.currentMode === 'kids') {
                 this.puzzleView.displayKidsSudoku(this.currentSudoku);
-            }else {
+            } else {
                 this.puzzleView.displaySudoku(this.currentSudoku);
             }
             this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
             this.addSudokuListeners();
-        } else if (this.helperMode){
+        } else if (this.helperMode) {
             this.filledSquares.push(squareIndex);
             this.currentSudoku[squareIndex].value = this.currentOption;
-            if(this.currentMode === 'kids'){
+            if (this.currentMode === 'kids') {
                 this.puzzleView.displayKidsSudoku(this.currentSudoku);
-            }else {
+            } else {
                 this.puzzleView.displaySudoku(this.currentSudoku);
             }
             this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
 
             let validPick = this.Validator.validateSetNumber(this.currentSudoku, squareIndex, this.currentOption);
 
-            if(validPick === false){
+            if (validPick === false) {
                 this.wrongSquares.push(squareIndex);
             } else {
-                if (this.wrongSquares.indexOf(squareIndex) !== -1){
+                if (this.wrongSquares.indexOf(squareIndex) !== -1) {
                     let index = this.wrongSquares.indexOf(squareIndex);
                     this.wrongSquares.splice(index, 1);
                 }
@@ -139,9 +144,9 @@ export default class SudokuController {
         } else {
             this.filledSquares.push(squareIndex);
             this.currentSudoku[squareIndex].value = this.currentOption;
-            if(this.currentMode === 'kids'){
+            if (this.currentMode === 'kids') {
                 this.puzzleView.displayKidsSudoku(this.currentSudoku);
-            }else {
+            } else {
                 this.puzzleView.displaySudoku(this.currentSudoku);
             }
             this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
@@ -171,9 +176,9 @@ export default class SudokuController {
 
     solveSudoku() {
         this.Solver.solveSudoku(this.currentSudokuGrid);
-        if(this.currentMode === 'kids'){
+        if (this.currentMode === 'kids') {
             this.puzzleView.displayKidsSudoku(this.currentSudoku);
-        }else {
+        } else {
             this.puzzleView.displaySudoku(this.currentSudoku);
         }
     }
@@ -198,7 +203,7 @@ export default class SudokuController {
             this.setupNewSudoku();
             this.extremeMode();
             this.strobo();
-        } else if (event.target.id === 'kidsBtn'){
+        } else if (event.target.id === 'kidsBtn') {
             this.currentMode = 'kids';
             this.defaultDifficulty = 10;
             this.setupNewSudoku();
