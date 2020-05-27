@@ -23,9 +23,10 @@ export default class Validator {
     }
 
     private validInRow(index: number, value: number) {
-        let row = Utility.getRow(index + 1) - 1;
-        for (let i = row * 9; i < (row * 9) + 9; i++) {
-            if (this.sudoku[i].value === value) {
+        let row = Utility.getRow(Number(index) + 1) - 1;
+        console.log(row);
+        for (let i = (row * 9); i < ((row * 9) + 9); i++) {
+            if (this.sudoku[i].value === Number(value) && i !== Number(index)) {
                 return false;
             }
         }
@@ -50,9 +51,9 @@ export default class Validator {
     }
 
     private validInColumn(index: number, value: number) {
-        let column = Utility.getColumn(index + 1) - 1;
+        let column = Utility.getColumn(Number(index) + 1) - 1;
         for (let i = column; i < 81; i += 9) {
-            if (this.sudoku[i].value === value) {
+            if (this.sudoku[i].value === Number(value) && i !== Number(index)) {
                 return false;
             }
         }
@@ -81,7 +82,7 @@ export default class Validator {
     }
 
     private validInSubGrid(index: number, value: number) {
-        let subGrid = Utility.getSubGrid(index + 1);
+        let subGrid = Utility.getSubGrid(Number(index) + 1);
         let start;
         if (subGrid === 1) {
             start = 0;
@@ -102,10 +103,11 @@ export default class Validator {
         } else if (subGrid === 9) {
             start = 60;
         }
+        console.log(start);
 
-        for (let i = start; i < (i + (2 * 9) + 1); i += 9) {
+        for (let i = start; i < (start + (2 * 9) + 3); i += 9) {
             for (let j = 0; j < 3; j++){
-                if (this.sudoku[i+j].value === value) {
+                if (this.sudoku[i+j].value === Number(value) && (i+j) !== Number(index)) {
                     return false;
                 }
             }
@@ -125,7 +127,8 @@ export default class Validator {
         return false;
     }
 
-    validateSetNumber(index: number, value: number){
+    validateSetNumber(sudoku: Array<Square> ,index: number, value: number){
+        this.sudoku = sudoku
         let valid = this.validInRow(index, value);
         if(valid){
             valid = this.validInColumn(index, value);

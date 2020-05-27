@@ -111,14 +111,14 @@ export default class SudokuViewPuzzle {
         }
         let tr = document.createElement('tr');
         let titles = ['Place', 'Date', 'Time'];
-        for (let i = 0; i < 3; i++){
+        for (let i = 0; i < 3; i++) {
             let th = document.createElement('th');
             th.innerText = titles[i];
             tr.appendChild(th);
         }
         this.scoreList.appendChild(tr);
 
-        for (let i = 1; i < 4; i++){
+        for (let i = 1; i < 4; i++) {
             let tr = document.createElement('tr');
             let place = document.createElement('td');
             place.innerText = `${i}`;
@@ -140,12 +140,11 @@ export default class SudokuViewPuzzle {
         this.timer.style.color = 'white';
     }
 
-    highlightWrongPick(squares: Array<number>, index: number){
+    highlightWrongPick(squares: Array<number>) {
         let li = document.getElementsByClassName('sudokuLiElement');
         squares.forEach(square => {
-            if(square === index){
-                li[square].classList.add('wrongPick');
-            }
+            li[square].classList.add('wrongPick');
+
         })
     }
 

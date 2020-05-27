@@ -22,6 +22,7 @@ export default class SudokuController {
     private timeScores: Array<Array<string | number>> = new Array<Array<string | number>>();
     private eraseMode: boolean = false;
     private helperMode: boolean = false;
+    public wrongSquares: Array<number> = new Array<number>();
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
@@ -74,6 +75,7 @@ export default class SudokuController {
         });
 
         this.filledSquares = new Array<number>();
+        this.wrongSquares = new Array<number>();
 
         this.puzzleView.displayOptions();
         this.addSudokuListeners();
@@ -108,10 +110,12 @@ export default class SudokuController {
             this.puzzleView.displaySudoku(this.currentSudoku);
             this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
 
-            //let validPick = this.Validator.validateSetNumber(squareIndex, this.currentOption);
-            let validPick = this.Validator.validate(this.currentSudoku);
-            if(!validPick){
-                this.puzzleView.highlightWrongPick(this.filledSquares, squareIndex);
+
+            let validPick = this.Validator.validateSetNumber(this.currentSudoku, squareIndex, this.currentOption);
+            console.log(squareIndex, this.currentOption, validPick);
+            if(validPick === false){
+                this.wrongSquares.push(squareIndex);
+                this.puzzleView.highlightWrongPick(this.wrongSquares);
             }
             this.addSudokuListeners();
         } else {

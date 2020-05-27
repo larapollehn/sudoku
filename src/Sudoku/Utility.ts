@@ -17,7 +17,7 @@ export default class Utility {
      */
     static getRow(index: number): number {
         let row;
-        if (index % 9 === 0) { //original: getColumn(n)
+        if (index % 9 === 0) {
             row = Math.floor(index / 9);
         } else {
             row = Math.floor(index / 9) + 1;
@@ -34,7 +34,7 @@ export default class Utility {
     }
 
     /**
-     * @param index is number between 1 and 81
+     * @param index is number [1, 81]
      */
     static getSubGrid(index: number): number{
         let row = this.getRow(index);
