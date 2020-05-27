@@ -176,7 +176,7 @@ export default class SudokuViewPuzzle {
         }
         this.scoreList.appendChild(tr);
 
-        if(scores !== null){
+        if(scores !== null && scores.length !== 0){
             for (let i = 1; i < 4; i++) {
                 let tr = document.createElement('tr');
                 let place = document.createElement('td');

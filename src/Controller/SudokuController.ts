@@ -122,7 +122,7 @@ export default class SudokuController {
             this.addSudokuListeners();
         } else if (this.helperMode) {
             this.filledSquares.push(squareIndex);
-            this.currentSudoku[squareIndex].value = this.currentOption;
+            this.currentSudoku[squareIndex].value = Number(this.currentOption);
             if (this.currentMode === 'kids') {
                 this.puzzleView.displayKidsSudoku(this.currentSudoku);
             } else {
@@ -144,7 +144,7 @@ export default class SudokuController {
             this.addSudokuListeners();
         } else {
             this.filledSquares.push(squareIndex);
-            this.currentSudoku[squareIndex].value = this.currentOption;
+            this.currentSudoku[squareIndex].value = Number(this.currentOption);
             if (this.currentMode === 'kids') {
                 this.puzzleView.displayKidsSudoku(this.currentSudoku);
             } else {
@@ -154,9 +154,11 @@ export default class SudokuController {
             this.addSudokuListeners();
         }
 
+
         if (this.finished()){
             this.validateSudoku();
         }
+
     }
 
     finished(){
@@ -179,6 +181,7 @@ export default class SudokuController {
     }
 
     validateSudoku() {
+        console.log(this.currentSudoku);
         if (this.Validator.validate(this.currentSudoku)) {
             this.puzzleView.showValidatorMessage('Super! Deine Lösung ist Richtig :D');
             this.markHighscore(new Date().toLocaleTimeString(), this.seconds);
