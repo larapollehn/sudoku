@@ -21,6 +21,7 @@ export default class SudokuController {
     private seconds: number;
     private timeScores: Array<Array<string | number>> = new Array<Array<string | number>>();
     private eraseMode: boolean = false;
+    private helperMode: boolean = false;
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
@@ -37,6 +38,7 @@ export default class SudokuController {
         this.setDifficulty = this.setDifficulty.bind(this);
         this.timer = this.timer.bind(this);
         this.activateEraseMode = this.activateEraseMode.bind(this);
+        this.activateHelperMode = this.activateHelperMode.bind(this);
     }
 
     setup() {
@@ -55,6 +57,7 @@ export default class SudokuController {
         this.puzzleView.hardBtn.addEventListener('click', this.setDifficulty);
         this.puzzleView.extremeBtn.addEventListener('click', this.setDifficulty);
         this.puzzleView.eraseBtn.addEventListener('click', this.activateEraseMode);
+        this.puzzleView.helperModeInput.addEventListener('click', this.activateHelperMode);
     }
 
     setupNewSudoku() {
@@ -92,12 +95,24 @@ export default class SudokuController {
 
     fillEmptySquare(event: any) {
         let squareIndex = event.target.id;
-        if (this.eraseMode){
+        if (this.eraseMode) {
             let index = this.filledSquares.indexOf(squareIndex);
             this.filledSquares.splice(index, 1);
             this.currentSudoku[squareIndex].value = 0;
             this.puzzleView.displaySudoku(this.currentSudoku);
             this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
+            this.addSudokuListeners();
+        } else if (this.helperMode){
+            this.filledSquares.push(squareIndex);
+            this.currentSudoku[squareIndex].value = this.currentOption;
+            this.puzzleView.displaySudoku(this.currentSudoku);
+            this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
+
+            //let validPick = this.Validator.validateSetNumber(squareIndex, this.currentOption);
+            let validPick = this.Validator.validate(this.currentSudoku);
+            if(!validPick){
+                this.puzzleView.highlightWrongPick(this.filledSquares, squareIndex);
+            }
             this.addSudokuListeners();
         } else {
             this.filledSquares.push(squareIndex);
@@ -134,7 +149,7 @@ export default class SudokuController {
     }
 
     setDifficulty(event: any) {
-        this.timeScores = new Array<Array<string|number>>();
+        this.timeScores = new Array<Array<string | number>>();
         if (event.target.id === 'easyBtn') {
             this.currentMode = 'easy';
             this.defaultDifficulty = 20;
@@ -193,7 +208,7 @@ export default class SudokuController {
             this.seconds++
             let time = Utility.humanReadable(this.seconds);
             this.puzzleView.displayClock(time);
-            if(this.seconds === 1){
+            if (this.seconds === 1) {
                 this.puzzleView.showTimer();
             }
             if (this.currentMode === 'extreme' && this.seconds % 5 === 0) {
@@ -227,12 +242,12 @@ export default class SudokuController {
         }
     }
 
-    activateEraseMode(){
-        if (this.eraseMode){
-            this.eraseMode = false;
-        } else {
-            this.eraseMode = true;
-        }
+    activateEraseMode() {
+        this.eraseMode = !this.eraseMode;
+    }
+
+    activateHelperMode() {
+        this.helperMode = this.puzzleView.helperModeInput.checked;
     }
 
 }

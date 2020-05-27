@@ -15,6 +15,7 @@ export default class SudokuViewPuzzle {
     public timer: HTMLElement = document.getElementById('timer');
     public scoreList: HTMLElement = document.getElementById('highScores');
     public eraseBtn: HTMLElement = document.getElementById('eraseBtn');
+    public helperModeInput: HTMLInputElement = document.getElementById('helperMode');
 
     constructor() {
         this.setBackgroundImages = this.setBackgroundImages.bind(this);
@@ -25,6 +26,7 @@ export default class SudokuViewPuzzle {
         this.displayClock = this.displayClock.bind(this);
         this.displayHighScores = this.displayHighScores.bind(this);
         this.showTimer = this.showTimer.bind(this);
+        this.highlightWrongPick = this.highlightWrongPick.bind(this);
     }
 
     setBackgroundImages() {
@@ -136,6 +138,15 @@ export default class SudokuViewPuzzle {
 
     showTimer() {
         this.timer.style.color = 'white';
+    }
+
+    highlightWrongPick(squares: Array<number>, index: number){
+        let li = document.getElementsByClassName('sudokuLiElement');
+        squares.forEach(square => {
+            if(square === index){
+                li[square].classList.add('wrongPick');
+            }
+        })
     }
 
 
