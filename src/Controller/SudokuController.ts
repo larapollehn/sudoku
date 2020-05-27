@@ -112,11 +112,16 @@ export default class SudokuController {
 
 
             let validPick = this.Validator.validateSetNumber(this.currentSudoku, squareIndex, this.currentOption);
-            console.log(squareIndex, this.currentOption, validPick);
+
             if(validPick === false){
                 this.wrongSquares.push(squareIndex);
-                this.puzzleView.highlightWrongPick(this.wrongSquares);
+            } else {
+                if (this.wrongSquares.indexOf(squareIndex) !== -1){
+                    let index = this.wrongSquares.indexOf(squareIndex);
+                    this.wrongSquares.splice(index, 1);
+                }
             }
+            this.puzzleView.highlightWrongPick(this.wrongSquares);
             this.addSudokuListeners();
         } else {
             this.filledSquares.push(squareIndex);
