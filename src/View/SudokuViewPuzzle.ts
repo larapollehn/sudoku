@@ -19,6 +19,7 @@ import pig from "./../../public/assets/png/7.png";
 import bunny from "./../../public/assets/png/8.png";
 // @ts-ignore
 import whale from "./../../public/assets/png/9.png";
+import bg from "./../../public/assets/png/tree2.png";
 
 export default class SudokuViewPuzzle {
     public sudokuSection: HTMLElement = document.getElementById('puzzleSection');
@@ -51,6 +52,9 @@ export default class SudokuViewPuzzle {
     }
 
     setBackgroundImages() {
+        this.sudokuSection.style.backgroundImage = 'url("' + bg + '")';
+        this.sudokuSection.style.backgroundPosition = '120% 60%';
+        this.sudokuSection.style.backgroundRepeat = 'no-repeat';
     }
 
     displaySudoku(sudoku: Array<Square>) {

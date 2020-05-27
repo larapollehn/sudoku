@@ -40,6 +40,7 @@ export default class SudokuController {
         this.timer = this.timer.bind(this);
         this.activateEraseMode = this.activateEraseMode.bind(this);
         this.activateHelperMode = this.activateHelperMode.bind(this);
+        this.finished = this.finished.bind(this);
     }
 
     setup() {
@@ -153,6 +154,18 @@ export default class SudokuController {
             this.addSudokuListeners();
         }
 
+        if (this.finished()){
+            this.validateSudoku();
+        }
+    }
+
+    finished(){
+        for (let i = 0; i < this.currentSudoku.length; i++){
+            if(this.currentSudoku[i].value === 0){
+                return false;
+            }
+        }
+        return true;
     }
 
     setCurrentOption(event: any) {
@@ -187,7 +200,7 @@ export default class SudokuController {
         this.timeScores = new Array<Array<string | number>>();
         if (event.target.id === 'easyBtn') {
             this.currentMode = 'easy';
-            this.defaultDifficulty = 20;
+            this.defaultDifficulty = 1; //20
             this.setupNewSudoku();
         } else if (event.target.id === 'advancedBtn') {
             this.currentMode = 'advanced';
