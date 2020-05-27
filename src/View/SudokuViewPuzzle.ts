@@ -16,6 +16,7 @@ export default class SudokuViewPuzzle {
     public scoreList: HTMLElement = document.getElementById('highScores');
     public eraseBtn: HTMLElement = document.getElementById('eraseBtn');
     public helperModeInput: HTMLInputElement = document.getElementById('helperMode');
+    public kidsBtn: HTMLElement = document.getElementById('kidsBtn');
 
     constructor() {
         this.setBackgroundImages = this.setBackgroundImages.bind(this);
@@ -27,6 +28,7 @@ export default class SudokuViewPuzzle {
         this.displayHighScores = this.displayHighScores.bind(this);
         this.showTimer = this.showTimer.bind(this);
         this.highlightWrongPick = this.highlightWrongPick.bind(this);
+        this.displayKidsSudoku = this.displayKidsSudoku.bind(this);
     }
 
     setBackgroundImages() {
@@ -36,7 +38,6 @@ export default class SudokuViewPuzzle {
         while (this.sudokuList.hasChildNodes()) {
             this.sudokuList.removeChild(this.sudokuList.firstChild);
         }
-
         sudoku.forEach(square => {
             let li = document.createElement('li');
             li.classList.add('sudokuLiElement');
@@ -47,7 +48,25 @@ export default class SudokuViewPuzzle {
                 li.classList.add('emptySquare');
             }
             this.sudokuList.appendChild(li);
-        })
+        });
+    }
+
+    displayKidsSudoku(sudoku: Array<Square>){
+        while (this.sudokuList.hasChildNodes()) {
+            this.sudokuList.removeChild(this.sudokuList.firstChild);
+        }
+        sudoku.forEach(square => {
+            let li = document.createElement('li');
+            li.classList.add('sudokuLiElement');
+            li.id = String(square.index);
+            if (square.value !== 0) {
+                li.style.backgroundImage = 'url("' + square.picture + '")';
+                li.style.backgroundSize = 'cover';
+            } else {
+                li.classList.add('emptySquare');
+            }
+            this.sudokuList.appendChild(li);
+        });
     }
 
     displayOptions() {
@@ -118,22 +137,23 @@ export default class SudokuViewPuzzle {
         }
         this.scoreList.appendChild(tr);
 
-        for (let i = 1; i < 4; i++) {
-            let tr = document.createElement('tr');
-            let place = document.createElement('td');
-            place.innerText = `${i}`;
-            let date = document.createElement('td');
-            date.innerText = String(scores[i][0]);
-            let time = document.createElement('td');
-            time.innerText = Utility.humanReadable(Number(scores[i][1]));
+        if(scores !== null){
+            for (let i = 1; i < 4; i++) {
+                let tr = document.createElement('tr');
+                let place = document.createElement('td');
+                place.innerText = `${i}`;
+                let date = document.createElement('td');
+                date.innerText = String(scores[i][0]);
+                let time = document.createElement('td');
+                time.innerText = Utility.humanReadable(Number(scores[i][1]));
 
-            tr.appendChild(place);
-            tr.appendChild(date);
-            tr.appendChild(time);
+                tr.appendChild(place);
+                tr.appendChild(date);
+                tr.appendChild(time);
 
-            this.scoreList.appendChild(tr);
+                this.scoreList.appendChild(tr);
+            }
         }
-
     }
 
     showTimer() {

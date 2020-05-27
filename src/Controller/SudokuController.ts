@@ -59,13 +59,19 @@ export default class SudokuController {
         this.puzzleView.extremeBtn.addEventListener('click', this.setDifficulty);
         this.puzzleView.eraseBtn.addEventListener('click', this.activateEraseMode);
         this.puzzleView.helperModeInput.addEventListener('click', this.activateHelperMode);
+        this.puzzleView.kidsBtn.addEventListener('click', this.setDifficulty);
     }
 
     setupNewSudoku() {
         this.seconds = 0;
 
         this.currentSudoku = this.Generator.generateSudoku(this.defaultDifficulty);
-        this.puzzleView.displaySudoku(this.currentSudoku);
+
+        if(this.currentMode === 'kids'){
+            this.puzzleView.displayKidsSudoku(this.currentSudoku);
+        }else {
+            this.puzzleView.displaySudoku(this.currentSudoku);
+        }
 
         this.currentSudokuGrid = JSON.parse(JSON.stringify(this.currentSudoku));
 
@@ -101,15 +107,22 @@ export default class SudokuController {
             let index = this.filledSquares.indexOf(squareIndex);
             this.filledSquares.splice(index, 1);
             this.currentSudoku[squareIndex].value = 0;
-            this.puzzleView.displaySudoku(this.currentSudoku);
+            if(this.currentMode === 'kids'){
+                this.puzzleView.displayKidsSudoku(this.currentSudoku);
+            }else {
+                this.puzzleView.displaySudoku(this.currentSudoku);
+            }
             this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
             this.addSudokuListeners();
         } else if (this.helperMode){
             this.filledSquares.push(squareIndex);
             this.currentSudoku[squareIndex].value = this.currentOption;
-            this.puzzleView.displaySudoku(this.currentSudoku);
+            if(this.currentMode === 'kids'){
+                this.puzzleView.displayKidsSudoku(this.currentSudoku);
+            }else {
+                this.puzzleView.displaySudoku(this.currentSudoku);
+            }
             this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
-
 
             let validPick = this.Validator.validateSetNumber(this.currentSudoku, squareIndex, this.currentOption);
 
@@ -126,7 +139,11 @@ export default class SudokuController {
         } else {
             this.filledSquares.push(squareIndex);
             this.currentSudoku[squareIndex].value = this.currentOption;
-            this.puzzleView.displaySudoku(this.currentSudoku);
+            if(this.currentMode === 'kids'){
+                this.puzzleView.displayKidsSudoku(this.currentSudoku);
+            }else {
+                this.puzzleView.displaySudoku(this.currentSudoku);
+            }
             this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
             this.addSudokuListeners();
         }
@@ -154,7 +171,11 @@ export default class SudokuController {
 
     solveSudoku() {
         this.Solver.solveSudoku(this.currentSudokuGrid);
-        this.puzzleView.displaySudoku(this.currentSudokuGrid);
+        if(this.currentMode === 'kids'){
+            this.puzzleView.displayKidsSudoku(this.currentSudoku);
+        }else {
+            this.puzzleView.displaySudoku(this.currentSudoku);
+        }
     }
 
     setDifficulty(event: any) {
@@ -177,6 +198,10 @@ export default class SudokuController {
             this.setupNewSudoku();
             this.extremeMode();
             this.strobo();
+        } else if (event.target.id === 'kidsBtn'){
+            this.currentMode = 'kids';
+            this.defaultDifficulty = 10;
+            this.setupNewSudoku();
         }
         let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${this.currentMode}`));
         this.puzzleView.displayHighScores(scoreBoard);
@@ -242,7 +267,7 @@ export default class SudokuController {
             former.sort((a: Array<number>, b: Array<number>) => {
                 return a[1] - b[1];
             });
-            if (former.length > 3) {
+            if (former.length > 10) {
                 former = former.slice(0, 3);
             }
             let score = JSON.stringify(former);
