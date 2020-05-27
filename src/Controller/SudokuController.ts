@@ -181,7 +181,6 @@ export default class SudokuController {
     }
 
     validateSudoku() {
-        console.log(this.currentSudoku);
         if (this.Validator.validate(this.currentSudoku)) {
             this.puzzleView.showValidatorMessage('Super! Deine Lösung ist Richtig :D');
             this.markHighscore(new Date().toLocaleTimeString(), this.seconds);
@@ -207,21 +206,21 @@ export default class SudokuController {
             this.setupNewSudoku();
         } else if (event.target.id === 'advancedBtn') {
             this.currentMode = 'advanced';
-            this.defaultDifficulty = 30;
+            this.defaultDifficulty = 1; //30
             this.setupNewSudoku();
         } else if (event.target.id === 'hardBtn') {
             this.currentMode = 'hard';
-            this.defaultDifficulty = 35;
+            this.defaultDifficulty = 1; //35
             this.setupNewSudoku();
         } else if (event.target.id === 'extremeBtn') {
             this.currentMode = 'extreme';
-            this.defaultDifficulty = 45;
+            this.defaultDifficulty = 1; //45
             this.setupNewSudoku();
             this.extremeMode();
             this.strobo();
         } else if (event.target.id === 'kidsBtn') {
             this.currentMode = 'kids';
-            this.defaultDifficulty = 10;
+            this.defaultDifficulty = 1; //1
             this.setupNewSudoku();
         }
         let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${this.currentMode}`));

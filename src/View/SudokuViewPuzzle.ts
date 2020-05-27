@@ -175,12 +175,11 @@ export default class SudokuViewPuzzle {
             tr.appendChild(th);
         }
         this.scoreList.appendChild(tr);
-
         if(scores !== null && scores.length !== 0){
-            for (let i = 1; i < 4; i++) {
+            for (let i = 0; i < scores.length; i++) {
                 let tr = document.createElement('tr');
                 let place = document.createElement('td');
-                place.innerText = `${i}`;
+                place.innerText = `${i+1}`;
                 let date = document.createElement('td');
                 date.innerText = String(scores[i][0]);
                 let time = document.createElement('td');
