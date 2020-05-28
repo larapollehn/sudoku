@@ -1,18 +1,27 @@
-#app{
+#app {
   height: 100vh;
   width: 100%;
   display: grid;
-  grid-template-columns: 20% auto;
-  grid-template-rows: 50% 50%;
+  grid-template-columns: 15% 20% 30% 20% 15%;
+  grid-template-rows: 5% 10% 50% 10% 20%;
 }
 
-#menuSection{
-  grid-column: 1/2;
-  grid-row: 1/3;
-  background-color: #F9428C;
-}
-
-#puzzleSection{
+#menuSection {
   grid-column: 2/3;
-  grid-row: 1/3;
+  grid-row: 2/5;
+  background-color: cornflowerblue;
+}
+
+
+#puzzleSection {
+  grid-column: 3/4;
+  grid-row: 2/5;
+  background-color: thistle;
+}
+
+
+#optionsSection{
+  grid-column:4/5;
+  grid-row: 2/5;
+  background-color: darkseagreen;
 }

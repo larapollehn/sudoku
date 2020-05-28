@@ -19,15 +19,12 @@ import pig from "./../../public/assets/png/7.png";
 import bunny from "./../../public/assets/png/8.png";
 // @ts-ignore
 import whale from "./../../public/assets/png/9.png";
-// @ts-ignore
-import bg from "./../../public/assets/png/tree2.png";
 
 export default class SudokuViewPuzzle {
     public sudokuSection: HTMLElement = document.getElementById('puzzleSection');
     public sudokuList: HTMLElement = document.getElementById('sudokuList');
     public optionsList: HTMLElement = document.getElementById('optionsList');
     public generateBtn: HTMLElement = document.getElementById('generateBtn');
-    public validateBtn: HTMLElement = document.getElementById('validateBtn');
     public solveBtn: HTMLElement = document.getElementById('solveBtn');
     public easyBtn: HTMLElement = document.getElementById('easyBtn');
     public advancedBtn: HTMLElement = document.getElementById('advancedBtn');
@@ -40,7 +37,6 @@ export default class SudokuViewPuzzle {
     public kidsBtn: HTMLElement = document.getElementById('kidsBtn');
 
     constructor() {
-        this.setBackgroundImages = this.setBackgroundImages.bind(this);
         this.displaySudoku = this.displaySudoku.bind(this);
         this.displayOptions = this.displayOptions.bind(this);
         this.highlightCurrentOption = this.highlightCurrentOption.bind(this);
@@ -52,11 +48,6 @@ export default class SudokuViewPuzzle {
         this.displayKidsSudoku = this.displayKidsSudoku.bind(this);
     }
 
-    setBackgroundImages() {
-        this.sudokuSection.style.backgroundImage = 'url("' + bg + '")';
-        this.sudokuSection.style.backgroundPosition = '120% 60%';
-        this.sudokuSection.style.backgroundRepeat = 'no-repeat';
-    }
 
     displaySudoku(sudoku: Array<Square>) {
         while (this.sudokuList.hasChildNodes()) {
@@ -196,7 +187,7 @@ export default class SudokuViewPuzzle {
     }
 
     showTimer() {
-        this.timer.style.color = 'white';
+        this.timer.style.color = 'black';
     }
 
     highlightWrongPick(squares: Array<number>) {

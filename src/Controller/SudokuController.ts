@@ -45,7 +45,6 @@ export default class SudokuController {
     }
 
     setup() {
-        this.puzzleView.setBackgroundImages();
         this.addBtnEventListener();
         this.timer();
         this.setupNewSudoku();
@@ -53,7 +52,6 @@ export default class SudokuController {
 
     addBtnEventListener() {
         this.puzzleView.generateBtn.addEventListener('click', this.setupNewSudoku);
-        this.puzzleView.validateBtn.addEventListener('click', this.validateSudoku);
         this.puzzleView.solveBtn.addEventListener('click', this.solveSudoku);
         this.puzzleView.easyBtn.addEventListener('click', this.setDifficulty);
         this.puzzleView.advancedBtn.addEventListener('click', this.setDifficulty);
@@ -144,7 +142,6 @@ export default class SudokuController {
             if (this.currentMode === 'kids') {
                 this.currentSudoku[squareIndex].value = Number(this.currentOption);
                 this.currentSudoku[squareIndex].picture = numberAnimalsMapping.get(Number(this.currentOption));
-                console.log(this.currentMode, this.currentOption, squareIndex, this.currentSudoku);
                 this.puzzleView.displayKidsSudoku(this.currentSudoku);
             } else {
                 this.currentSudoku[squareIndex].value = Number(this.currentOption);
@@ -185,7 +182,7 @@ export default class SudokuController {
             this.puzzleView.showValidatorMessage('Super! Deine Lösung ist Richtig :D');
             this.markHighscore(new Date().toLocaleTimeString(), this.seconds);
         } else {
-            this.puzzleView.showValidatorMessage('Leider Falsch. Versuche es doch nochmal.');
+            this.puzzleView.showValidatorMessage('Leider Falsch. Findest du den Fehler?.');
         }
     }
 

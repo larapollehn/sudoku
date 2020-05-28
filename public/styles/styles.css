@@ -1,10 +1,10 @@
 /*
 Error: wrong number of arguments (4 for 3) for `rgb'
-        on line 66 of scss/components/_sudoku.scss
+        on line 42 of scss/components/_sudoku.scss
         from line 14 of styles.scss
 
 Backtrace:
-scss/components/_sudoku.scss:66
+scss/components/_sudoku.scss:42
 styles.scss:14
 /usr/lib/ruby/vendor_ruby/sass/script/tree/funcall.rb:310:in `reformat_argument_error'
 /usr/lib/ruby/vendor_ruby/sass/script/tree/funcall.rb:149:in `rescue in _perform'
@@ -65,4 +65,4 @@ styles.scss:14
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: wrong number of arguments (4 for 3) for `rgb'\A         on line 66 of scss/components/_sudoku.scss\A         from line 14 of styles.scss"; }
+  content: "Error: wrong number of arguments (4 for 3) for `rgb'\A         on line 42 of scss/components/_sudoku.scss\A         from line 14 of styles.scss"; }

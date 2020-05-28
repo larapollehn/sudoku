@@ -4,34 +4,32 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/styles.scss">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Forum&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Sudoku</title>
 </head>
 <body>
 <div id="app">
     <div id="menuSection">
-        <button id="kidsBtn" class="menuBtn">KIDS</button>
-        <button id="easyBtn" class="menuBtn">EASY</button>
-        <button id="advancedBtn" class="menuBtn">ADVANCED</button>
-        <button id="hardBtn" class="menuBtn">HARD</button>
-        <button id="extremeBtn" class="menuBtn">EXTREME</button>
+        <button id="kidsBtn" class="menuBtn">Kids</button>
+        <button id="easyBtn" class="menuBtn">Easy</button>
+        <button id="advancedBtn" class="menuBtn">Advanced</button>
+        <button id="hardBtn" class="menuBtn">Hard</button>
+        <button id="extremeBtn" class="menuBtn">Extreme</button>
         <table id="highScores">
         </table>
     </div>
     <div id="puzzleSection">
-        <h1 id="title"></h1>
         <h3 id="timer"></h3>
         <ul id="sudokuList" class="sudokuList"></ul>
-        <ul id="optionsList"></ul>
-        <div id="buttonMenu">
-            <button id="generateBtn" class="puzzleBtn">New Sudoku</button>
-            <button id="validateBtn" class="puzzleBtn middleBtn">Validate Sudoku</button>
-            <button id="solveBtn" class="puzzleBtn">Show Solution</button>
-            <button id="eraseBtn" class="puzzleBtn">Erase Number</button>
-            <label class="checkBoxContainer">Helper Mode <input id="helperMode" type="checkbox"> <span class="checkmark"></span></label>
-        </div>
-        <p id="validationMsg"></p>
-
     </div>
+    <div id="optionsSection">
+        <button id="generateBtn" class="puzzleBtn">New Sudoku</button>
+        <ul id="optionsList"></ul>
+        <button id="solveBtn" class="puzzleBtn">Show Solution</button>
+        <button id="eraseBtn" class="puzzleBtn">Erase Number</button>
+        <label class="checkBoxContainer">Helper Mode <input id="helperMode" type="checkbox"> <span class="checkmark"></span></label>
+    </div>
+    <p id="validationMsg"></p>
 </div>
 
 
