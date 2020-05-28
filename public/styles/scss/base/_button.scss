@@ -26,3 +26,13 @@
   width: 40%;
   margin: 0 auto;
 }
+
+.activeEraser {
+  background-color: $mainColor;
+  border: 1px solid white;
+}
+
+.activeHelper {
+  background-color: $mainColor;
+  border: 1px solid white;
+}

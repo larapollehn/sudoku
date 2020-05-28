@@ -32,7 +32,7 @@ export default class SudokuViewPuzzle {
     public optionsList: HTMLElement = document.getElementById('optionsList');
     public generateBtn: HTMLElement = document.getElementById('generateBtn');
     public solveBtn: HTMLElement = document.getElementById('solveBtn');
-    public solutionIcon:HTMLElement = document.getElementById('solutionIcon');
+    public solutionIcon: HTMLElement = document.getElementById('solutionIcon');
     public easyBtn: HTMLElement = document.getElementById('easyBtn');
     public eraseIcon: HTMLElement = document.getElementById('eraserIcon')
     public advancedBtn: HTMLElement = document.getElementById('advancedBtn');
@@ -56,10 +56,11 @@ export default class SudokuViewPuzzle {
         this.showTimer = this.showTimer.bind(this);
         this.highlightWrongPick = this.highlightWrongPick.bind(this);
         this.displayKidsSudoku = this.displayKidsSudoku.bind(this);
+        this.markBtn = this.markBtn.bind(this);
     }
 
-    setIcons(){
-        this.eraseIcon.style.backgroundImage = 'url("'+eraserIcon+'")';
+    setIcons() {
+        this.eraseIcon.style.backgroundImage = 'url("' + eraserIcon + '")';
         this.eraseIcon.style.backgroundSize = '100% 90%';
         this.eraseIcon.style.backgroundRepeat = 'no-repeat';
 
@@ -89,7 +90,7 @@ export default class SudokuViewPuzzle {
         });
     }
 
-    displayKidsSudoku(sudoku: Array<Square>){
+    displayKidsSudoku(sudoku: Array<Square>) {
         while (this.sudokuList.hasChildNodes()) {
             this.sudokuList.removeChild(this.sudokuList.firstChild);
         }
@@ -121,7 +122,7 @@ export default class SudokuViewPuzzle {
         }
     }
 
-    displayKidsOptions(){
+    displayKidsOptions() {
         while (this.optionsList.hasChildNodes()) {
             this.optionsList.removeChild(this.optionsList.firstChild);
         }
@@ -130,7 +131,7 @@ export default class SudokuViewPuzzle {
             let li = document.createElement('li');
             li.style.backgroundImage = 'url("' + options[i] + '")';
             li.style.backgroundSize = 'cover';
-            li.id = `li${i+1}`;
+            li.id = `li${i + 1}`;
             li.classList.add('optionsList')
             this.optionsList.appendChild(li);
         }
@@ -190,11 +191,11 @@ export default class SudokuViewPuzzle {
             tr.appendChild(th);
         }
         this.scoreList.appendChild(tr);
-        if(scores !== null && scores.length !== 0){
+        if (scores !== null && scores.length !== 0) {
             for (let i = 0; i < scores.length; i++) {
                 let tr = document.createElement('tr');
                 let place = document.createElement('td');
-                place.innerText = `${i+1}`;
+                place.innerText = `${i + 1}`;
                 let date = document.createElement('td');
                 date.innerText = String(scores[i][0]);
                 let time = document.createElement('td');
@@ -219,6 +220,22 @@ export default class SudokuViewPuzzle {
             li[square].classList.add('wrongPick');
 
         })
+    }
+
+    markBtn(className: string, activated: boolean) {
+        if (className === 'activeEraser') {
+            if (activated) {
+                this.eraseBtn.classList.add('activeEraser');
+            } else {
+                this.eraseBtn.classList.remove('activeEraser');
+            }
+        } else if (className === 'activeHelper') {
+            if (activated) {
+                this.helperModeBtn.classList.add('activeHelper');
+            } else {
+                this.helperModeBtn.classList.remove('activeHelper');
+            }
+        }
     }
 
 

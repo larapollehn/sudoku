@@ -295,11 +295,14 @@ export default class SudokuController {
     }
 
     activateEraseMode() {
+        console.log(this.eraseMode);
         this.eraseMode = !this.eraseMode;
+        this.puzzleView.markBtn('activeEraser', this.eraseMode);
     }
 
     activateHelperMode() {
         this.helperMode = !this.helperMode;
+        this.puzzleView.markBtn('activeHelper', this.helperMode);
     }
 
 }
