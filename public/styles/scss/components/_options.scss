@@ -1,5 +1,115 @@
 #optionsSection{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 20% 60% 20%;
+  grid-template-rows:  10% 10% 60% 20%;
+}
+
+#generateBtn{
+  grid-column: 1/4;
+  grid-row: 2/3;
+  background-color: $secondaryColor;
+  font-size: 30px;
+  margin: 0 4%;
+  border: none;
+  border-radius: 8px;
+  color: white;
+}
+
+#generateBtn:hover{
+  background-color: $secondaryHover;
+}
+
+#optionsList{
+  grid-column: 1/4;
+  grid-row: 3/4;
+  list-style-type: none;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  margin: 4%;
+}
+
+.optionsList {
+  float: left;
+  cursor: pointer;
+  font-size: 80px;
+  font-weight: bold;
+  width: 31%;
+  height: 31%;
+  padding: 5%;
+  border-radius: 5px;
+  color: $mainColor;
+}
+
+.optionsList:hover{
+  background-color: $emptySquareHover;
+}
+
+.highlightCurrentOption{
+  background-color: $mainColor;
+  color: $HLCurrentOptionFont;
+  font-weight: bolder;
+}
+
+#buttonSection{
+  grid-column: 1/4;
+  grid-row: 4/5;
+  margin: 0 4%;
+  height: 100%;
+}
+
+.checkBoxContainer {
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  user-select: none;
+}
+
+.checkBoxContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+.checkBoxContainer:hover input ~ .checkmark {
+  background-color: $checkMark;
+}
+
+.checkBoxContainer input:checked ~ .checkmark {
+  background-color: $secondaryColor;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkBoxContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkBoxContainer .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid $checkMark;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }

@@ -1,19 +1,28 @@
 .puzzleBtn{
   padding: 10px;
   border: none;
-  border-radius: 10px;
-  font-size: 15px;
-  background-color: #9f0050;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 17px;
+  background-color: $secondaryColor;
   color: white;
+  cursor: pointer;
+  width: 31%;
+  height: 55%;
+  float: left;
+  margin: 0 1%;
 }
 
-.middleBtn{
-  margin-left: 10px;
-  margin-right: 10px;
+.puzzleBtn:hover{
+  background-color: $secondaryHover;
 }
 
-.menuBtn{
-  margin: 10px auto;
-  min-width: 30px;
-  min-height: 30px;
+.checkBoxContainer{
+  background-color: $secondaryColor;
+}
+
+.btnIcon{
+  height: 70%;
+  width: 40%;
+  margin: 0 auto;
 }

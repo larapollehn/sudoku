@@ -1,16 +1,11 @@
 #puzzleSection{
   text-align: center;
-  display: grid;
 }
 
 #timer{
-  color: #FCA0C5;
+  color: $timerColor;
   font-size: 30px;
-}
-
-#optionsList{
-  margin: 0 auto;
-  color: black;
+  height: 10%;
 }
 
 #validationMsg{
@@ -35,133 +30,57 @@
   margin: 0;
   padding: 0;
   text-align: center;
-  border: 1px solid #FCA0C5;
+  border: 1px solid $mainColor;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(223,225,228,0.8);
-  color: rgba(0, 0, 0, 0.7);
+  background-color: $LiBgColor;
+  color: $LiFontColor;
 }
 
 li:nth-child(n):nth-child(-n+9) {
   border-top-width: 3px;
-  border-top-color: #9f0050;
+  border-top-color: $mainColor;
 }
 
 li:nth-child(n+73):nth-child(-n+81) {
   border-bottom-width: 3px;
-  border-bottom-color: #9f0050;
+  border-bottom-color: $mainColor;
 }
 
 li:nth-child(3n) {
   border-right-width: 3px;
-  border-right-color: #9f0050;
+  border-right-color: $mainColor;
 }
 
 li:nth-child(9n+1) {
   border-left-width: 3px;
-  border-left-color: #9f0050;
+  border-left-color: $mainColor;
 }
 
 li:nth-child(n+19):nth-child(-n+27) {
   border-bottom-width: 3px;
-  border-bottom-color: #9f0050;
+  border-bottom-color: $mainColor;
 }
 
 li:nth-child(n+46):nth-child(-n+54) {
   border-bottom-width: 3px;
-  border-bottom-color: #9f0050;
-}
-
-#optionsList {
-  list-style-type: none;
-}
-
-.optionsList {
-  float: left;
-  cursor: pointer;
-  margin: 0 15px 0 15px;
-  font-size: 27px;
-  font-weight: bold;
-  width: 30px;
-  height: 30px;
-  border-radius: 25px;
-}
-
-.highlightCurrentOption{
-  background-color: #9f0050;
-  color: black;
-  font-weight: bolder;
+  border-bottom-color: $mainColor;
 }
 
 .emptySquare{
-  background-color: white;
+  background-color: $emptySquareBg;
   color: rgba(0, 0, 0, 1);
 }
 
+.emptySquare:hover{
+  background-color: $emptySquareHover;
+}
+
 .strobo{
-    background-color: black;
-}
-
-.checkBoxContainer {
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.checkBoxContainer input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-}
-
-.checkBoxContainer:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-.checkBoxContainer input:checked ~ .checkmark {
-  background-color: #9f0050;
-}
-
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-.checkBoxContainer input:checked ~ .checkmark:after {
-  display: block;
-}
-
-.checkBoxContainer .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
+    background-color: $stroboColor;
 }
 
 .wrongPick{
-  background-color: indianred;
+  color: $wrongPick;
 }

@@ -1,27 +1,28 @@
 /*
 Error: wrong number of arguments (4 for 3) for `rgb'
-        on line 42 of scss/components/_sudoku.scss
-        from line 14 of styles.scss
+        on line 7 of scss/base/_colors.scss
+        from line 8 of styles.scss
+
+2:   padding: 0;
+3:   margin: 0;
+4:   box-sizing: border-box;
+5: }
+6: 
+7: // Abstracts - variables - grids
+8: @import "scss/base/colors";
+9: @import "scss/base/globalGrid";
+10: @import "scss/base/button";
+11: 
+12: 
 
 Backtrace:
-scss/components/_sudoku.scss:42
-styles.scss:14
+scss/base/_colors.scss:7
+styles.scss:8
 /usr/lib/ruby/vendor_ruby/sass/script/tree/funcall.rb:310:in `reformat_argument_error'
 /usr/lib/ruby/vendor_ruby/sass/script/tree/funcall.rb:149:in `rescue in _perform'
 /usr/lib/ruby/vendor_ruby/sass/script/tree/funcall.rb:122:in `_perform'
 /usr/lib/ruby/vendor_ruby/sass/script/tree/node.rb:58:in `perform'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:397:in `visit_prop'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:160:in `block in visit'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `block in with_base'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:115:in `with_frame'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `with_base'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:160:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:433:in `block (2 levels) in visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:433:in `map'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:433:in `block in visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:181:in `with_environment'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `visit_rule'
+/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:471:in `visit_variable'
 /usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `visit'
 /usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:160:in `block in visit'
 /usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `block in with_base'
@@ -65,4 +66,4 @@ styles.scss:14
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: wrong number of arguments (4 for 3) for `rgb'\A         on line 42 of scss/components/_sudoku.scss\A         from line 14 of styles.scss"; }
+  content: "Error: wrong number of arguments (4 for 3) for `rgb'\A         on line 7 of scss/base/_colors.scss\A         from line 8 of styles.scss\A \A 2:   padding: 0;\A 3:   margin: 0;\A 4:   box-sizing: border-box;\A 5: }\A 6: \A 7: // Abstracts - variables - grids\A 8: @import \"scss/base/colors\";\A 9: @import \"scss/base/globalGrid\";\A 10: @import \"scss/base/button\";\A 11: \A 12: "; }

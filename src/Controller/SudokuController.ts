@@ -23,7 +23,7 @@ export default class SudokuController {
     private timeScores: Array<Array<string | number>> = new Array<Array<string | number>>();
     private eraseMode: boolean = false;
     private helperMode: boolean = false;
-    public wrongSquares: Array<number> = new Array<number>();
+    private wrongSquares: Array<number> = new Array<number>();
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
@@ -45,6 +45,7 @@ export default class SudokuController {
     }
 
     setup() {
+        this.puzzleView.setIcons();
         this.addBtnEventListener();
         this.timer();
         this.setupNewSudoku();
@@ -58,7 +59,7 @@ export default class SudokuController {
         this.puzzleView.hardBtn.addEventListener('click', this.setDifficulty);
         this.puzzleView.extremeBtn.addEventListener('click', this.setDifficulty);
         this.puzzleView.eraseBtn.addEventListener('click', this.activateEraseMode);
-        this.puzzleView.helperModeInput.addEventListener('click', this.activateHelperMode);
+        this.puzzleView.helperModeBtn.addEventListener('click', this.activateHelperMode);
         this.puzzleView.kidsBtn.addEventListener('click', this.setDifficulty);
     }
 
@@ -298,7 +299,7 @@ export default class SudokuController {
     }
 
     activateHelperMode() {
-        this.helperMode = this.puzzleView.helperModeInput.checked;
+        this.helperMode = !this.helperMode;
     }
 
 }

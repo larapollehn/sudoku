@@ -23,12 +23,14 @@
         <ul id="sudokuList" class="sudokuList"></ul>
     </div>
     <div id="optionsSection">
-        <button id="generateBtn" class="puzzleBtn">New Sudoku</button>
+        <button id="generateBtn">New Sudoku</button>
         <ul id="optionsList"></ul>
-        <button id="solveBtn" class="puzzleBtn">Show Solution</button>
-        <button id="eraseBtn" class="puzzleBtn">Erase Number</button>
-        <label class="checkBoxContainer">Helper Mode <input id="helperMode" type="checkbox"> <span class="checkmark"></span></label>
-    </div>
+        <div id="buttonSection">
+            <div id="eraseBtn" class="puzzleBtn"><div id="eraserIcon" class="btnIcon"></div>Erase</div>
+            <div id="helperMode" class="puzzleBtn"><div id="helperIcon" class="btnIcon"></div>Help</div>
+            <div id="solveBtn" class="puzzleBtn"><div id="solutionIcon" class="btnIcon"></div>Solution</div>
+        </div>
+        </div>
     <p id="validationMsg"></p>
 </div>
 

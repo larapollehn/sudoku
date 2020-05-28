@@ -19,6 +19,12 @@ import pig from "./../../public/assets/png/7.png";
 import bunny from "./../../public/assets/png/8.png";
 // @ts-ignore
 import whale from "./../../public/assets/png/9.png";
+// @ts-ignore
+import eraserIcon from "./../../public/assets/png/eraser.png";
+// @ts-ignore
+import helperIcon from "./../../public/assets/png/warning.png";
+// @ts-ignore
+import solutionIcon from "./../../public/assets/png/checkmark.png";
 
 export default class SudokuViewPuzzle {
     public sudokuSection: HTMLElement = document.getElementById('puzzleSection');
@@ -26,17 +32,21 @@ export default class SudokuViewPuzzle {
     public optionsList: HTMLElement = document.getElementById('optionsList');
     public generateBtn: HTMLElement = document.getElementById('generateBtn');
     public solveBtn: HTMLElement = document.getElementById('solveBtn');
+    public solutionIcon:HTMLElement = document.getElementById('solutionIcon');
     public easyBtn: HTMLElement = document.getElementById('easyBtn');
+    public eraseIcon: HTMLElement = document.getElementById('eraserIcon')
     public advancedBtn: HTMLElement = document.getElementById('advancedBtn');
     public hardBtn: HTMLElement = document.getElementById('hardBtn');
     public extremeBtn: HTMLElement = document.getElementById('extremeBtn');
     public timer: HTMLElement = document.getElementById('timer');
     public scoreList: HTMLElement = document.getElementById('highScores');
     public eraseBtn: HTMLElement = document.getElementById('eraseBtn');
-    public helperModeInput: HTMLInputElement = document.getElementById('helperMode');
+    public helperModeBtn: HTMLElement = document.getElementById('helperMode');
+    public helperIcon: HTMLElement = document.getElementById('helperIcon');
     public kidsBtn: HTMLElement = document.getElementById('kidsBtn');
 
     constructor() {
+        this.setIcons = this.setIcons.bind(this);
         this.displaySudoku = this.displaySudoku.bind(this);
         this.displayOptions = this.displayOptions.bind(this);
         this.highlightCurrentOption = this.highlightCurrentOption.bind(this);
@@ -48,6 +58,19 @@ export default class SudokuViewPuzzle {
         this.displayKidsSudoku = this.displayKidsSudoku.bind(this);
     }
 
+    setIcons(){
+        this.eraseIcon.style.backgroundImage = 'url("'+eraserIcon+'")';
+        this.eraseIcon.style.backgroundSize = '100% 90%';
+        this.eraseIcon.style.backgroundRepeat = 'no-repeat';
+
+        this.helperIcon.style.backgroundImage = 'url("' + helperIcon + '")';
+        this.helperIcon.style.backgroundSize = '100% 90%';
+        this.helperIcon.style.backgroundRepeat = 'no-repeat';
+
+        this.solutionIcon.style.backgroundImage = 'url("' + solutionIcon + '")';
+        this.solutionIcon.style.backgroundSize = '100% 90%';
+        this.solutionIcon.style.backgroundRepeat = 'no-repeat';
+    }
 
     displaySudoku(sudoku: Array<Square>) {
         while (this.sudokuList.hasChildNodes()) {
