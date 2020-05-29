@@ -25,6 +25,8 @@ import eraserIcon from "./../../public/assets/png/eraser.png";
 import helperIcon from "./../../public/assets/png/warning.png";
 // @ts-ignore
 import solutionIcon from "./../../public/assets/png/checkmark.png";
+// @ts-ignore
+import infoIcon from "./../../public/assets/png/info.png";
 
 export default class SudokuViewPuzzle {
     public sudokuSection: HTMLElement = document.getElementById('puzzleSection');
@@ -52,6 +54,7 @@ export default class SudokuViewPuzzle {
     public hardScoreBtn: HTMLElement = document.getElementById('hardScores');
     public extremeScoreBtn: HTMLElement = document.getElementById('extremeScores');
     public solverOptionBtn: HTMLElement = document.getElementById('solveOptionBtn');
+    public infoBtn: HTMLElement = document.getElementById('infoSection');
 
     constructor() {
         this.setIcons = this.setIcons.bind(this);
@@ -83,6 +86,9 @@ export default class SudokuViewPuzzle {
         this.solutionIcon.style.backgroundImage = 'url("' + solutionIcon + '")';
         this.solutionIcon.style.backgroundSize = '100% 90%';
         this.solutionIcon.style.backgroundRepeat = 'no-repeat';
+
+        this.infoBtn.style.backgroundImage = 'url("' + infoIcon + '")';
+        this.infoBtn.style.backgroundSize = 'cover';
     }
 
     displaySudoku(sudoku: Array<Square>) {

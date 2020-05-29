@@ -39,3 +39,20 @@
   font-weight: bold;
   padding-top: 2%;
 }
+
+#infoSection{
+  grid-column: 5/6;
+  grid-row: 1/2;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-self: flex-end;
+  margin: 2%;
+  border-radius: 25px;
+  background-color: gainsboro;
+}
+
+#infoSection:hover{
+  background-color: $secondaryColor;
+  cursor: pointer;
+}
