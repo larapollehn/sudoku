@@ -75,13 +75,16 @@ export default class SudokuController {
         this.puzzleView.advancedScoreBtn.addEventListener('click', this.changeScoreBoard);
         this.puzzleView.hardScoreBtn.addEventListener('click', this.changeScoreBoard);
         this.puzzleView.extremeScoreBtn.addEventListener('click', this.changeScoreBoard);
+        this.puzzleView.solverOptionBtn.addEventListener('click', this.setDifficulty);
     }
 
     startGame(){
         this.puzzleView.displayStartBtn(false);
         this.stopTimer();
         this.clearTimer();
-        this.timer();
+        if(this.currentMode !== 'solver'){
+            this.timer();
+        }
         this.setupNewSudoku();
     }
 
@@ -216,12 +219,18 @@ export default class SudokuController {
     }
 
     solveSudoku() {
-        this.Solver.solveSudoku(this.currentSudokuGrid);
-        if (this.currentMode === 'kids') {
-            this.puzzleView.displayKidsSudoku(this.currentSudokuGrid);
+        if(this.currentMode === 'solver'){
+            this.Solver.solveSudoku(this.currentSudoku);
+            this.puzzleView.displaySudoku(this.currentSudoku);
         } else {
-            this.puzzleView.displaySudoku(this.currentSudokuGrid);
+            this.Solver.solveSudoku(this.currentSudokuGrid);
+            if (this.currentMode === 'kids') {
+                this.puzzleView.displayKidsSudoku(this.currentSudokuGrid);
+            } else {
+                this.puzzleView.displaySudoku(this.currentSudokuGrid);
+            }
         }
+
     }
 
     setDifficulty(event: any) {
@@ -246,12 +255,20 @@ export default class SudokuController {
             this.currentMode = 'kids';
             this.defaultDifficulty = 1; //1
             this.showScoreBoard();
+        } else if (event.target.id === 'solveOptionBtn'){
+            this.currentMode = 'solver';
+            this.defaultDifficulty = 81;
         }
-        this.puzzleView.displayStartBtn(true);
         this.puzzleView.displayCurrentLevel(this.currentMode);
         this.puzzleView.clearSudoku();
         this.stopTimer();
         this.clearTimer();
+        if(this.currentMode !== 'solver'){
+            this.puzzleView.displayStartBtn(true);
+        } else {
+            this.puzzleView.displayStartBtn(false);
+            this.startGame();
+        }
         this.puzzleView.startSudokuBtn.addEventListener('click', this.startGame);
         let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${this.currentMode}`));
         this.puzzleView.displayHighScores(scoreBoard);

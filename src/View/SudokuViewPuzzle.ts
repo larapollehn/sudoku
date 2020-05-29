@@ -51,6 +51,7 @@ export default class SudokuViewPuzzle {
     public advancedScoreBtn: HTMLElement = document.getElementById('advancedScores');
     public hardScoreBtn: HTMLElement = document.getElementById('hardScores');
     public extremeScoreBtn: HTMLElement = document.getElementById('extremeScores');
+    public solverOptionBtn: HTMLElement = document.getElementById('solveOptionBtn');
 
     constructor() {
         this.setIcons = this.setIcons.bind(this);

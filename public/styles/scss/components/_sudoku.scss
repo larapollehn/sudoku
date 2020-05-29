@@ -87,5 +87,10 @@ li:nth-child(n+46):nth-child(-n+54) {
   font-size: 2.5rem;
   border: none;
   border-radius: 8px;
+  cursor: pointer;
+}
+
+#startSudokuBtn:hover{
+  background-color: $emptySquareHover;
 }
 
