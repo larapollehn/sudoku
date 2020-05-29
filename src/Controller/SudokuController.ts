@@ -64,13 +64,11 @@ export default class SudokuController {
         this.puzzleView.eraseBtn.addEventListener('click', this.activateEraseMode);
         this.puzzleView.helperModeBtn.addEventListener('click', this.activateHelperMode);
         this.puzzleView.kidsBtn.addEventListener('click', this.setDifficulty);
-        this.puzzleView.startBtn.addEventListener('click', this.timer);
-        this.puzzleView.stopBtn.addEventListener('click', this.stopTimer);
-        this.puzzleView.resetBtn.addEventListener('click', this.clearTimer);
         this.puzzleView.startSudokuBtn.addEventListener('click', this.startGame);
     }
 
     startGame(){
+        this.puzzleView.displayStartBtn();
         this.stopTimer();
         this.clearTimer();
         this.timer();
@@ -191,10 +189,10 @@ export default class SudokuController {
     }
 
     validateSudoku() {
-        this.stopTimer();
         if (this.Validator.validate(this.currentSudoku)) {
             this.puzzleView.showValidatorMessage('Super! Deine Lösung ist Richtig :D');
             this.markHighscore(new Date().toLocaleTimeString(), this.seconds);
+            this.stopTimer();
         } else {
             this.puzzleView.showValidatorMessage('Leider Falsch. Findest du den Fehler?.');
         }
@@ -233,6 +231,7 @@ export default class SudokuController {
         this.puzzleView.clearSudoku();
         this.stopTimer();
         this.clearTimer();
+        this.puzzleView.displayStartBtn();
         this.puzzleView.startSudokuBtn.addEventListener('click', this.startGame);
         let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${this.currentMode}`));
         this.puzzleView.displayHighScores(scoreBoard);

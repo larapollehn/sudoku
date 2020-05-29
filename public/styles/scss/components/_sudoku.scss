@@ -84,3 +84,13 @@ li:nth-child(n+46):nth-child(-n+54) {
 .wrongPick{
   color: $wrongPick;
 }
+
+#startSudokuBtn{
+  margin: 0 auto;
+  display: block;
+  height: 10%;
+  width: 10%;
+  font-size: 2.5rem;
+  border: none;
+  border-radius: 8px;
+}
