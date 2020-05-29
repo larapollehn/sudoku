@@ -234,7 +234,6 @@ export default class SudokuController {
         } else if (event.target.id === 'kidsBtn') {
             this.currentMode = 'kids';
             this.defaultDifficulty = 1; //1
-
         }
         this.puzzleView.clearSudoku();
         this.stopTimer();

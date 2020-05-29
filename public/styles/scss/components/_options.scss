@@ -1,12 +1,12 @@
 #optionsSection{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows:  10% 10% 60% 20%;
+  grid-template-rows:  10% 60% 20%;
 }
 
 #generateBtn{
   grid-column: 1/4;
-  grid-row: 2/3;
+  grid-row: 1/2;
   background-color: $secondaryColor;
   font-size: 30px;
   margin: 0 4%;
@@ -22,7 +22,7 @@
 
 #optionsList{
   grid-column: 1/4;
-  grid-row: 3/4;
+  grid-row: 2/3;
   list-style-type: none;
   text-align: center;
   width: 100%;
@@ -54,7 +54,7 @@
 
 #buttonSection{
   grid-column: 1/4;
-  grid-row: 4/5;
+  grid-row: 3/4;
   margin: 0 4%;
   height: 100%;
 }

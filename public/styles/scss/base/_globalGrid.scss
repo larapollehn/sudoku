@@ -3,7 +3,13 @@
   width: 100%;
   display: grid;
   grid-template-columns: 15% 20% 30% 20% 15%;
-  grid-template-rows: 5% 10% 50% 10% 20%;
+  grid-template-rows: 7% 10% 50% 10% 20%;
+}
+
+#levelAndTimer{
+  grid-column: 3/4;
+  grid-row: 1/2;
+  margin: 5% 5%;
 }
 
 #menuSection {
