@@ -47,6 +47,7 @@ export default class SudokuViewPuzzle {
     public startBtn: HTMLElement = document.getElementById('startTimerBtn');
     public stopBtn: HTMLElement = document.getElementById('stopTimerBtn');
     public resetBtn: HTMLElement = document.getElementById('resetTimerBtn');
+    public startSudokuBtn: HTMLElement = document.getElementById('startSudokuBtn');
 
     constructor() {
         this.setIcons = this.setIcons.bind(this);
@@ -60,6 +61,7 @@ export default class SudokuViewPuzzle {
         this.highlightWrongPick = this.highlightWrongPick.bind(this);
         this.displayKidsSudoku = this.displayKidsSudoku.bind(this);
         this.markBtn = this.markBtn.bind(this);
+        this.clearSudoku = this.clearSudoku.bind(this);
     }
 
     setIcons() {
@@ -91,6 +93,12 @@ export default class SudokuViewPuzzle {
             }
             this.sudokuList.appendChild(li);
         });
+    }
+
+    clearSudoku(){
+        while (this.sudokuList.hasChildNodes()) {
+            this.sudokuList.removeChild(this.sudokuList.firstChild);
+        }
     }
 
     displayKidsSudoku(sudoku: Array<Square>) {
