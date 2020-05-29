@@ -25,6 +25,7 @@ export default class SudokuController {
     private wrongSquares: Array<number> = new Array<number>();
     private timerFunction: Function;
 
+
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
 
@@ -47,11 +48,15 @@ export default class SudokuController {
         this.addSeconds = this.addSeconds.bind(this);
         this.startGame = this.startGame.bind(this);
         this.generateNewBoard = this.generateNewBoard.bind(this);
+        this.changeScoreBoard = this.changeScoreBoard.bind(this);
+        this.showScoreBoard = this.showScoreBoard.bind(this);
     }
 
     setup() {
         this.puzzleView.setIcons();
         this.addBtnEventListener();
+        let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${this.currentMode}`));
+        this.puzzleView.displayHighScores(scoreBoard);
     }
 
     addBtnEventListener() {
@@ -65,6 +70,11 @@ export default class SudokuController {
         this.puzzleView.helperModeBtn.addEventListener('click', this.activateHelperMode);
         this.puzzleView.kidsBtn.addEventListener('click', this.setDifficulty);
         this.puzzleView.startSudokuBtn.addEventListener('click', this.startGame);
+        this.puzzleView.kidsScoreBtn.addEventListener('click', this.changeScoreBoard);
+        this.puzzleView.easyScoreBtn.addEventListener('click', this.changeScoreBoard);
+        this.puzzleView.advancedScoreBtn.addEventListener('click', this.changeScoreBoard);
+        this.puzzleView.hardScoreBtn.addEventListener('click', this.changeScoreBoard);
+        this.puzzleView.extremeScoreBtn.addEventListener('click', this.changeScoreBoard);
     }
 
     startGame(){
@@ -219,18 +229,23 @@ export default class SudokuController {
         if (event.target.id === 'easyBtn') {
             this.currentMode = 'easy';
             this.defaultDifficulty = 1; //20
+            this.showScoreBoard();
         } else if (event.target.id === 'advancedBtn') {
             this.currentMode = 'advanced';
             this.defaultDifficulty = 1; //30
+            this.showScoreBoard();
         } else if (event.target.id === 'hardBtn') {
             this.currentMode = 'hard';
             this.defaultDifficulty = 1; //35
+            this.showScoreBoard();
         } else if (event.target.id === 'extremeBtn') {
             this.currentMode = 'extreme';
             this.defaultDifficulty = 1; //45
+            this.showScoreBoard();
         } else if (event.target.id === 'kidsBtn') {
             this.currentMode = 'kids';
             this.defaultDifficulty = 1; //1
+            this.showScoreBoard();
         }
         this.puzzleView.displayStartBtn(true);
         this.puzzleView.displayCurrentLevel(this.currentMode);
@@ -328,6 +343,18 @@ export default class SudokuController {
     activateHelperMode() {
         this.helperMode = !this.helperMode;
         this.puzzleView.markBtn('activeHelper', this.helperMode);
+    }
+
+    changeScoreBoard(event: any){
+        let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${event.target.innerText.toLowerCase()}`));
+        this.puzzleView.displayHighScores(scoreBoard);
+        this.puzzleView.markCurrentScoreBoard(event.target.id);
+    }
+
+    showScoreBoard(){
+        let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${this.currentMode}`));
+        this.puzzleView.displayHighScores(scoreBoard);
+        this.puzzleView.markCurrentScoreBoard(`${this.currentMode}Scores`);
     }
 
 }

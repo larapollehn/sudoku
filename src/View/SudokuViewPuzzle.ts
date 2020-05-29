@@ -46,6 +46,11 @@ export default class SudokuViewPuzzle {
     public kidsBtn: HTMLElement = document.getElementById('kidsBtn');
     public startSudokuBtn: HTMLElement = document.getElementById('startSudokuBtn');
     public levelDropBtn: HTMLElement = document.getElementById('dropBtn');
+    public kidsScoreBtn: HTMLElement = document.getElementById('kidsScores');
+    public easyScoreBtn: HTMLElement = document.getElementById('easyScores');
+    public advancedScoreBtn: HTMLElement = document.getElementById('advancedScores');
+    public hardScoreBtn: HTMLElement = document.getElementById('hardScores');
+    public extremeScoreBtn: HTMLElement = document.getElementById('extremeScores');
 
     constructor() {
         this.setIcons = this.setIcons.bind(this);
@@ -62,6 +67,7 @@ export default class SudokuViewPuzzle {
         this.clearSudoku = this.clearSudoku.bind(this);
         this.displayStartBtn = this.displayStartBtn.bind(this);
         this.displayCurrentLevel = this.displayCurrentLevel.bind(this);
+        this.markCurrentScoreBoard = this.markCurrentScoreBoard.bind(this);
     }
 
     setIcons() {
@@ -199,6 +205,7 @@ export default class SudokuViewPuzzle {
         for (let i = 0; i < 3; i++) {
             let th = document.createElement('th');
             th.innerText = titles[i];
+            th.classList.add('trHeader');
             tr.appendChild(th);
         }
         this.scoreList.appendChild(tr);
@@ -206,10 +213,13 @@ export default class SudokuViewPuzzle {
             for (let i = 0; i < scores.length; i++) {
                 let tr = document.createElement('tr');
                 let place = document.createElement('td');
+                place.classList.add('timeTd');
                 place.innerText = `${i + 1}`;
                 let date = document.createElement('td');
+                date.classList.add('timeTd');
                 date.innerText = String(scores[i][0]);
                 let time = document.createElement('td');
+                time.classList.add('timeTd');
                 time.innerText = Utility.humanReadable(Number(scores[i][1]));
 
                 tr.appendChild(place);
@@ -260,5 +270,17 @@ export default class SudokuViewPuzzle {
     displayCurrentLevel(level: string){
         this.levelDropBtn.innerHTML = `${level.toUpperCase()} <i class="fa fa-caret-down"></i>`;
     }
+
+    markCurrentScoreBoard(id: string){
+        let marked = document.getElementsByClassName('selectedScoreOption');
+        if (marked[0]){
+            marked[0].classList.remove('selectedScoreOption')
+        }
+
+        let currentBoard = document.getElementById(id);
+        currentBoard.classList.add('selectedScoreOption')
+    }
+
+
 
 }

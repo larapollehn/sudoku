@@ -1,6 +1,49 @@
+#scoreSelect{
+  width: 100%;
+  background-color: #9bb0b8;
+}
+.scoreOption{
+  float: left;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  font-weight: bold;
+  height: 40px;
+  background-color: $secondaryColor;
+  outline: none;
+  padding: 2%;
+  color: white;
+}
+
+.scoreOption:hover{
+  background-color: $secondaryHover;
+  color: white;
+}
+
+.selectedScoreOption{
+  background-color: gainsboro;
+  color: $mainColor;
+}
+
+#kidsScores{
+  border-top-left-radius: 8px;
+}
+
+#extremeScores{
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+#scoreBoardSection{
+  height: 100%;
+  background-color: gainsboro;
+  display: block;
+  border-radius: 8px;
+}
+
 #highScores{
   margin: 0 auto;
-  width: 80%;
+  width: 100%;
 }
 
 th{
@@ -8,6 +51,19 @@ th{
   padding-bottom: 10px;
   text-align: left;
   color: black;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
+}
+
+tr{
+  font-size: 20px;
+  text-align: left;
+}
+
+.timeTd{
+  text-align: center;
+}
+
+.trHeader{
+  text-align: center;
 }
