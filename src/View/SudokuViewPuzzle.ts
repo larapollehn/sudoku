@@ -249,11 +249,11 @@ export default class SudokuViewPuzzle {
         }
     }
 
-    displayStartBtn(){
-        if(getComputedStyle(this.startSudokuBtn, null).display === 'block'){
-            this.startSudokuBtn.style.display = 'none';
-        } else {
+    displayStartBtn(show: boolean){
+        if(show === true){
             this.startSudokuBtn.style.display = 'block';
+        } else {
+            this.startSudokuBtn.style.display = 'none';
         }
     }
 

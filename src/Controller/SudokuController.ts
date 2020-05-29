@@ -24,7 +24,6 @@ export default class SudokuController {
     private helperMode: boolean = false;
     private wrongSquares: Array<number> = new Array<number>();
     private timerFunction: Function;
-    private firstSudoku: boolean;
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
@@ -53,7 +52,6 @@ export default class SudokuController {
     setup() {
         this.puzzleView.setIcons();
         this.addBtnEventListener();
-        this.firstSudoku = true;
     }
 
     addBtnEventListener() {
@@ -70,7 +68,7 @@ export default class SudokuController {
     }
 
     startGame(){
-        this.puzzleView.displayStartBtn();
+        this.puzzleView.displayStartBtn(false);
         this.stopTimer();
         this.clearTimer();
         this.timer();
@@ -81,8 +79,7 @@ export default class SudokuController {
         this.puzzleView.clearSudoku();
         this.stopTimer();
         this.clearTimer();
-        this.puzzleView.displayStartBtn();
-        this.firstSudoku = false;
+        this.puzzleView.displayStartBtn(true);
     }
 
     setupNewSudoku() {
@@ -231,15 +228,11 @@ export default class SudokuController {
         } else if (event.target.id === 'extremeBtn') {
             this.currentMode = 'extreme';
             this.defaultDifficulty = 1; //45
-            this.extremeMode();
-            this.strobo();
         } else if (event.target.id === 'kidsBtn') {
             this.currentMode = 'kids';
             this.defaultDifficulty = 1; //1
         }
-        if (this.firstSudoku === false){
-            this.puzzleView.displayStartBtn();
-        }
+        this.puzzleView.displayStartBtn(true);
         this.puzzleView.displayCurrentLevel(this.currentMode);
         this.puzzleView.clearSudoku();
         this.stopTimer();
@@ -285,6 +278,12 @@ export default class SudokuController {
 
     addSeconds(){
         this.seconds++;
+        if(this.currentMode === 'extreme' && this.seconds % 5 === 0){
+            this.extremeMode();
+            this.strobo();
+        } else if (this.currentMode === 'extreme'){
+            this.strobo();
+        }
         this.puzzleView.displayClock(String(Utility.humanReadable(this.seconds)));
         this.timer();
     }
