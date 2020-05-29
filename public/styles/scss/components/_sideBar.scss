@@ -1,6 +1,35 @@
 #infoSideBar{
-  background-color: #ea4444;
   height: 100vh;
   text-align: center;
   line-height: 3;
+  z-index: 1;
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  overflow-x: hidden;
+  transition: 0.5s;
+  white-space: nowrap;
+  color: gainsboro;
+  background-color: $secondaryColor;
 }
+
+#closeSideBarBtn{
+  font-size: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 4%;
+  color: gainsboro;
+}
+
+#closeSideBarBtn:hover{
+  color: white;
+  font-weight: bolder;
+}
+
+.sideBarContent{
+  transition: 0.5s;
+  display: block;
+}
+

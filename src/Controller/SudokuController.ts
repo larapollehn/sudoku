@@ -50,6 +50,8 @@ export default class SudokuController {
         this.generateNewBoard = this.generateNewBoard.bind(this);
         this.changeScoreBoard = this.changeScoreBoard.bind(this);
         this.showScoreBoard = this.showScoreBoard.bind(this);
+        this.openSideBar = this.openSideBar.bind(this);
+        this.closeSideBar = this.closeSideBar.bind(this);
     }
 
     setup() {
@@ -76,6 +78,8 @@ export default class SudokuController {
         this.puzzleView.hardScoreBtn.addEventListener('click', this.changeScoreBoard);
         this.puzzleView.extremeScoreBtn.addEventListener('click', this.changeScoreBoard);
         this.puzzleView.solverOptionBtn.addEventListener('click', this.setDifficulty);
+        this.puzzleView.infoBtn.addEventListener('click', this.openSideBar);
+        this.puzzleView.closeSideBarBtn.addEventListener('click', this.closeSideBar);
     }
 
     startGame(){
@@ -372,6 +376,14 @@ export default class SudokuController {
         let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${this.currentMode}`));
         this.puzzleView.displayHighScores(scoreBoard);
         this.puzzleView.markCurrentScoreBoard(`${this.currentMode}Scores`);
+    }
+
+    openSideBar(){
+        this.puzzleView.openSideBar();
+    }
+
+    closeSideBar(){
+        this.puzzleView.closeSideBar();
     }
 
 }

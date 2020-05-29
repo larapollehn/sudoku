@@ -55,6 +55,8 @@ export default class SudokuViewPuzzle {
     public extremeScoreBtn: HTMLElement = document.getElementById('extremeScores');
     public solverOptionBtn: HTMLElement = document.getElementById('solveOptionBtn');
     public infoBtn: HTMLElement = document.getElementById('infoSection');
+    public sideBar: HTMLElement = document.getElementById('infoSideBar');
+    public closeSideBarBtn: HTMLElement = document.getElementById('closeSideBarBtn');
 
     constructor() {
         this.setIcons = this.setIcons.bind(this);
@@ -72,6 +74,8 @@ export default class SudokuViewPuzzle {
         this.displayStartBtn = this.displayStartBtn.bind(this);
         this.displayCurrentLevel = this.displayCurrentLevel.bind(this);
         this.markCurrentScoreBoard = this.markCurrentScoreBoard.bind(this);
+        this.openSideBar = this.openSideBar.bind(this);
+        this.closeSideBar = this.closeSideBar.bind(this);
     }
 
     setIcons() {
@@ -290,6 +294,12 @@ export default class SudokuViewPuzzle {
         currentBoard.classList.add('selectedScoreOption')
     }
 
+    openSideBar(){
+        this.sideBar.style.width = '15%';
+    }
 
+    closeSideBar(){
+        this.sideBar.style.width = '0';
+    }
 
 }
