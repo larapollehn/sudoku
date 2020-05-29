@@ -1,4 +1,4 @@
-.dropbtn {
+#dropBtn {
   background-color: $secondaryColor;
   color: white;
   padding: 6px;
@@ -34,7 +34,7 @@
 
 .dropdown:hover .dropdown-content {display: block;}
 
-.dropdown:hover .dropbtn {background-color: $secondaryHover;}
+.dropdown:hover #dropBtn {background-color: $secondaryHover;}
 
 #timer{
   color: $timerColor;

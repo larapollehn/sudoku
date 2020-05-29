@@ -1,5 +1,4 @@
 import SudokuViewPuzzle from "../View/SudokuViewPuzzle";
-import SudokuViewMenu from "../View/SudokuViewMenu";
 import Generator from "../Sudoku/Generator";
 import Square from "../Sudoku/Square";
 import Validator from "../Sudoku/Validator";
@@ -25,6 +24,7 @@ export default class SudokuController {
     private helperMode: boolean = false;
     private wrongSquares: Array<number> = new Array<number>();
     private timerFunction: Function;
+    private firstSudoku: boolean;
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
@@ -53,6 +53,7 @@ export default class SudokuController {
     setup() {
         this.puzzleView.setIcons();
         this.addBtnEventListener();
+        this.firstSudoku = true;
     }
 
     addBtnEventListener() {
@@ -81,6 +82,7 @@ export default class SudokuController {
         this.stopTimer();
         this.clearTimer();
         this.puzzleView.displayStartBtn();
+        this.firstSudoku = false;
     }
 
     setupNewSudoku() {
@@ -235,10 +237,13 @@ export default class SudokuController {
             this.currentMode = 'kids';
             this.defaultDifficulty = 1; //1
         }
+        if (this.firstSudoku === false){
+            this.puzzleView.displayStartBtn();
+        }
+        this.puzzleView.displayCurrentLevel(this.currentMode);
         this.puzzleView.clearSudoku();
         this.stopTimer();
         this.clearTimer();
-        this.puzzleView.displayStartBtn();
         this.puzzleView.startSudokuBtn.addEventListener('click', this.startGame);
         let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${this.currentMode}`));
         this.puzzleView.displayHighScores(scoreBoard);

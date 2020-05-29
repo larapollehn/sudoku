@@ -45,6 +45,7 @@ export default class SudokuViewPuzzle {
     public helperIcon: HTMLElement = document.getElementById('helperIcon');
     public kidsBtn: HTMLElement = document.getElementById('kidsBtn');
     public startSudokuBtn: HTMLElement = document.getElementById('startSudokuBtn');
+    public levelDropBtn: HTMLElement = document.getElementById('dropBtn');
 
     constructor() {
         this.setIcons = this.setIcons.bind(this);
@@ -60,6 +61,7 @@ export default class SudokuViewPuzzle {
         this.markBtn = this.markBtn.bind(this);
         this.clearSudoku = this.clearSudoku.bind(this);
         this.displayStartBtn = this.displayStartBtn.bind(this);
+        this.displayCurrentLevel = this.displayCurrentLevel.bind(this);
     }
 
     setIcons() {
@@ -253,6 +255,10 @@ export default class SudokuViewPuzzle {
         } else {
             this.startSudokuBtn.style.display = 'block';
         }
+    }
+
+    displayCurrentLevel(level: string){
+        this.levelDropBtn.innerHTML = `${level.toUpperCase()} <i class="fa fa-caret-down"></i>`;
     }
 
 }
