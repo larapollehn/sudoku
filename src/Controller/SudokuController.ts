@@ -47,6 +47,7 @@ export default class SudokuController {
         this.clearTimer = this.clearTimer.bind(this);
         this.addSeconds = this.addSeconds.bind(this);
         this.startGame = this.startGame.bind(this);
+        this.generateNewBoard = this.generateNewBoard.bind(this);
     }
 
     setup() {
@@ -55,7 +56,7 @@ export default class SudokuController {
     }
 
     addBtnEventListener() {
-        this.puzzleView.generateBtn.addEventListener('click', this.startGame);
+        this.puzzleView.generateBtn.addEventListener('click', this.generateNewBoard);
         this.puzzleView.solveBtn.addEventListener('click', this.solveSudoku);
         this.puzzleView.easyBtn.addEventListener('click', this.setDifficulty);
         this.puzzleView.advancedBtn.addEventListener('click', this.setDifficulty);
@@ -73,6 +74,13 @@ export default class SudokuController {
         this.clearTimer();
         this.timer();
         this.setupNewSudoku();
+    }
+
+    generateNewBoard(){
+        this.puzzleView.clearSudoku();
+        this.stopTimer();
+        this.clearTimer();
+        this.puzzleView.displayStartBtn();
     }
 
     setupNewSudoku() {
