@@ -214,7 +214,7 @@ export default class SudokuController {
             this.markHighscore(new Date().toLocaleTimeString(), this.seconds);
             this.stopTimer();
         } else {
-            this.puzzleView.showValidatorMessage('Leider Falsch. Findest du den Fehler?.');
+            this.puzzleView.showValidatorMessage('Leider Falsch. Findest die den Fehler?');
         }
     }
 

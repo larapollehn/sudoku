@@ -27,3 +27,15 @@
   grid-column:4/5;
   grid-row: 2/5;
 }
+
+#validationMsg{
+  grid-column: 3/4;
+  grid-row: 4/5;
+  margin: 0 5% 6% 5%;
+  background-color: transparent;
+  text-align: center;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  padding-top: 2%;
+}

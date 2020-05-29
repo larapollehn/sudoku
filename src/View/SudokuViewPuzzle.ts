@@ -175,8 +175,10 @@ export default class SudokuViewPuzzle {
     showValidatorMessage(msg: string) {
         let msgContainer = document.getElementById('validationMsg');
         msgContainer.innerText = msg;
+        msgContainer.style.backgroundColor = '#003232';
         setTimeout(function () {
             msgContainer.innerText = '';
+            msgContainer.style.backgroundColor = 'transparent';
         }, 5000);
     }
 
