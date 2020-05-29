@@ -44,6 +44,9 @@ export default class SudokuViewPuzzle {
     public helperModeBtn: HTMLElement = document.getElementById('helperMode');
     public helperIcon: HTMLElement = document.getElementById('helperIcon');
     public kidsBtn: HTMLElement = document.getElementById('kidsBtn');
+    public startBtn: HTMLElement = document.getElementById('startTimerBtn');
+    public stopBtn: HTMLElement = document.getElementById('stopTimerBtn');
+    public resetBtn: HTMLElement = document.getElementById('resetTimerBtn');
 
     constructor() {
         this.setIcons = this.setIcons.bind(this);

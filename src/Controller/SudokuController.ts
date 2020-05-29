@@ -19,11 +19,12 @@ export default class SudokuController {
     private filledSquares: Array<number> = new Array<number>();
     private defaultDifficulty: number = 20;
     private currentMode: string = 'easy';
-    private seconds: number;
+    private seconds: number = 0;
     private timeScores: Array<Array<string | number>> = new Array<Array<string | number>>();
     private eraseMode: boolean = false;
     private helperMode: boolean = false;
     private wrongSquares: Array<number> = new Array<number>();
+    private timerFunction: Function;
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
@@ -42,6 +43,9 @@ export default class SudokuController {
         this.activateEraseMode = this.activateEraseMode.bind(this);
         this.activateHelperMode = this.activateHelperMode.bind(this);
         this.finished = this.finished.bind(this);
+        this.stopTimer = this.stopTimer.bind(this);
+        this.clearTimer = this.clearTimer.bind(this);
+        this.addSeconds = this.addSeconds.bind(this);
     }
 
     setup() {
@@ -61,11 +65,12 @@ export default class SudokuController {
         this.puzzleView.eraseBtn.addEventListener('click', this.activateEraseMode);
         this.puzzleView.helperModeBtn.addEventListener('click', this.activateHelperMode);
         this.puzzleView.kidsBtn.addEventListener('click', this.setDifficulty);
+        this.puzzleView.startBtn.addEventListener('click', this.timer);
+        this.puzzleView.stopBtn.addEventListener('click', this.stopTimer);
+        this.puzzleView.resetBtn.addEventListener('click', this.clearTimer);
     }
 
     setupNewSudoku() {
-        this.seconds = 0;
-
         this.currentSudoku = this.Generator.generateSudoku(this.defaultDifficulty);
 
         if (this.currentMode === 'kids') {
@@ -256,20 +261,22 @@ export default class SudokuController {
     }
 
     timer() {
-        setInterval(() => {
-            this.seconds++
-            let time = Utility.humanReadable(this.seconds);
-            this.puzzleView.displayClock(time);
-            if (this.seconds === 1) {
-                this.puzzleView.showTimer();
-            }
-            if (this.currentMode === 'extreme' && this.seconds % 5 === 0) {
-                this.extremeMode();
-            }
-            if (this.currentMode === 'extreme') {
-                this.strobo();
-            }
-        }, 1000);
+      this.timerFunction = setTimeout(this.addSeconds, 1000);
+    }
+
+    addSeconds(){
+        this.seconds++;
+        this.puzzleView.displayClock(String(Utility.humanReadable(this.seconds)));
+        this.timer();
+    }
+
+    stopTimer(){
+        clearTimeout(this.timerFunction);
+    }
+
+    clearTimer(){
+        this.puzzleView.displayClock(String(Utility.humanReadable(0)));
+        this.seconds = 0;
     }
 
     markHighscore(time: string, seconds: number) {
