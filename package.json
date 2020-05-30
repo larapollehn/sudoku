@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/jquery": "^3.3.38",
+    "animate.css": "^4.1.0",
     "git": "^0.1.5",
     "jquery": "^3.5.1",
     "parcel": "^1.12.4",

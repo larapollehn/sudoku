@@ -153,6 +153,8 @@ export default class SudokuViewPuzzle {
             li.innerText = String(i);
             li.id = `li${i}`;
             li.classList.add('optionsList')
+            li.classList.add('animate__animated');
+            li.classList.add('animate__zoomIn');
             this.optionsList.appendChild(li);
         }
     }
@@ -168,6 +170,8 @@ export default class SudokuViewPuzzle {
             li.style.backgroundSize = 'cover';
             li.id = `li${i + 1}`;
             li.classList.add('optionsList')
+            li.classList.add('animate__animated');
+            li.classList.add('animate__zoomIn');
             this.optionsList.appendChild(li);
         }
     }
@@ -193,6 +197,8 @@ export default class SudokuViewPuzzle {
         let msgContainer = document.getElementById('validationMsg');
         msgContainer.innerText = msg;
         msgContainer.style.backgroundColor = '#003232';
+        msgContainer.classList.add('animate__animated');
+        msgContainer.classList.add('animate__slideInUp');
         setTimeout(function () {
             msgContainer.innerText = '';
             msgContainer.style.backgroundColor = 'transparent';
