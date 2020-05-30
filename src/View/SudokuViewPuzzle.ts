@@ -261,7 +261,7 @@ export default class SudokuViewPuzzle {
     }
 
     hideSolverFeatures(){
-        this.timer.style.color = 'white';
+        this.timer.style.color = 'rgb(232,232,232)';
     }
 
     showTimer() {

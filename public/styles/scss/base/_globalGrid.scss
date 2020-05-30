@@ -4,6 +4,8 @@
   display: grid;
   grid-template-columns: 15% 20% 30% 20% 15%;
   grid-template-rows: 7% 10% 50% 10% 20%;
+  font-family: 'Lato', sans-serif;
+  background-color: rgb(232,232,232);
 }
 
 #levelAndTimer{
@@ -35,7 +37,7 @@
   background-color: transparent;
   text-align: center;
   border-radius: 8px;
-  color: white;
+  color: $fontColor;
   font-weight: bold;
   padding-top: 2%;
 }

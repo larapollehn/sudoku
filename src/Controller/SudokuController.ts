@@ -231,6 +231,7 @@ export default class SudokuController {
             this.puzzleView.displaySudoku(this.currentSudoku);
         } else {
             this.Solver.solveSudoku(this.currentSudokuGrid);
+            this.stopTimer();
             if (this.currentMode === 'kids') {
                 this.puzzleView.displayKidsSudoku(this.currentSudokuGrid);
             } else {

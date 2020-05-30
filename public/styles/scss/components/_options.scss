@@ -12,7 +12,7 @@
   margin: 0 4%;
   border: none;
   border-radius: 8px;
-  color: white;
+  color: $fontColor;
   cursor: pointer;
 }
 
@@ -37,7 +37,7 @@
   font-weight: bold;
   width: 31%;
   height: 31%;
-  padding: 2%;
+  padding: 3%;
   border-radius: 5px;
   color: $mainColor;
 }
@@ -48,7 +48,7 @@
 
 .highlightCurrentOption{
   background-color: $mainColor;
-  color: $HLCurrentOptionFont;
+  color: $fontColor;
   font-weight: bolder;
 }
 

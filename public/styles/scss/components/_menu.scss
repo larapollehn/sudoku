@@ -1,6 +1,6 @@
 #scoreSelect{
   width: 100%;
-  background-color: $fontColor;
+  background-color: $emptySquareHover;
   height: 40px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -12,7 +12,7 @@
   cursor: pointer;
   font-weight: bold;
   height: 40px;
-  background-color: $fontColor;
+  background-color: $emptySquareHover;
   outline: none;
   padding: 2.5%;
   color: $secondaryColor;
