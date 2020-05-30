@@ -80,6 +80,7 @@ export default class SudokuViewPuzzle {
         this.openSideBar = this.openSideBar.bind(this);
         this.closeSideBar = this.closeSideBar.bind(this);
         this.disableBtn = this.disableBtn.bind(this);
+        this.hideSolverFeatures = this.hideSolverFeatures.bind(this);
     }
 
     setIcons() {
@@ -255,6 +256,10 @@ export default class SudokuViewPuzzle {
                 this.scoreList.appendChild(tr);
             }
         }
+    }
+
+    hideSolverFeatures(){
+        this.timer.style.color = 'white';
     }
 
     showTimer() {
