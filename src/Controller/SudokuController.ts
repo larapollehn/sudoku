@@ -100,7 +100,12 @@ export default class SudokuController {
         this.puzzleView.clearSudoku();
         this.stopTimer();
         this.clearTimer();
-        this.puzzleView.displayStartBtn(true);
+        if(this.currentMode !== 'solver'){
+            this.puzzleView.displayStartBtn(true);
+        } else {
+            this.setupNewSudoku();
+        }
+
     }
 
     setupNewSudoku() {

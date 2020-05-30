@@ -80,14 +80,17 @@ li:nth-child(n+46):nth-child(-n+54) {
 }
 
 #startSudokuBtn{
-  margin: 0 auto;
-  display: block;
-  height: 10%;
+  height: 20%;
   width: 10%;
-  font-size: 2.5rem;
+  font-size: 8rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 90%;
   cursor: pointer;
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
 }
 
 #startSudokuBtn:hover{
