@@ -79,6 +79,7 @@ export default class SudokuViewPuzzle {
         this.markCurrentScoreBoard = this.markCurrentScoreBoard.bind(this);
         this.openSideBar = this.openSideBar.bind(this);
         this.closeSideBar = this.closeSideBar.bind(this);
+        this.disableBtn = this.disableBtn.bind(this);
     }
 
     setIcons() {
@@ -306,6 +307,17 @@ export default class SudokuViewPuzzle {
 
     closeSideBar(){
         this.sideBar.style.width = '0';
+    }
+
+    disableBtn(){
+        this.helperModeBtn.classList.add('disabledBtn');
+    }
+
+    enableBtn(){
+        let btns = document.getElementsByClassName('disabledBtn');
+        if(btns[0]){
+            btns[0].classList.remove('disabledBtn');
+        }
     }
 
 }

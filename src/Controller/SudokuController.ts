@@ -243,25 +243,31 @@ export default class SudokuController {
             this.currentMode = 'easy';
             this.defaultDifficulty = 1; //20
             this.showScoreBoard();
+            this.puzzleView.enableBtn();
         } else if (event.target.id === 'advancedBtn') {
             this.currentMode = 'advanced';
             this.defaultDifficulty = 1; //30
             this.showScoreBoard();
+            this.puzzleView.enableBtn();
         } else if (event.target.id === 'hardBtn') {
             this.currentMode = 'hard';
             this.defaultDifficulty = 1; //35
+            this.puzzleView.enableBtn();
             this.showScoreBoard();
         } else if (event.target.id === 'extremeBtn') {
             this.currentMode = 'extreme';
             this.defaultDifficulty = 1; //45
             this.showScoreBoard();
+            this.puzzleView.disableBtn();
         } else if (event.target.id === 'kidsBtn') {
             this.currentMode = 'kids';
             this.defaultDifficulty = 1; //1
             this.showScoreBoard();
+            this.puzzleView.disableBtn();
         } else if (event.target.id === 'solveOptionBtn'){
             this.currentMode = 'solver';
             this.defaultDifficulty = 81;
+            this.puzzleView.disableBtn();
         }
         this.puzzleView.displayCurrentLevel(this.currentMode);
         this.puzzleView.clearSudoku();
@@ -362,8 +368,13 @@ export default class SudokuController {
     }
 
     activateHelperMode() {
-        this.helperMode = !this.helperMode;
-        this.puzzleView.markBtn('activeHelper', this.helperMode);
+        if(this.currentMode !== 'kids' && this.currentMode !== 'extreme' && this.currentMode !== 'solver'){
+            this.helperMode = !this.helperMode;
+            this.puzzleView.markBtn('activeHelper', this.helperMode);
+        } else {
+
+        }
+
     }
 
     changeScoreBoard(event: any){
