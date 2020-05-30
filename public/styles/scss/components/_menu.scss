@@ -1,6 +1,9 @@
 #scoreSelect{
   width: 100%;
-  background-color: #9bb0b8;
+  background-color: $fontColor;
+  height: 40px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 .scoreOption{
   float: left;
@@ -9,10 +12,10 @@
   cursor: pointer;
   font-weight: bold;
   height: 40px;
-  background-color: $secondaryColor;
+  background-color: $fontColor;
   outline: none;
-  padding: 2%;
-  color: white;
+  padding: 2.5%;
+  color: $secondaryColor;
 }
 
 .scoreOption:hover{
@@ -26,25 +29,24 @@
 }
 
 .selectedScoreOption{
-  background-color: gainsboro;
-  color: $mainColor;
+  background-color: $secondaryColor;
+  color: $fontColor;
 }
 
 #kidsScores{
   border-top-left-radius: 8px;
 }
 
-#extremeScores{
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
+
 
 #scoreBoardSection{
-  height: 100%;
-  background-color: gainsboro;
+  height: 93%;
+  background-color: $secondaryColor;
   display: block;
-  border-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   line-height: 1.5;
+  color: $fontColor;
 }
 
 #highScores{
@@ -56,9 +58,9 @@ th{
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: left;
-  color: black;
   font-size: 25px;
   font-weight: bold;
+  color: $fontColor;
 }
 
 tr{

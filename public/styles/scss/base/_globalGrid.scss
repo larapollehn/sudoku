@@ -53,11 +53,12 @@
   display: flex;
   justify-self: flex-end;
   margin: 2%;
-  border-radius: 25px;
-  background-color: $emptySquareHover;
+  background-color: transparent;
+  border: none;
 }
 
 #infoSection:hover{
-  background-color: gainsboro;
   cursor: pointer;
+  height: 35px;
+  width: 35px;
 }

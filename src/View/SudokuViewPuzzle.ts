@@ -168,7 +168,9 @@ export default class SudokuViewPuzzle {
         for (let i = 0; i < 9; i++) {
             let li = document.createElement('li');
             li.style.backgroundImage = 'url("' + options[i] + '")';
-            li.style.backgroundSize = 'cover';
+            li.style.backgroundSize = '80% 80%';
+            li.style.backgroundRepeat = 'no-repeat';
+            li.style.backgroundPosition = 'center';
             li.id = `li${i + 1}`;
             li.classList.add('optionsList')
             li.classList.add('animate__animated');
@@ -313,7 +315,7 @@ export default class SudokuViewPuzzle {
     }
 
     openSideBar(){
-        this.sideBar.style.width = '17%';
+        this.sideBar.style.width = '15.5%';
     }
 
     closeSideBar(){
