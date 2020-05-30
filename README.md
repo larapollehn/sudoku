@@ -1,4 +1,4 @@
-# Sudoku
+# Sudoku ✍️
 Passionate Sudoku-Solvers await 5 different Levels to test their skills and a Sudoku Solver to find the right solution to even the most difficult Sudoku-Boards.
 
 This Sudoku-Game-Engine and Solver uses an extremly fast backtracking algorithm, generating and solving sudokus in mere miliseconds.
