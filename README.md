@@ -45,4 +45,4 @@ It is written in Typescript, build with Parcel-Bundler, styled with Sass and tes
   ![alt app](public/assets/readme/overview2.png)
   
   ---
-  ###### Difficulty levels depend solely on the number of empty squares. There is no further algorithm rating the difficulty of the generated Sudoku-Boards.
+  ###### ! Difficulty levels depend solely on the number of empty squares. There is no further algorithm rating the difficulty of the generated Sudoku-Boards.
