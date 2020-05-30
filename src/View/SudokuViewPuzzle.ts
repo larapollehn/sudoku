@@ -27,6 +27,8 @@ import helperIcon from "./../../public/assets/png/warning.png";
 import solutionIcon from "./../../public/assets/png/checkmark.png";
 // @ts-ignore
 import infoIcon from "./../../public/assets/png/info.png";
+// @ts-ignore
+import github from "./../../public/assets/png/github.png";
 
 export default class SudokuViewPuzzle {
     public sudokuSection: HTMLElement = document.getElementById('puzzleSection');
@@ -57,6 +59,7 @@ export default class SudokuViewPuzzle {
     public infoBtn: HTMLElement = document.getElementById('infoSection');
     public sideBar: HTMLElement = document.getElementById('infoSideBar');
     public closeSideBarBtn: HTMLElement = document.getElementById('closeSideBarBtn');
+    public githubIcon: HTMLElement = document.getElementById('githubIcon');
 
     constructor() {
         this.setIcons = this.setIcons.bind(this);
@@ -93,6 +96,9 @@ export default class SudokuViewPuzzle {
 
         this.infoBtn.style.backgroundImage = 'url("' + infoIcon + '")';
         this.infoBtn.style.backgroundSize = 'cover';
+
+        this.githubIcon.style.backgroundImage ='url("' + github + '")';
+        this.githubIcon.style.backgroundSize = 'cover';
     }
 
     displaySudoku(sudoku: Array<Square>) {
@@ -295,7 +301,7 @@ export default class SudokuViewPuzzle {
     }
 
     openSideBar(){
-        this.sideBar.style.width = '15%';
+        this.sideBar.style.width = '17%';
     }
 
     closeSideBar(){

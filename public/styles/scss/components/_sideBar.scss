@@ -1,7 +1,7 @@
 #infoSideBar{
   height: 100vh;
   text-align: center;
-  line-height: 3;
+  line-height: 2;
   z-index: 1;
   width: 0;
   position: fixed;
@@ -33,3 +33,8 @@
   display: block;
 }
 
+#githubIcon{
+  height: 30px;
+  width: 30px;
+  margin: 0 auto;
+}
