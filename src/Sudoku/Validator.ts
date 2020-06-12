@@ -138,6 +138,4 @@ export default class Validator {
         }
         return false;
     }
-
-
 }

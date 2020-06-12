@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  sudoku:
+    container_name: sudoku
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'

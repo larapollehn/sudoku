@@ -6,7 +6,6 @@ export default class Generator {
     private squares: Array<Square>;
     private available: Array<Array<number>>;
     private count: number;
-    private freeSquares: number;
 
     constructor() {
     }
@@ -52,7 +51,7 @@ export default class Generator {
         this.setUp();
         while (this.count < 81) {
             if (this.available[this.count].length !== 0) { //if there are possible values left for the current square
-                let nextIndex = Utility.getRandomNumber(this.available[this.count].length) //get random number/index of between 0 and last index of array
+                let nextIndex = Utility.getRandomNumber(this.available[this.count].length) //get random number/index between 0 and last index of array
                 let value = this.available[this.count][nextIndex];
 
                 if (Generator.hasConflict(this.squares, this.createSquare(this.count, value)) === false) { //if the randomly chosen value provides no conflict
