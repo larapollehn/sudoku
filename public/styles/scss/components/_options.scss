@@ -65,3 +65,25 @@
 .disabledBtn:hover{
   background-color: gainsboro;
 }
+
+@media screen and (max-width: 500px){
+  .optionsList {
+    float: left;
+    cursor: pointer;
+    font-size: 40px;
+    font-weight: bold;
+    width: 31%;
+    height: 31%;
+    padding: 1%;
+    border-radius: 5px;
+    color: $mainColor;
+    background-size: 40% 40% ;
+  }
+
+  .highlightCurrentOption{
+    background-color: $mainColor;
+    color: $fontColor;
+    font-weight: bolder;
+  }
+
+}

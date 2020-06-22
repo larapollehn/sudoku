@@ -36,3 +36,20 @@
   background-color: $mainColor;
   border: 1px solid white;
 }
+
+@media screen and (max-width: 500px){
+  .puzzleBtn{
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 17px;
+    background-color: $secondaryColor;
+    color: white;
+    cursor: pointer;
+    width: 31%;
+    height: 95%;
+    float: left;
+    margin: 2% 1%;
+  }
+}

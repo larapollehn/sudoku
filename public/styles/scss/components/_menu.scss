@@ -75,3 +75,27 @@ tr{
 .trHeader{
   text-align: center;
 }
+
+@media screen and (max-width: 768px){
+  #scoreBoardSection{
+    height: 400px;
+    background-color: $secondaryColor;
+    display: block;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    line-height: 1.5;
+    color: $fontColor;
+  }
+}
+
+@media screen and (max-width: 320px){
+  #scoreBoardSection{
+    height: 450px;
+    background-color: $secondaryColor;
+    display: block;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    line-height: 1.5;
+    color: $fontColor;
+  }
+}
