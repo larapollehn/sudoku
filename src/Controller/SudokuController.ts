@@ -23,47 +23,24 @@ export default class SudokuController {
     private eraseMode: boolean = false;
     private helperMode: boolean = false;
     private wrongSquares: Array<number> = new Array<number>();
-    private timerFunction: Function;
+    private timerFunction: number;
 
 
     constructor() {
         this.puzzleView = new SudokuViewPuzzle();
 
-        this.setup = this.setup.bind(this);
-        this.addBtnEventListener = this.addBtnEventListener.bind(this);
-        this.setupNewSudoku = this.setupNewSudoku.bind(this);
-        this.addSudokuListeners = this.addSudokuListeners.bind(this);
         this.fillEmptySquare = this.fillEmptySquare.bind(this);
-        this.setCurrentOption = this.setCurrentOption.bind(this);
-        this.setCurrentOptionWithKeyboard = this.setCurrentOptionWithKeyboard.bind(this);
-        this.validateSudoku = this.validateSudoku.bind(this);
-        this.solveSudoku = this.solveSudoku.bind(this);
-        this.setDifficulty = this.setDifficulty.bind(this);
-        this.timer = this.timer.bind(this);
-        this.activateEraseMode = this.activateEraseMode.bind(this);
-        this.activateHelperMode = this.activateHelperMode.bind(this);
-        this.finished = this.finished.bind(this);
-        this.stopTimer = this.stopTimer.bind(this);
-        this.clearTimer = this.clearTimer.bind(this);
-        this.addSeconds = this.addSeconds.bind(this);
-        this.startGame = this.startGame.bind(this);
-        this.generateNewBoard = this.generateNewBoard.bind(this);
-        this.changeScoreBoard = this.changeScoreBoard.bind(this);
-        this.showScoreBoard = this.showScoreBoard.bind(this);
-        this.openSideBar = this.openSideBar.bind(this);
-        this.closeSideBar = this.closeSideBar.bind(this);
     }
 
-    setup() {
+    setup = () => {
         this.puzzleView.setIcons();
         this.addBtnEventListener();
         this.showScoreBoard();
         this.puzzleView.displayOptions();
         this.puzzleView.displayClock('00:00:00');
-
     }
 
-    addBtnEventListener() {
+    addBtnEventListener = () => {
         this.puzzleView.generateBtn.addEventListener('click', this.generateNewBoard);
         this.puzzleView.solveBtn.addEventListener('click', this.solveSudoku);
         this.puzzleView.easyBtn.addEventListener('click', this.setDifficulty);
@@ -84,7 +61,10 @@ export default class SudokuController {
         this.puzzleView.closeSideBarBtn.addEventListener('click', this.closeSideBar);
     }
 
-    startGame(){
+    /**
+     * reset timer for new game, manage visibility of helper features based on current mode
+     */
+    startGame = () => {
         this.puzzleView.displayStartBtn(false);
         this.stopTimer();
         this.clearTimer();
@@ -96,7 +76,10 @@ export default class SudokuController {
         this.setupNewSudoku();
     }
 
-    generateNewBoard(){
+    /**
+     *
+     */
+    generateNewBoard = () =>{
         this.puzzleView.clearSudoku();
         this.stopTimer();
         this.clearTimer();
@@ -108,7 +91,7 @@ export default class SudokuController {
 
     }
 
-    setupNewSudoku() {
+    setupNewSudoku = () => {
         this.currentSudoku = this.Generator.generateSudoku(this.defaultDifficulty);
 
         if (this.currentMode === 'kids') {
@@ -130,7 +113,7 @@ export default class SudokuController {
         this.addSudokuListeners();
     }
 
-    addSudokuListeners() {
+    addSudokuListeners = () => {
         let emptySquares = document.getElementsByClassName('emptySquare');
         for (let emptySquare of emptySquares) {
             emptySquare.addEventListener('click', this.fillEmptySquare);
@@ -144,7 +127,7 @@ export default class SudokuController {
         window.addEventListener('keypress', this.setCurrentOptionWithKeyboard);
     }
 
-    fillEmptySquare(event: any) {
+    fillEmptySquare = (event: any) => {
         let squareIndex = event.target.id;
         if (this.eraseMode) {
             let index = this.filledSquares.indexOf(squareIndex);
@@ -196,7 +179,7 @@ export default class SudokuController {
 
     }
 
-    finished() {
+    finished = () => {
         for (let i = 0; i < this.currentSudoku.length; i++) {
             if (this.currentSudoku[i].value === 0) {
                 return false;
@@ -205,17 +188,17 @@ export default class SudokuController {
         return true;
     }
 
-    setCurrentOption(event: any) {
+    setCurrentOption = (event: any) => {
         this.currentOption = event.target.id.slice(2,3);
         this.puzzleView.highlightCurrentOption(event.target.id);
     }
 
-    setCurrentOptionWithKeyboard(event: any) {
+    setCurrentOptionWithKeyboard = (event: any) => {
         this.currentOption = Number(event.key);
         this.puzzleView.highlightCurrentOption(`li${event.key}`);
     }
 
-    validateSudoku() {
+    validateSudoku = () => {
         if (this.Validator.validate(this.currentSudoku)) {
             this.puzzleView.showValidatorMessage('Super! Deine Lösung ist Richtig :D');
             this.markHighscore(new Date().toLocaleTimeString(), this.seconds);
@@ -225,7 +208,7 @@ export default class SudokuController {
         }
     }
 
-    solveSudoku() {
+    solveSudoku = () => {
         if(this.currentMode === 'solver'){
             this.Solver.solveSudoku(this.currentSudoku);
             this.puzzleView.displaySudoku(this.currentSudoku);
@@ -241,7 +224,7 @@ export default class SudokuController {
 
     }
 
-    setDifficulty(event: any) {
+    setDifficulty = (event: any) => {
         this.timeScores = new Array<Array<string | number>>();
         if (event.target.id === 'easyBtn') {
             this.currentMode = 'easy';
@@ -294,7 +277,7 @@ export default class SudokuController {
         this.puzzleView.startSudokuBtn.addEventListener('click', this.startGame);
     }
 
-    extremeMode() {
+    extremeMode = () => {
         this.filledSquares = this.filledSquares.map(num => {
             return 80 - num;
         });
@@ -317,18 +300,18 @@ export default class SudokuController {
         this.addSudokuListeners();
     }
 
-    strobo() {
+    strobo = () => {
         this.puzzleView.displayStrobo('on');
         setTimeout(() => {
             this.puzzleView.displayStrobo('off');
         }, 200);
     }
 
-    timer() {
+    timer = () => {
       this.timerFunction = setTimeout(this.addSeconds, 1000);
     }
 
-    addSeconds(){
+    addSeconds = () => {
         this.seconds++;
         if(this.currentMode === 'extreme' && this.seconds % 5 === 0){
             this.extremeMode();
@@ -340,16 +323,16 @@ export default class SudokuController {
         this.timer();
     }
 
-    stopTimer(){
+    stopTimer = () =>{
         clearTimeout(this.timerFunction);
     }
 
-    clearTimer(){
+    clearTimer = () =>{
         this.puzzleView.displayClock(String(Utility.humanReadable(0)));
         this.seconds = 0;
     }
 
-    markHighscore(time: string, seconds: number) {
+    markHighscore = (time: string, seconds: number) => {
         if (localStorage.getItem(`HighScore${this.currentMode}`) === null) {
             this.timeScores.push([time, seconds]);
             let score = JSON.stringify(this.timeScores);
@@ -371,13 +354,13 @@ export default class SudokuController {
         }
     }
 
-    activateEraseMode() {
+    activateEraseMode = () => {
         console.log(this.eraseMode);
         this.eraseMode = !this.eraseMode;
         this.puzzleView.markBtn('activeEraser', this.eraseMode);
     }
 
-    activateHelperMode() {
+    activateHelperMode = () => {
         if(this.currentMode !== 'kids' && this.currentMode !== 'extreme' && this.currentMode !== 'solver'){
             this.helperMode = !this.helperMode;
             this.puzzleView.markBtn('activeHelper', this.helperMode);
@@ -387,23 +370,23 @@ export default class SudokuController {
 
     }
 
-    changeScoreBoard(event: any){
+    changeScoreBoard = (event: any) => {
         let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${event.target.innerText.toLowerCase()}`));
         this.puzzleView.displayHighScores(scoreBoard);
         this.puzzleView.markCurrentScoreBoard(event.target.id);
     }
 
-    showScoreBoard(){
+    showScoreBoard = () =>{
         let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${this.currentMode}`));
         this.puzzleView.displayHighScores(scoreBoard);
         this.puzzleView.markCurrentScoreBoard(`${this.currentMode}Scores`);
     }
 
-    openSideBar(){
+    openSideBar = () =>{
         this.puzzleView.openSideBar();
     }
 
-    closeSideBar(){
+    closeSideBar = () =>{
         this.puzzleView.closeSideBar();
     }
 
