@@ -17,7 +17,7 @@ export default class Solver {
         }
     }
 
-    // takes all squares currently empty and saves their indices to visit them specifically while solving th sudoku
+    // takes all squares currently empty and saves their indices to visit them specifically while solving the sudoku
     private findEmptySquares() {
         let indices = [];
         for (let i = 0; i < 81; i++) {
@@ -55,8 +55,8 @@ export default class Solver {
     // check if conflict of possible number for current square is already in the subgrid its in
     private checkSubGrid(index: number, value: number): boolean {
         let region = Utility.getSubGrid(index + 1);
-        let start;
-        let end;
+        let start; // index
+        let end; // index
         switch (region) {
             case 1:
                 start = 0;
@@ -122,12 +122,12 @@ export default class Solver {
         this.sudoku = sudoku;
         this.setUp();
         while (this.count < this.cellCount) {
-            if (this.available[this.count].length !== 0) {
-                let nextIndex = Utility.getRandomNumber(this.available[this.count].length)
+            if (this.available[this.count].length !== 0) {  //if there are possible values left for the current square
+                let nextIndex = Utility.getRandomNumber(this.available[this.count].length) //get random number/index between 0 and last index of array
                 let value = this.available[this.count][nextIndex];
 
-                if (this.conflictForOption(this.emptySquares[this.count], value) === false) {
-                    this.sudoku[this.emptySquares[this.count]].value = value;
+                if (this.conflictForOption(this.emptySquares[this.count], value) === false) { // check for conflict
+                    this.sudoku[this.emptySquares[this.count]].value = value; // fill square with the
                     this.available[this.count].splice(nextIndex, 1);
                     this.count += 1;
                 } else {
