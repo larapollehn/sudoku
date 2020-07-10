@@ -299,7 +299,7 @@ export default class SudokuController {
     /**
      * extreme level mirrors the displayed board by filling the grid in reverse order
      */
-    extremeMode = () => {
+    mirrorBoard = () => {
         this.filledSquares = this.filledSquares.map(num => {
             return 80 - num;
         });
@@ -322,6 +322,9 @@ export default class SudokuController {
         this.addSudokuListeners();
     }
 
+    /**
+     * creates a strobo effect by manipulating css style
+     */
     strobo = () => {
         this.puzzleView.displayStrobo('on');
         setTimeout(() => {
@@ -329,14 +332,21 @@ export default class SudokuController {
         }, 200);
     }
 
+    /**
+     * setup timer to start, stop and clear the time display of played round
+     */
     timer = () => {
       this.timerFunction = setTimeout(this.addSeconds, 1000);
     }
 
+    /**
+     * increments current time and triggers the strobo event and board mirroring if user plays in extreme mode
+     */
     addSeconds = () => {
-        this.seconds++;
-        if(this.currentMode === 'extreme' && this.seconds % 5 === 0){
-            this.extremeMode();
+        const STROBO_INTERVAL = 5; // in seconds
+        this.seconds++; // increment time by one
+        if(this.currentMode === 'extreme' && this.seconds % STROBO_INTERVAL === 0){
+            this.mirrorBoard();
             this.strobo();
         } else if (this.currentMode === 'extreme'){
             this.strobo();
@@ -354,6 +364,12 @@ export default class SudokuController {
         this.seconds = 0;
     }
 
+    /**
+     * if solved sudoku was validated and solution is correct
+     * the needed time is marked as a new highscore, persisted in localStorage and displayed on the scoreboard
+     * @param time
+     * @param seconds
+     */
     markHighscore = (time: string, seconds: number) => {
         if (localStorage.getItem(`HighScore${this.currentMode}`) === null) {
             this.timeScores.push([time, seconds]);
@@ -392,12 +408,19 @@ export default class SudokuController {
 
     }
 
+    /**
+     * display the scoreboard when section of scoreboard is clicked
+     * @param event
+     */
     changeScoreBoard = (event: any) => {
         let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${event.target.innerText.toLowerCase()}`));
         this.puzzleView.displayHighScores(scoreBoard);
         this.puzzleView.markCurrentScoreBoard(event.target.id);
     }
 
+    /**
+     * display the scoreboard of the level being played
+     */
     showScoreBoard = () =>{
         let scoreBoard = JSON.parse(localStorage.getItem(`HighScore${this.currentMode}`));
         this.puzzleView.displayHighScores(scoreBoard);
