@@ -12,19 +12,19 @@ export default class SudokuController {
     private Validator: Validator = new Validator();
     private Solver: Solver = new Solver();
 
-    private generatedSudoku: Array<Square>;
-    private currentSudokuGrid: Array<Square> = new Array<Square>();
-    private sudokuSquares: Map<number, Square>;
-    private currentOption: number = 1;
-    private filledSquares: Array<number> = new Array<number>();
-    private defaultDifficulty: number = 20;
-    private currentMode: string = 'easy';
-    private seconds: number = 0;
-    private timeScores: Array<Array<string | number>> = new Array<Array<string | number>>();
+    private generatedSudoku: Array<Square>; // partially filled sudoku
+    private currentSudokuGrid: Array<Square> = new Array<Square>(); // copy of generated sudoku to base solution on
+    private sudokuSquares: Map<number, Square>; // represents all 81 squares based on their position in the grid
+    private currentOption: number = 1; // the numeric values 1-9 or animal icons
+    private filledSquares: Array<number> = new Array<number>(); // all the squares filled by the user
+    private defaultDifficulty: number = 20; // number of empty squares on default
+    private currentMode: string = 'easy'; // level description
+    private seconds: number = 0; // representing the time passend since starting new game
+    private timeScores: Array<Array<string | number>> = new Array<Array<string | number>>(); // list of list highscores for all levels
     private eraseMode: boolean = false;
     private helperMode: boolean = false;
-    private wrongSquares: Array<number> = new Array<number>();
-    private timerFunction: number;
+    private wrongSquares: Array<number> = new Array<number>(); // used in helper mode to keep track of squares filled with wrong value
+    private timerFunction: number; // represents the timer that shows how much time is passend since starting new game
 
     constructor() {
         this.puzzleView.setIcons();

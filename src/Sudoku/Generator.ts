@@ -3,12 +3,9 @@ import Utility from "./Utility";
 import {numberAnimalsMapping} from "../Globals";
 
 export default class Generator {
-    private squares: Array<Square>;
-    private available: Array<Array<number>>;
-    private count: number;
-
-    constructor() {
-    }
+    private squares: Array<Square>; // will hold all 81 squares of the sudoku
+    private available: Array<Array<number>>; // stores the value 1-9 available for each empty square
+    private count: number; // the index of the square in the sudoku that is about to be filled with a value
 
     private setUp(): void {
         this.squares = new Array<Square>(81);
@@ -23,6 +20,8 @@ export default class Generator {
         }
     }
 
+    // based on the index and possible value an example square is created
+    // used later to check if it fits in the partially filled sudoku
     private createSquare(index: number, value: number): Square {
         let square = new Square();
         square.column = Utility.getColumn(index + 1);
@@ -34,6 +33,8 @@ export default class Generator {
         return square;
     }
 
+    // check if example square would fit in partially filled square
+    // meaning: the value of this square is neither in the row, column or subgrid
     private static hasConflict(squares: Array<Square>, option: Square): boolean {
         for (let i = 0; i < squares.length; i++) {
             if (squares[i].column === option.column ||
@@ -69,6 +70,7 @@ export default class Generator {
         }
     }
 
+    // remove value of randomly chosen squares to build a solvable sudoku
     generateSudoku(freeSquares: number){
         this.generateGrid();
         let erased = new Set<number>();

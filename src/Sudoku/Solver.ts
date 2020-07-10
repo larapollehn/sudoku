@@ -2,14 +2,11 @@ import Square from "./Square";
 import Utility from "./Utility";
 
 export default class Solver {
-    private emptySquares: Array<number>;
-    private cellCount: number;
-    private available: Array<Array<number>>;
-    private count: number;
-    public sudoku: Array<Square>;
-
-    constructor() {
-    }
+    private emptySquares: Array<number>; // holds all squares without a given value
+    private cellCount: number; // number of empty squares
+    private available: Array<Array<number>>; // stores the value 1-9 available for each empty square
+    private count: number; // the index of the square in the sudoku that is about to be filled with a value
+    public sudoku: Array<Square>; // the partially filled sudoku supposed to be solved
 
     private setUp() {
         this.available = new Array<Array<number>>();
@@ -20,6 +17,7 @@ export default class Solver {
         }
     }
 
+    // takes all squares currently empty and saves their indices to visit them specifically while solving th sudoku
     private findEmptySquares() {
         let indices = [];
         for (let i = 0; i < 81; i++) {
@@ -31,6 +29,7 @@ export default class Solver {
         this.cellCount = indices.length;
     }
 
+    // check if conflict of possible number for current square is already in the row its in
     private checkRow(index: number, value: number): boolean {
         let row = Utility.getRow(index + 1) - 1;
         let begin = (row * 9);
@@ -42,6 +41,7 @@ export default class Solver {
         return false;
     }
 
+    // check if conflict of possible number for current square is already in the column its in
     private checkColumn(index: number, value: number): boolean {
         let column = Utility.getColumn(index + 1);
         for (let i = column - 1; i < 81; i += 9) {
@@ -52,6 +52,7 @@ export default class Solver {
         return false;
     }
 
+    // check if conflict of possible number for current square is already in the subgrid its in
     private checkSubGrid(index: number, value: number): boolean {
         let region = Utility.getSubGrid(index + 1);
         let start;
@@ -105,6 +106,7 @@ export default class Solver {
         return false;
     }
 
+    // check if there is a conflict if the randomly chosen value would be put in the current square
     private conflictForOption(index: number, value: number) {
         let conflict = this.checkRow(index, value);
         if (!conflict) {
