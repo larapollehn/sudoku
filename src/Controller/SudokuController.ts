@@ -7,11 +7,12 @@ import Utility from "../Sudoku/Utility";
 import {numberAnimalsMapping} from "../Globals";
 
 export default class SudokuController {
-    private puzzleView: SudokuViewPuzzle;
+    private puzzleView: SudokuViewPuzzle = new SudokuViewPuzzle();
     private Generator: Generator = new Generator();
     private Validator: Validator = new Validator();
     private Solver: Solver = new Solver();
-    private currentSudoku: Array<Square>;
+
+    private generatedSudoku: Array<Square>;
     private currentSudokuGrid: Array<Square> = new Array<Square>();
     private sudokuSquares: Map<number, Square>;
     private currentOption: number = 1;
@@ -25,15 +26,11 @@ export default class SudokuController {
     private wrongSquares: Array<number> = new Array<number>();
     private timerFunction: number;
 
-
     constructor() {
-        this.puzzleView = new SudokuViewPuzzle();
-
-        this.fillEmptySquare = this.fillEmptySquare.bind(this);
+        this.puzzleView.setIcons();
     }
 
     setup = () => {
-        this.puzzleView.setIcons();
         this.addBtnEventListener();
         this.showScoreBoard();
         this.puzzleView.displayOptions();
@@ -77,7 +74,7 @@ export default class SudokuController {
     }
 
     /**
-     *
+     * new board is setup for every game
      */
     generateNewBoard = () =>{
         this.puzzleView.clearSudoku();
@@ -92,62 +89,75 @@ export default class SudokuController {
     }
 
     setupNewSudoku = () => {
-        this.currentSudoku = this.Generator.generateSudoku(this.defaultDifficulty);
+        // generate new Sudoku with the generator algorithm
+        this.generatedSudoku = this.Generator.generateSudoku(this.defaultDifficulty);
 
+        // display sudoku, different view for kids mode because of the animal icons
         if (this.currentMode === 'kids') {
-            this.puzzleView.displayKidsSudoku(this.currentSudoku);
+            this.puzzleView.displayKidsSudoku(this.generatedSudoku);
         } else {
-            this.puzzleView.displaySudoku(this.currentSudoku);
+            this.puzzleView.displaySudoku(this.generatedSudoku);
         }
 
-        this.currentSudokuGrid = JSON.parse(JSON.stringify(this.currentSudoku));
+        // make deep copy of generated sudoku to use if solution is requested
+        this.currentSudokuGrid = JSON.parse(JSON.stringify(this.generatedSudoku));
 
+        // Map sudokuSquares represents the individual squares and their position in the grid
         this.sudokuSquares = new Map();
-        this.currentSudoku.forEach(square => {
+        this.generatedSudoku.forEach(square => {
             this.sudokuSquares.set(square.index, square);
         });
 
+        // reinitialize possibly existing arrays to store the filled squares or when in helper mode wrong filled squares
         this.filledSquares = new Array<number>();
         this.wrongSquares = new Array<number>();
-
         this.addSudokuListeners();
     }
 
     addSudokuListeners = () => {
+        // squares without value get an element listener assigned to process user actions
         let emptySquares = document.getElementsByClassName('emptySquare');
         for (let emptySquare of emptySquares) {
             emptySquare.addEventListener('click', this.fillEmptySquare);
         }
 
+        // oprions are numeric values 1-9 or animal icons in kids mode
         let options = document.getElementsByClassName('optionsList');
         for (let option of options) {
             option.addEventListener('click', this.setCurrentOption);
         }
 
+        // user can choose options with keyboard number keys
         window.addEventListener('keypress', this.setCurrentOptionWithKeyboard);
     }
 
+    /**
+     * is invoked if empty square is clicked
+     * @param event will indicated the empty square that was clicked
+     */
     fillEmptySquare = (event: any) => {
         let squareIndex = event.target.id;
+
+        //
         if (this.eraseMode) {
             let index = this.filledSquares.indexOf(squareIndex);
+            // remove square from filled squares and set value back to 0, means empty
             this.filledSquares.splice(index, 1);
-            this.currentSudoku[squareIndex].value = 0;
+            this.generatedSudoku[squareIndex].value = 0;
             if (this.currentMode === 'kids') {
-                this.puzzleView.displayKidsSudoku(this.currentSudoku);
+                this.puzzleView.displayKidsSudoku(this.generatedSudoku);
             } else {
-                this.puzzleView.displaySudoku(this.currentSudoku);
+                this.puzzleView.displaySudoku(this.generatedSudoku);
             }
             this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
-            this.addSudokuListeners();
         } else if (this.helperMode) {
             this.filledSquares.push(squareIndex);
-            this.currentSudoku[squareIndex].value = Number(this.currentOption);
-            this.puzzleView.displaySudoku(this.currentSudoku);
+            this.generatedSudoku[squareIndex].value = Number(this.currentOption);
+            this.puzzleView.displaySudoku(this.generatedSudoku);
             this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
 
-            let validPick = this.Validator.validateSetNumber(this.currentSudoku, squareIndex, this.currentOption);
-
+            // validate the set number based on the solution of the sudoku
+            let validPick = this.Validator.validateSetNumber(this.generatedSudoku, squareIndex, this.currentOption);
             if (validPick === false) {
                 this.wrongSquares.push(squareIndex);
             } else {
@@ -157,37 +167,39 @@ export default class SudokuController {
                 }
             }
             this.puzzleView.highlightWrongPick(this.wrongSquares);
-            this.addSudokuListeners();
         } else {
             this.filledSquares.push(squareIndex);
+            this.generatedSudoku[squareIndex].value = Number(this.currentOption);
             if (this.currentMode === 'kids') {
-                this.currentSudoku[squareIndex].value = Number(this.currentOption);
-                this.currentSudoku[squareIndex].picture = numberAnimalsMapping.get(Number(this.currentOption));
-                this.puzzleView.displayKidsSudoku(this.currentSudoku);
+                this.generatedSudoku[squareIndex].picture = numberAnimalsMapping.get(Number(this.currentOption));
+                this.puzzleView.displayKidsSudoku(this.generatedSudoku);
             } else {
-                this.currentSudoku[squareIndex].value = Number(this.currentOption);
-                this.puzzleView.displaySudoku(this.currentSudoku);
+                this.puzzleView.displaySudoku(this.generatedSudoku);
             }
             this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
-            this.addSudokuListeners();
         }
+        this.addSudokuListeners();
 
-
+        // check if all squares are filled and if yes directly validate the sudoku
         if (this.finished()) {
             this.validateSudoku();
         }
 
     }
 
+    /**
+     * cheks if all quares of the sudoku are filled with a value
+     */
     finished = () => {
-        for (let i = 0; i < this.currentSudoku.length; i++) {
-            if (this.currentSudoku[i].value === 0) {
+        for (let i = 0; i < this.generatedSudoku.length; i++) {
+            if (this.generatedSudoku[i].value === 0) {
                 return false;
             }
         }
         return true;
     }
 
+    // based on the option (numeric value or animal icon) set the currently used option
     setCurrentOption = (event: any) => {
         this.currentOption = event.target.id.slice(2,3);
         this.puzzleView.highlightCurrentOption(event.target.id);
@@ -198,8 +210,9 @@ export default class SudokuController {
         this.puzzleView.highlightCurrentOption(`li${event.key}`);
     }
 
+
     validateSudoku = () => {
-        if (this.Validator.validate(this.currentSudoku)) {
+        if (this.Validator.validate(this.generatedSudoku)) {
             this.puzzleView.showValidatorMessage('Super! Deine Lösung ist Richtig :D');
             this.markHighscore(new Date().toLocaleTimeString(), this.seconds);
             this.stopTimer();
@@ -210,8 +223,8 @@ export default class SudokuController {
 
     solveSudoku = () => {
         if(this.currentMode === 'solver'){
-            this.Solver.solveSudoku(this.currentSudoku);
-            this.puzzleView.displaySudoku(this.currentSudoku);
+            this.Solver.solveSudoku(this.generatedSudoku);
+            this.puzzleView.displaySudoku(this.generatedSudoku);
         } else {
             this.Solver.solveSudoku(this.currentSudokuGrid);
             this.stopTimer();
@@ -283,17 +296,17 @@ export default class SudokuController {
         });
         this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
 
-        this.currentSudoku = this.currentSudoku.reverse().map(square => {
+        this.generatedSudoku = this.generatedSudoku.reverse().map(square => {
             let newSquare = square;
             newSquare.index = 80 - square.index;
             return newSquare;
         })
-        this.puzzleView.displaySudoku(this.currentSudoku);
+        this.puzzleView.displaySudoku(this.generatedSudoku);
 
         this.puzzleView.setClassofFormerEmptySquares(this.filledSquares);
 
         this.sudokuSquares = new Map();
-        this.currentSudoku.forEach(square => {
+        this.generatedSudoku.forEach(square => {
             this.sudokuSquares.set(square.index, square);
         });
 
