@@ -4,9 +4,6 @@ import Utility from "./Utility";
 export default class Validator {
     private sudoku: Array<Square>
 
-    constructor() {
-    }
-
     private rowIsValid() {
         let row = new Set();
         for (let i = 0; i < this.sudoku.length; i++) {
