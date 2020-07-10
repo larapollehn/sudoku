@@ -121,7 +121,7 @@ export default class SudokuController {
             emptySquare.addEventListener('click', this.fillEmptySquare);
         }
 
-        // oprions are numeric values 1-9 or animal icons in kids mode
+        // options are numeric values 1-9 or animal icons in kids mode
         let options = document.getElementsByClassName('optionsList');
         for (let option of options) {
             option.addEventListener('click', this.setCurrentOption);
@@ -138,7 +138,6 @@ export default class SudokuController {
     fillEmptySquare = (event: any) => {
         let squareIndex = event.target.id;
 
-        //
         if (this.eraseMode) {
             let index = this.filledSquares.indexOf(squareIndex);
             // remove square from filled squares and set value back to 0, means empty
@@ -199,7 +198,9 @@ export default class SudokuController {
         return true;
     }
 
-    // based on the option (numeric value or animal icon) set the currently used option
+    /**
+     * based on the option (numeric value or animal icon) set the currently used option
+     */
     setCurrentOption = (event: any) => {
         this.currentOption = event.target.id.slice(2,3);
         this.puzzleView.highlightCurrentOption(event.target.id);
@@ -217,7 +218,7 @@ export default class SudokuController {
             this.markHighscore(new Date().toLocaleTimeString(), this.seconds);
             this.stopTimer();
         } else {
-            this.puzzleView.showValidatorMessage('Leider Falsch. Findest die den Fehler?');
+            this.puzzleView.showValidatorMessage('Leider Falsch. Findest du den Fehler?');
         }
     }
 
@@ -237,6 +238,9 @@ export default class SudokuController {
 
     }
 
+    /**
+     * based on the chosen level a different number of squares will be empty in the displayed sudoku
+     */
     setDifficulty = (event: any) => {
         this.timeScores = new Array<Array<string | number>>();
         if (event.target.id === 'easyBtn') {
@@ -270,6 +274,8 @@ export default class SudokuController {
             this.puzzleView.disableBtn();
         }
         this.puzzleView.displayCurrentLevel(this.currentMode);
+
+        // directly setup a new sudoku based on the chosen difficulty
         this.puzzleView.clearSudoku();
         this.stopTimer();
         this.clearTimer();
@@ -290,6 +296,9 @@ export default class SudokuController {
         this.puzzleView.startSudokuBtn.addEventListener('click', this.startGame);
     }
 
+    /**
+     * extreme level mirrors the displayed board by filling the grid in reverse order
+     */
     extremeMode = () => {
         this.filledSquares = this.filledSquares.map(num => {
             return 80 - num;
